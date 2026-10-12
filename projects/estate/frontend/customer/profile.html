@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - Lil Mosey Estate 6G Edition</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">LM</div>
+      <div class="sidebar-logo-text">
+        <h3><span class="gold">Lil Mosey</span> Estate</h3>
+        <small>Customer Portal</small>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">C</div>
+      <div class="sidebar-user-info">
+        <h6 id="user-name">Customer</h6>
+        <small>Tenant</small>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="sidebar-nav-label">Overview</span>
+      <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a class="nav-link" href="bookings.html"><i class="fas fa-calendar-check"></i> My Bookings</a>
+      <a class="nav-link" href="favorites.html"><i class="fas fa-heart"></i> Favorites</a>
+      <span class="sidebar-nav-label">Account</span>
+      <a class="nav-link" href="payments.html"><i class="fas fa-credit-card"></i> My Payments</a>
+      <span class="sidebar-separator"></span>
+      <span class="sidebar-nav-label">Support</span>
+      <a class="nav-link" href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+      <a class="nav-link" href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a>
+      <a class="nav-link active" href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-link" href="../index.html"><i class="fas fa-arrow-left"></i> Back to Site</a>
+      <a class="nav-link" href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </aside>
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+<button class="btn d-md-none" id="sidebar-toggle" title="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+        <h4>My Profile</h4>
+      </div>
+      <div class="topbar-right">
+        <div class="d-flex align-items-center gap-2">
+          <div class="user-avatar" id="user-avatar">C</div>
+<span class="fw-semibold user-name-text">Customer</span>
+        </div>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </header>
+    <div class="dash-content">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="profile-card text-center">
+            <div class="card-body">
+              <div class="avatar-upload mb-3">
+                <img src="https://ui-avatars.com/api/?name=Customer&background=D4AF37&color=0B1F3A&size=100" alt="Avatar" class="profile-avatar" id="profile-avatar">
+                <div class="upload-overlay" onclick="document.getElementById('avatar-input').click()"><i class="fas fa-camera"></i></div>
+                <input type="file" id="avatar-input" accept="image/*" style="display:none">
+              </div>
+              <h5 id="profile-name">Customer</h5>
+              <p class="text-muted" id="profile-email">customer@email.com</p>
+              <span class="badge-status" style="background:rgba(212,175,55,0.15);color:#D4AF37;">Customer</span>
+            </div>
+          </div>
+          <div class="profile-card mt-4">
+            <div class="card-header"><h5>Change Password</h5></div>
+            <div class="card-body">
+              <form id="password-form">
+                <div class="mb-3">
+                  <label class="form-label">Current Password</label>
+                  <input type="password" class="form-control form-control-modern" id="current-password" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">New Password</label>
+                  <input type="password" class="form-control form-control-modern" id="new-password" required minlength="8">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Confirm New Password</label>
+                  <input type="password" class="form-control form-control-modern" id="confirm-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary-custom btn-3d btn-3d-gold w-100" id="password-btn">Update Password</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="profile-card">
+            <div class="card-header"><h5>Personal Information</h5></div>
+            <div class="card-body">
+              <form id="profile-form">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-control form-control-modern" id="first-name" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-control form-control-modern" id="last-name" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control form-control-modern" id="email" disabled>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-control form-control-modern" id="phone">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary-custom btn-3d btn-3d-gold mt-4" id="profile-btn">Save Changes</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/main.js"></script>
+  <script>
+  (function(){
+    async function loadProfile(){
+      try{
+        const res=await api.get('/users/profile');
+        const u=res.data.user||{};
+        document.getElementById('first-name').value=u.first_name||'';
+        document.getElementById('last-name').value=u.last_name||'';
+        document.getElementById('email').value=u.email||'';
+        document.getElementById('phone').value=u.phone||'';
+        document.getElementById('profile-name').textContent=(u.first_name||'Customer')+' '+(u.last_name||'');
+        document.getElementById('profile-email').textContent=u.email||'';
+        const avatar=document.getElementById('profile-avatar');
+        if(u.avatar) avatar.src='/uploads/avatars/'+u.avatar;
+        else avatar.src='https://ui-avatars.com/api/?name='+(u.first_name||'C')+'+'+(u.last_name||'U')+'&background=D4AF37&color=0B1F3A&size=100';
+        document.getElementById('user-name').textContent=(u.first_name||'Customer')+' '+(u.last_name||'');
+        document.getElementById('user-avatar').textContent=(u.first_name||'C').charAt(0).toUpperCase();
+      }catch(err){
+        console.error('Failed to load profile:',err);
+      }
+    }
+
+    document.getElementById('profile-form').addEventListener('submit',async function(e){
+      e.preventDefault();
+      const btn=document.getElementById('profile-btn');
+      btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';
+      try{
+        await api.put('/users/profile',{
+          first_name:document.getElementById('first-name').value,
+          last_name:document.getElementById('last-name').value,
+          phone:document.getElementById('phone').value
+        });
+        Swal.fire({icon:'success',title:'Updated!',text:'Profile updated successfully.',confirmButtonColor:'#D4AF37',timer:1500,showConfirmButton:false});
+        loadProfile();
+      }catch(err){Swal.fire({icon:'error',title:'Failed',text:err.message})}
+      finally{btn.disabled=false;btn.innerHTML='Save Changes'}
+    });
+
+    document.getElementById('password-form').addEventListener('submit',async function(e){
+      e.preventDefault();
+      const np=document.getElementById('new-password').value;
+      const cp=document.getElementById('confirm-password').value;
+      if(np!==cp) return Swal.fire({icon:'error',title:'Error',text:'Passwords do not match'});
+      const btn=document.getElementById('password-btn');
+      btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Updating...';
+      try{
+        await api.post('/auth/change-password',{
+          current_password:document.getElementById('current-password').value,
+          new_password:np
+        });
+        Swal.fire({icon:'success',title:'Updated!',text:'Password changed successfully.',confirmButtonColor:'#D4AF37'});
+        document.getElementById('password-form').reset();
+      }catch(err){Swal.fire({icon:'error',title:'Failed',text:err.message})}
+      finally{btn.disabled=false;btn.innerHTML='Update Password'}
+    });
+
+    document.getElementById('avatar-input').addEventListener('change',async function(){
+      const file=this.files[0];
+      if(!file)return;
+      const fd=new FormData();
+      fd.append('avatar',file);
+      try{
+        await api.upload('/users/avatar',fd);
+        Swal.fire({icon:'success',title:'Updated!',text:'Avatar updated.',confirmButtonColor:'#D4AF37',timer:1500,showConfirmButton:false});
+        loadProfile();
+      }catch(err){Swal.fire({icon:'error',title:'Failed',text:err.message})}
+    });
+
+        document.getElementById('logout-btn').addEventListener('click',()=>auth.logout());
+    loadProfile();
+  })();
+  </script>
+</body>
+</html>

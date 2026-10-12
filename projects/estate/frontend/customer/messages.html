@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Messages - Lil Mosey Estate 6G Edition</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">LM</div>
+      <div class="sidebar-logo-text">
+        <h3><span class="gold">Lil Mosey</span> Estate</h3>
+        <small>Customer Portal</small>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">C</div>
+      <div class="sidebar-user-info">
+        <h6 id="user-name">Customer</h6>
+        <small>Tenant</small>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="sidebar-nav-label">Overview</span>
+      <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a class="nav-link" href="bookings.html"><i class="fas fa-calendar-check"></i> My Bookings</a>
+      <a class="nav-link" href="favorites.html"><i class="fas fa-heart"></i> Favorites</a>
+      <span class="sidebar-nav-label">Account</span>
+      <a class="nav-link" href="payments.html"><i class="fas fa-credit-card"></i> My Payments</a>
+      <span class="sidebar-separator"></span>
+      <span class="sidebar-nav-label">Support</span>
+      <a class="nav-link active" href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+      <a class="nav-link" href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a>
+      <a class="nav-link" href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-link" href="../index.html"><i class="fas fa-arrow-left"></i> Back to Site</a>
+      <a class="nav-link" href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </aside>
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+<button class="btn d-md-none" id="sidebar-toggle" title="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+        <h4>Messages</h4>
+      </div>
+      <div class="topbar-right">
+        <div class="d-flex align-items-center gap-2">
+          <div class="user-avatar" id="user-avatar">C</div>
+<span class="fw-semibold user-name-text">Customer</span>
+        </div>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </header>
+    <div class="dash-content">
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <div class="content-card shadow-3d">
+            <div class="card-header"><h5><i class="fas fa-inbox me-2"></i>Inbox <span class="badge bg-warning text-dark ms-2" id="unread-badge">0</span></h5></div>
+            <div class="card-body" id="messages-list">
+              <div class="text-center text-muted py-5">Loading...</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="detail-card">
+            <div class="card-header"><h5 id="detail-title">Select a message</h5></div>
+            <div class="card-body" id="detail-body">
+              <div class="text-center text-muted py-5"><i class="fas fa-envelope-open-text" style="font-size:3rem;display:block;margin-bottom:15px;"></i>Select a message to view</div>
+            </div>
+            <div class="reply-box" id="reply-box" style="display:none;">
+              <div class="input-group">
+                <input type="text" class="form-control form-control-modern" id="reply-input" placeholder="Type your reply...">
+                <button class="btn btn-primary-custom btn-3d btn-3d-gold" onclick="sendReply()"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/main.js"></script>
+  <script>
+  function formatDate(d){if(!d)return '';const dt=new Date(d);const now=new Date();const diff=now-dt;if(diff<86400000)return dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'})}
+  function formatDateTime(d){if(!d)return '';return new Date(d).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'})}
+
+  let currentUser=null;
+  let selectedMsgId=null;
+let selectedMsgSenderId=null;
+  const colors=['#e74c3c','#D4AF37','#27ae60','#3498db','#9b59b6'];
+
+  (function(){
+    try{
+      currentUser=JSON.parse(localStorage.getItem('user')||'{}');
+      if(currentUser.first_name){
+        document.getElementById('user-name').textContent=currentUser.first_name+' '+(currentUser.last_name||'');
+        document.getElementById('user-avatar').textContent=currentUser.first_name.charAt(0).toUpperCase();
+      }
+    }catch(e){}
+
+    async function loadMessages(){
+      try{
+const res=await api.get('/messages/my-messages');
+        const messages=res.data.messages||[];
+        const uc=res.data.unread_count||0;
+        document.getElementById('unread-badge').textContent=uc;
+        const list=document.getElementById('messages-list');
+        if(!messages.length){
+          list.innerHTML='<div class="text-center text-muted py-5">No messages yet</div>';
+          return;
+        }
+        list.innerHTML=messages.map(m=>{
+          const isUnread=m.receiver_id===(currentUser.id||currentUser.user_id)&&!m.is_read;
+          const senderName=m.sender_first_name+' '+m.sender_last_name;
+          const initial=(m.sender_first_name||'U').charAt(0).toUpperCase();
+          const colorIdx=m.sender_id%colors.length;
+          return `<div class="msg-item${isUnread?' unread':''}" onclick="viewMessage(${m.message_id})">
+            <div class="msg-avatar" style="background:${colors[colorIdx]}">${initial}</div>
+            <div class="msg-content">
+              <h6>${senderName}${isUnread?'<span class="unread-dot"></span>':''}</h6>
+              <p>${m.subject||'(No subject)'} &mdash; ${(m.message||'').substring(0,60)}</p>
+            </div>
+            <div class="msg-meta">${formatDate(m.created_at)}</div>
+          </div>`;
+        }).join('');
+        if(!selectedMsgId&&messages.length) viewMessage(messages[0].message_id);
+      }catch(err){
+        document.getElementById('messages-list').innerHTML='<div class="text-center text-muted py-5">Failed to load messages</div>';
+      }
+    }
+
+    window.viewMessage=async function(id){
+      selectedMsgId=id;
+      try{
+        const res=await api.get('/messages/'+id);
+        const msg=res.data.message||{};
+        selectedMsgSenderId=(msg.sender_id===(currentUser.id||currentUser.user_id))?(msg.receiver_id||null):msg.sender_id;
+        document.getElementById('detail-title').textContent=msg.subject||'Message';
+        const replies=msg.replies||[];
+        const allMsgs=[msg,...replies];
+        let html='';
+        allMsgs.forEach(m=>{
+          const isSent=(m.sender_id===(currentUser.id||currentUser.user_id));
+          const senderName=m.sender_first_name+' '+m.sender_last_name;
+          html+=`<div class="message-bubble ${isSent?'sent':'received'}">
+            <strong style="font-size:0.82rem">${isSent?'You':senderName}</strong>
+            <p style="margin:5px 0 0;font-size:0.9rem">${m.message}</p>
+            <small>${formatDateTime(m.created_at)}</small>
+          </div>`;
+        });
+        document.getElementById('detail-body').innerHTML=html;
+        document.getElementById('reply-box').style.display='block';
+      }catch(err){
+        document.getElementById('detail-body').innerHTML='<div class="text-center text-muted py-5">Failed to load message</div>';
+      }
+    };
+
+    window.sendReply=async function(){
+      const input=document.getElementById('reply-input');
+      const msg=input.value.trim();
+      if(!msg||!selectedMsgId)return;
+      if(!selectedMsgSenderId){
+        Swal.fire({icon:'error',title:'Cannot Reply',text:'This conversation has no valid recipient.',confirmButtonColor:'#D4AF37'});
+        return;
+      }
+      input.disabled=true;
+      try{
+        await api.post('/messages',{
+          parent_message_id:selectedMsgId,
+          receiver_id:selectedMsgSenderId,
+          subject:'Re: Message',
+          message:msg
+        });
+        input.value='';
+        viewMessage(selectedMsgId);
+        loadMessages();
+      }catch(err){Swal.fire({icon:'error',title:'Failed',text:err.message})}
+      finally{input.disabled=false;input.focus()}
+    };
+
+    document.getElementById('reply-input').addEventListener('keypress',function(e){if(e.key==='Enter')sendReply()});
+        document.getElementById('logout-btn').addEventListener('click',()=>auth.logout());
+    loadMessages();
+  })();
+  </script>
+</body>
+</html>

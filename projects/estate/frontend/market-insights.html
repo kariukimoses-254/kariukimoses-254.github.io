@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Insights | Lil Mosey Estate 6G Edition</title>
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><span class="brand-icon"><i class="fas fa-home"></i></span>Lil<span class="brand-accent"> Mosey</span> Estate</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" href="mortgage-calculator.html">Calculator</a></li>
+        <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div id="auth-buttons" class="d-flex ms-3 gap-2">
+        <a href="login.html" class="btn btn-outline-custom btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary-custom btn-sm">Register</a>
+      </div>
+      <div id="user-menu" class="dropdown ms-3" style="display:none;">
+        <a href="#" class="d-flex align-items-center gap-2 text-decoration-none" data-bs-toggle="dropdown">
+          <img id="user-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle fill='%23D4AF37' cx='18' cy='18' r='18'/%3E%3Ctext fill='%230B1F3A' font-family='Arial' font-size='14' text-anchor='middle' x='18' y='23'%3E U %3C/text%3E%3C/svg%3E" alt="Avatar" class="rounded-circle" width="36" height="36">
+          <span id="user-name" class="fw-semibold text-dark"></span>
+          <i class="fas fa-chevron-down small"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a id="dashboard-link" class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+          <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+          <li><a class="dropdown-item" href="favorites.html"><i class="fas fa-heart me-2"></i>Favorites</a></li>
+          <li><a class="dropdown-item" href="appointments.html"><i class="fas fa-calendar me-2"></i>Bookings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section style="background:var(--primary);padding:120px 0 60px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(212,175,55,0.06) 0%,transparent 50%);pointer-events:none;"></div>
+  <div class="container position-relative">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Market Intelligence</span>
+      <h2 style="color:white;">Nairobi Real Estate Trends</h2>
+      <p style="color:rgba(255,255,255,0.7);">Stay informed with the latest property market data across Nairobi's top neighborhoods.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4 mb-4">
+      <div class="col-lg-3 col-md-6" data-aos="fade-up">
+        <div class="insight-card text-center">
+          <div style="font-size:2rem;color:var(--secondary);margin-bottom:8px;"><i class="fas fa-home"></i></div>
+          <h3 style="font-weight:800;">2,450</h3>
+          <p class="text-muted mb-0">Properties Sold</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="insight-card text-center">
+          <div style="font-size:2rem;color:var(--secondary);margin-bottom:8px;"><i class="fas fa-money-bill-wave"></i></div>
+          <h3 style="font-weight:800;">KES 28M</h3>
+          <p class="text-muted mb-0">Average Price</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="insight-card text-center">
+          <div style="font-size:2rem;color:var(--secondary);margin-bottom:8px;"><i class="fas fa-arrow-trend-up"></i></div>
+          <h3 style="font-weight:800;">+12.5%</h3>
+          <p class="text-muted mb-0">Annual Growth</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="insight-card text-center">
+          <div style="font-size:2rem;color:var(--secondary);margin-bottom:8px;"><i class="fas fa-plus-circle"></i></div>
+          <h3 style="font-weight:800;">380</h3>
+          <p class="text-muted mb-0">New Listings</p>
+        </div>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-8" data-aos="fade-up">
+        <div class="insight-card">
+          <h5 class="fw-bold mb-3"><i class="fas fa-chart-line me-2 text-gold"></i>Average Property Prices (KES Millions)</h5>
+          <canvas id="price-trends-chart" height="280"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="insight-card">
+          <h5 class="fw-bold mb-3"><i class="fas fa-chart-pie me-2 text-gold"></i>Property Types</h5>
+          <canvas id="type-dist-chart" height="280"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="insight-card">
+          <h5 class="fw-bold mb-3"><i class="fas fa-fire me-2 text-gold"></i>Most Searched Areas</h5>
+          <canvas id="popular-areas-chart" height="220"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="insight-card">
+          <h5 class="fw-bold mb-3"><i class="fas fa-arrow-trend-up me-2 text-gold"></i>Price per Sqft (KES)</h5>
+          <canvas id="sqft-chart" height="220"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section gradient-animate">
+  <div class="container text-center">
+    <h2 data-aos="fade-up">Ready to Invest in Nairobi Real Estate?</h2>
+    <p data-aos="fade-up" data-aos-delay="100">Browse our premium properties and make data-driven decisions.</p>
+    <div data-aos="fade-up" data-aos-delay="200">
+      <a href="properties.html" class="btn btn-primary-custom btn-lg me-3"><i class="fas fa-search me-2"></i>Browse Properties</a>
+      <a href="contact.html" class="btn btn-outline-custom btn-lg"><i class="fas fa-phone me-2"></i>Talk to an Agent</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4"><h5>Lil Mosey Estate 6G Edition</h5><p>Finding Your Perfect Property, Simplified. Kenya's premier real estate platform.</p>
+        <div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+      </div>
+      <div class="col-lg-2"><h5>Quick Links</h5>
+        <ul class="footer-links"><li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="properties.html"><i class="fas fa-chevron-right"></i> Properties</a></li><li><a href="mortgage-calculator.html"><i class="fas fa-chevron-right"></i> Calculator</a></li><li><a href="agents.html"><i class="fas fa-chevron-right"></i> Agents</a></li><li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li><li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li></ul>
+      </div>
+      <div class="col-lg-3"><h5>Property Types</h5>
+        <ul class="footer-links"><li><a href="properties.html?type=1"><i class="fas fa-chevron-right"></i> Apartments</a></li><li><a href="properties.html?type=2"><i class="fas fa-chevron-right"></i> Villas</a></li><li><a href="properties.html?type=3"><i class="fas fa-chevron-right"></i> Townhouses</a></li><li><a href="properties.html?type=4"><i class="fas fa-chevron-right"></i> Bungalows</a></li><li><a href="properties.html?type=5"><i class="fas fa-chevron-right"></i> Penthouses</a></li></ul>
+      </div>
+      <div class="col-lg-3"><h5>Contact Info</h5>
+        <ul class="footer-links"><li><a href="#"><i class="fas fa-map-marker-alt"></i> Westlands Business Park, Nairobi</a></li><li><a href="tel:+254793489901"><i class="fas fa-phone"></i> +254 793 489 901</a></li><li><a href="tel:+254105727456"><i class="fas fa-phone"></i> +254 105 727 456</a></li><li><a href="mailto:kariukimoseswambugu@gmail.com"><i class="fas fa-envelope"></i> kariukimoseswambugu@gmail.com</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 <span class="gold">Lil Mosey Estate 6G Edition</span>. All rights reserved. | Powered by 6G Technology</p></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/main.js"></script>
+<script>
+  AOS.init({duration:800,easing:'ease-in-out',once:true});
+</script>
+</body>
+</html>

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Lil Mosey Estate 6G Edition</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-home"></i> Lil Mosey Estate 6G Edition</h3>
+            <p id="sidebar-role-label">Admin Panel</p>
+        </div>
+        <nav class="sidebar-nav">
+            <ul class="nav flex-column" id="sidebar-nav-items"></ul>
+        </nav>
+    </aside>
+
+    <div class="dashboard-wrapper">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="btn d-md-none" id="sidebar-toggle" style="font-size:1.2rem;">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h4 id="page-title">Dashboard</h4>
+                <span class="role-badge" id="role-badge"></span>
+            </div>
+            <div class="topbar-right">
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar">U</div>
+                    <span class="user-name" id="user-name">User</span>
+                </div>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <!-- Admin Dashboard -->
+            <div id="admin-dashboard" class="dashboard-section section-hidden">
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon blue"><i class="fas fa-users"></i></div>
+                            <div class="stat-value" id="stat-total-users">0</div>
+                            <div class="stat-label">Total Users</div>
+                            <div class="stat-change up"><i class="fas fa-arrow-up"></i> 12% from last month</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon red"><i class="fas fa-building"></i></div>
+                            <div class="stat-value" id="stat-total-properties">0</div>
+                            <div class="stat-label">Total Properties</div>
+                            <div class="stat-change up"><i class="fas fa-arrow-up"></i> 8% from last month</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon green"><i class="fas fa-calendar-check"></i></div>
+                            <div class="stat-value" id="stat-total-bookings">0</div>
+                            <div class="stat-label">Total Bookings</div>
+                            <div class="stat-change up"><i class="fas fa-arrow-up"></i> 5% from last month</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon purple"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="stat-value" id="stat-total-revenue">$0</div>
+                            <div class="stat-label">Total Revenue</div>
+                            <div class="stat-change up"><i class="fas fa-arrow-up"></i> 18% from last month</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-8">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header">
+                                <h5 class="text-3d">Revenue Overview</h5>
+                                <select class="form-select form-select-sm" style="width:auto;" id="revenue-period">
+                                    <option value="monthly">Monthly</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="yearly">Yearly</option>
+                                </select>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="revenueChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header"><h5 class="text-3d">Properties by Type</h5></div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="propertyTypeChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-xl-7">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header">
+                                <h5 class="text-3d">Recent Bookings</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Booking ID</th>
+                                                <th>Customer</th>
+                                                <th>Property</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-recent-bookings">
+                                            <tr><td colspan="6" class="text-center py-4 text-muted">Loading...</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header"><h5 class="text-3d">Recent Activity</h5></div>
+                            <div class="card-body" id="admin-activity-list">
+                                <div class="text-center text-muted py-4">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Dashboard -->
+            <div id="agent-dashboard" class="dashboard-section section-hidden">
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon blue"><i class="fas fa-building"></i></div>
+                            <div class="stat-value" id="stat-agent-properties">0</div>
+                            <div class="stat-label">My Properties</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon red"><i class="fas fa-calendar-check"></i></div>
+                            <div class="stat-value" id="stat-agent-bookings">0</div>
+                            <div class="stat-label">Active Bookings</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon green"><i class="fas fa-handshake"></i></div>
+                            <div class="stat-value" id="stat-agent-sales">$0</div>
+                            <div class="stat-label">Total Sales</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon orange"><i class="fas fa-eye"></i></div>
+                            <div class="stat-value" id="stat-agent-views">0</div>
+                            <div class="stat-label">Property Views</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-8">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header">
+                                <h5 class="text-3d">Sales Overview</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="agentSalesChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header"><h5 class="text-3d">Properties by Type</h5></div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="agentPropertyTypeChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-xl-7">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header">
+                                <h5 class="text-3d">Upcoming Visits</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Schedule Visit</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Customer</th>
+                                                <th>Property</th>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="agent-upcoming-visits">
+                                            <tr><td colspan="5" class="text-center py-4 text-muted">Loading...</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header"><h5 class="text-3d">Recent Messages</h5></div>
+                            <div class="card-body" id="agent-messages-list">
+                                <div class="text-center text-muted py-4">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Dashboard -->
+            <div id="customer-dashboard" class="dashboard-section section-hidden">
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon blue"><i class="fas fa-calendar-check"></i></div>
+                            <div class="stat-value" id="stat-customer-bookings">0</div>
+                            <div class="stat-label">My Bookings</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon green"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="stat-value" id="stat-customer-payments">$0</div>
+                            <div class="stat-label">Total Payments</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon red"><i class="fas fa-heart"></i></div>
+                            <div class="stat-value" id="stat-customer-favorites">0</div>
+                            <div class="stat-label">Favorites</div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stat-card card-3d shadow-3d">
+                            <div class="stat-icon purple"><i class="fas fa-envelope"></i></div>
+                            <div class="stat-value" id="stat-customer-messages">0</div>
+                            <div class="stat-label">Unread Messages</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-8">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header">
+                                <h5 class="text-3d">My Bookings</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Booking ID</th>
+                                                <th>Property</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="customer-recent-bookings">
+                                            <tr><td colspan="5" class="text-center py-4 text-muted">Loading...</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header"><h5 class="text-3d">Payment History</h5></div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="customer-recent-payments">
+                                            <tr><td colspan="3" class="text-center py-4 text-muted">Loading...</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-xl-6">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header"><h5 class="text-3d">Saved Favorites</h5></div>
+                            <div class="card-body" id="customer-favorites-list">
+                                <div class="text-center text-muted py-4">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="content-card shadow-3d">
+                            <div class="card-header"><h5 class="text-3d">Recent Messages</h5></div>
+                            <div class="card-body" id="customer-messages-list">
+                                <div class="text-center text-muted py-4">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main.js"></script>
+    <script>
+        (function () {
+            const sidebarConfig = {
+                admin: [
+                    { icon: 'fas fa-tachometer-alt', label: 'Dashboard', tab: 'dashboard' },
+                    { icon: 'fas fa-users', label: 'Users', tab: 'users' },
+                    { icon: 'fas fa-building', label: 'Properties', tab: 'properties' },
+                    { icon: 'fas fa-calendar-check', label: 'Bookings', tab: 'bookings' },
+                    { icon: 'fas fa-credit-card', label: 'Payments', tab: 'payments' },
+                    { icon: 'fas fa-star', label: 'Reviews', tab: 'reviews' },
+                    { icon: 'fas fa-envelope', label: 'Messages', tab: 'messages' },
+                    { icon: 'fas fa-tools', label: 'Maintenance', tab: 'maintenance' },
+                    { icon: 'fas fa-envelope-open-text', label: 'Email Templates', tab: 'email-templates' },
+                    { icon: 'fas fa-cog', label: 'Settings', tab: 'settings' },
+                    { icon: 'fas fa-history', label: 'Activity Logs', tab: 'activity-logs' }
+                ],
+                agent: [
+                    { icon: 'fas fa-tachometer-alt', label: 'Dashboard', tab: 'dashboard' },
+                    { icon: 'fas fa-building', label: 'My Properties', tab: 'my-properties' },
+                    { icon: 'fas fa-calendar-check', label: 'Bookings', tab: 'bookings' },
+                    { icon: 'fas fa-handshake', label: 'Sales', tab: 'sales' },
+                    { icon: 'fas fa-calendar-alt', label: 'Schedule Visits', tab: 'schedule-visits' },
+                    { icon: 'fas fa-envelope', label: 'Messages', tab: 'messages' }
+                ],
+                customer: [
+                    { icon: 'fas fa-tachometer-alt', label: 'Dashboard', tab: 'dashboard' },
+                    { icon: 'fas fa-calendar-check', label: 'My Bookings', tab: 'my-bookings' },
+                    { icon: 'fas fa-credit-card', label: 'My Payments', tab: 'my-payments' },
+                    { icon: 'fas fa-heart', label: 'Favorites', tab: 'favorites' },
+                    { icon: 'fas fa-envelope', label: 'Messages', tab: 'messages' },
+                    { icon: 'fas fa-tools', label: 'Maintenance', tab: 'maintenance' }
+                ]
+            };
+
+            const roleLabels = { admin: 'Admin Panel', agent: 'Agent Portal', customer: 'Customer Portal' };
+
+            function getRole() {
+                const params = new URLSearchParams(window.location.search);
+                const tabRole = params.get('tab');
+                if (tabRole && ['admin', 'agent', 'customer'].includes(tabRole)) return tabRole;
+                try {
+                    const userData = localStorage.getItem('user');
+                    if (userData) {
+                        const user = JSON.parse(userData);
+                        if (user.role) return user.role;
+                    }
+                } catch (e) {}
+                return 'customer';
+            }
+
+            function getUser() {
+                try {
+                    const userData = localStorage.getItem('user');
+                    if (userData) return JSON.parse(userData);
+                } catch (e) {}
+                return { name: 'User', email: 'user@example.com' };
+            }
+
+            let currentRole = getRole();
+            let currentUser = getUser();
+            let charts = {};
+
+            function buildSidebar() {
+                const nav = document.getElementById('sidebar-nav-items');
+                const items = sidebarConfig[currentRole] || sidebarConfig.customer;
+                nav.innerHTML = items.map((item, i) =>
+                    `<li class="nav-item">
+                        <a class="nav-link${i === 0 ? ' active' : ''}" href="#" data-tab="${item.tab}">
+                            <i class="${item.icon}"></i><span>${item.label}</span>
+                        </a>
+                    </li>`
+                ).join('');
+                document.getElementById('sidebar-role-label').textContent = roleLabels[currentRole] || 'Dashboard';
+            }
+
+            function setUserDisplay() {
+                const name = currentUser.name || 'User';
+                document.getElementById('user-name').textContent = name;
+                document.getElementById('user-avatar').textContent = name.charAt(0).toUpperCase();
+                const badge = document.getElementById('role-badge');
+                badge.textContent = currentRole;
+                badge.className = 'role-badge ' + currentRole;
+            }
+
+            function showDashboard() {
+                document.querySelectorAll('.dashboard-section').forEach(s => {
+                    s.classList.remove('section-visible');
+                    s.classList.add('section-hidden');
+                });
+                const section = document.getElementById(currentRole + '-dashboard');
+                if (section) {
+                    section.classList.remove('section-hidden');
+                    section.classList.add('section-visible');
+                }
+            }
+
+            function formatCurrency(val) {
+                return '$' + Number(val || 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            }
+
+            function formatDate(d) {
+                if (!d) return '-';
+                const date = new Date(d);
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            }
+
+            function renderAdminDashboard(data) {
+                document.getElementById('stat-total-users').textContent = data.totalUsers || 0;
+                document.getElementById('stat-total-properties').textContent = data.totalProperties || 0;
+                document.getElementById('stat-total-bookings').textContent = data.totalBookings || 0;
+                document.getElementById('stat-total-revenue').textContent = formatCurrency(data.totalRevenue);
+
+                const bookings = data.recentBookings || [];
+                const tbody = document.getElementById('admin-recent-bookings');
+                if (bookings.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-muted">No recent bookings</td></tr>';
+                } else {
+                    tbody.innerHTML = bookings.map(b => `
+                        <tr>
+                            <td><strong>#${b._id ? b._id.slice(-6) : 'N/A'}</strong></td>
+                            <td>${b.customerName || b.user?.name || '-'}</td>
+                            <td>${b.propertyTitle || b.property?.title || '-'}</td>
+                            <td>${formatDate(b.date || b.createdAt)}</td>
+                            <td>${formatCurrency(b.amount)}</td>
+                            <td><span class="badge-status ${b.status || 'pending'}">${(b.status || 'pending').charAt(0).toUpperCase() + (b.status || 'pending').slice(1)}</span></td>
+                        </tr>
+                    `).join('');
+                }
+
+                const activities = data.recentActivity || [];
+                const actList = document.getElementById('admin-activity-list');
+                if (activities.length === 0) {
+                    actList.innerHTML = '<div class="text-center text-muted py-4">No recent activity</div>';
+                } else {
+                    actList.innerHTML = activities.map(a => {
+                        const iconClass = a.type === 'booking' ? 'booking' : a.type === 'payment' ? 'payment' : a.type === 'user' ? 'user' : 'message';
+                        const icon = a.type === 'booking' ? 'fas fa-calendar-check' : a.type === 'payment' ? 'fas fa-credit-card' : a.type === 'user' ? 'fas fa-user-plus' : 'fas fa-envelope';
+                        return `
+                            <div class="activity-item">
+                                <div class="activity-icon ${iconClass}"><i class="${icon}"></i></div>
+                                <div class="activity-info">
+                                    <h6>${a.title || a.message || 'Activity'}</h6>
+                                    <p>${a.description || ''}</p>
+                                </div>
+                                <span class="activity-time">${formatDate(a.createdAt)}</span>
+                            </div>`;
+                    }).join('');
+                }
+
+                initRevenueChart(data.revenueChart || data.monthlyRevenue || []);
+                initPropertyTypeChart(data.propertiesByType || data.propertyTypes || []);
+            }
+
+            function renderAgentDashboard(data) {
+                document.getElementById('stat-agent-properties').textContent = data.totalProperties || 0;
+                document.getElementById('stat-agent-bookings').textContent = data.activeBookings || 0;
+                document.getElementById('stat-agent-sales').textContent = formatCurrency(data.totalSales);
+                document.getElementById('stat-agent-views').textContent = data.totalViews || 0;
+
+                const visits = data.upcomingVisits || [];
+                const tbody = document.getElementById('agent-upcoming-visits');
+                if (visits.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-muted">No upcoming visits</td></tr>';
+                } else {
+                    tbody.innerHTML = visits.map(v => `
+                        <tr>
+                            <td>${v.customerName || v.user?.name || '-'}</td>
+                            <td>${v.propertyTitle || v.property?.title || '-'}</td>
+                            <td>${formatDate(v.date)}</td>
+                            <td>${v.time || '-'}</td>
+                            <td><span class="badge-status ${v.status || 'pending'}">${(v.status || 'pending').charAt(0).toUpperCase() + (v.status || 'pending').slice(1)}</span></td>
+                        </tr>
+                    `).join('');
+                }
+
+                const messages = data.recentMessages || [];
+                const msgList = document.getElementById('agent-messages-list');
+                if (messages.length === 0) {
+                    msgList.innerHTML = '<div class="text-center text-muted py-4">No new messages</div>';
+                } else {
+                    msgList.innerHTML = messages.map(m => `
+                        <div class="activity-item">
+                            <div class="activity-icon message"><i class="fas fa-envelope"></i></div>
+                            <div class="activity-info">
+                                <h6>${m.senderName || m.from || 'Unknown'}</h6>
+                                <p>${(m.subject || m.message || '').substring(0, 60)}${(m.message || '').length > 60 ? '...' : ''}</p>
+                            </div>
+                            <span class="activity-time">${formatDate(m.createdAt)}</span>
+                        </div>
+                    `).join('');
+                }
+
+                initAgentSalesChart(data.salesChart || data.monthlySales || []);
+                initAgentPropertyTypeChart(data.propertiesByType || data.propertyTypes || []);
+            }
+
+            function renderCustomerDashboard(data) {
+                document.getElementById('stat-customer-bookings').textContent = data.totalBookings || 0;
+                document.getElementById('stat-customer-payments').textContent = formatCurrency(data.totalPayments);
+                document.getElementById('stat-customer-favorites').textContent = data.totalFavorites || 0;
+                document.getElementById('stat-customer-messages').textContent = data.unreadMessages || 0;
+
+                const bookings = data.recentBookings || [];
+                const tbody = document.getElementById('customer-recent-bookings');
+                if (bookings.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-muted">No bookings yet</td></tr>';
+                } else {
+                    tbody.innerHTML = bookings.map(b => `
+                        <tr>
+                            <td><strong>#${b._id ? b._id.slice(-6) : 'N/A'}</strong></td>
+                            <td>${b.propertyTitle || b.property?.title || '-'}</td>
+                            <td>${formatDate(b.date || b.createdAt)}</td>
+                            <td>${formatCurrency(b.amount)}</td>
+                            <td><span class="badge-status ${b.status || 'pending'}">${(b.status || 'pending').charAt(0).toUpperCase() + (b.status || 'pending').slice(1)}</span></td>
+                        </tr>
+                    `).join('');
+                }
+
+                const payments = data.recentPayments || [];
+                const payTbody = document.getElementById('customer-recent-payments');
+                if (payments.length === 0) {
+                    payTbody.innerHTML = '<tr><td colspan="3" class="text-center py-4 text-muted">No payments yet</td></tr>';
+                } else {
+                    payTbody.innerHTML = payments.map(p => `
+                        <tr>
+                            <td>${formatDate(p.date || p.createdAt)}</td>
+                            <td>${formatCurrency(p.amount)}</td>
+                            <td><span class="badge-status ${p.status || 'pending'}">${(p.status || 'pending').charAt(0).toUpperCase() + (p.status || 'pending').slice(1)}</span></td>
+                        </tr>
+                    `).join('');
+                }
+
+                const favorites = data.favorites || [];
+                const favList = document.getElementById('customer-favorites-list');
+                if (favorites.length === 0) {
+                    favList.innerHTML = '<div class="text-center text-muted py-4">No favorites yet</div>';
+                } else {
+                    favList.innerHTML = favorites.map(f => `
+                        <div class="activity-item">
+                            <div class="activity-icon booking"><i class="fas fa-home"></i></div>
+                            <div class="activity-info">
+                                <h6>${f.title || f.property?.title || 'Property'}</h6>
+                                <p>${formatCurrency(f.price || f.property?.price)} &middot; ${f.location || f.property?.location || ''}</p>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                const messages = data.recentMessages || [];
+                const msgList = document.getElementById('customer-messages-list');
+                if (messages.length === 0) {
+                    msgList.innerHTML = '<div class="text-center text-muted py-4">No messages</div>';
+                } else {
+                    msgList.innerHTML = messages.map(m => `
+                        <div class="activity-item">
+                            <div class="activity-icon message"><i class="fas fa-envelope"></i></div>
+                            <div class="activity-info">
+                                <h6>${m.senderName || m.from || 'System'}</h6>
+                                <p>${(m.subject || m.message || '').substring(0, 60)}${(m.message || '').length > 60 ? '...' : ''}</p>
+                            </div>
+                            <span class="activity-time">${formatDate(m.createdAt)}</span>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            function destroyChart(name) {
+                if (charts[name]) { charts[name].destroy(); charts[name] = null; }
+            }
+
+            function initRevenueChart(data) {
+                destroyChart('revenue');
+                const labels = data.map(d => d.month || d.label || d._id || '');
+                const values = data.map(d => d.revenue || d.total || d.value || 0);
+                charts['revenue'] = new Chart(document.getElementById('revenueChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: labels.length ? labels : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Revenue',
+                            data: values.length ? values : [0, 0, 0, 0, 0, 0],
+                            backgroundColor: 'rgba(233, 69, 96, 0.8)',
+                            borderColor: '#e94560',
+                            borderWidth: 1,
+                            borderRadius: 6,
+                            barPercentage: 0.6
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            function initPropertyTypeChart(data) {
+                destroyChart('propertyType');
+                const labels = data.map(d => d.type || d._id || d.label || '');
+                const values = data.map(d => d.count || d.total || d.value || 0);
+                const colors = ['#e94560', '#0f3460', '#16c79a', '#6c5ce7', '#ffa502', '#3d3d3d'];
+                charts['propertyType'] = new Chart(document.getElementById('propertyTypeChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels.length ? labels : ['House', 'Apartment', 'Condo', 'Land'],
+                        datasets: [{
+                            data: values.length ? values : [10, 8, 5, 3],
+                            backgroundColor: colors.slice(0, labels.length || 4),
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { padding: 15, usePointStyle: true } }
+                        },
+                        cutout: '65%'
+                    }
+                });
+            }
+
+            function initAgentSalesChart(data) {
+                destroyChart('agentSales');
+                const labels = data.map(d => d.month || d.label || d._id || '');
+                const values = data.map(d => d.sales || d.total || d.value || 0);
+                charts['agentSales'] = new Chart(document.getElementById('agentSalesChart'), {
+                    type: 'line',
+                    data: {
+                        labels: labels.length ? labels : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: values.length ? values : [0, 0, 0, 0, 0, 0],
+                            borderColor: '#0f3460',
+                            backgroundColor: 'rgba(15, 52, 96, 0.1)',
+                            fill: true, tension: 0.4,
+                            pointBackgroundColor: '#0f3460',
+                            pointBorderColor: '#fff', pointBorderWidth: 2, pointRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            function initAgentPropertyTypeChart(data) {
+                destroyChart('agentPropertyType');
+                const labels = data.map(d => d.type || d._id || d.label || '');
+                const values = data.map(d => d.count || d.total || d.value || 0);
+                const colors = ['#0f3460', '#16c79a', '#e94560', '#6c5ce7', '#ffa502'];
+                charts['agentPropertyType'] = new Chart(document.getElementById('agentPropertyTypeChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels.length ? labels : ['House', 'Apartment', 'Condo', 'Land'],
+                        datasets: [{
+                            data: values.length ? values : [5, 3, 2, 1],
+                            backgroundColor: colors.slice(0, labels.length || 4),
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { padding: 15, usePointStyle: true } }
+                        },
+                        cutout: '65%'
+                    }
+                });
+            }
+
+            function showToast(icon, title) {
+                const Toast = Swal.mixin({
+                    toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true
+                });
+                Toast.fire({ icon, title });
+            }
+
+            async function loadDashboard() {
+                try {
+                    if (currentRole === 'admin') {
+                        const res = await api.get('/admin/dashboard');
+                        const d = res.data || res;
+                        const s = d.stats || {};
+                        const ch = d.charts || {};
+                        renderAdminDashboard({
+                            totalUsers: s.total_users,
+                            totalProperties: s.total_properties,
+                            totalBookings: s.total_bookings,
+                            totalRevenue: s.total_revenue,
+                            recentBookings: (d.recent_bookings || []).map(b => ({
+                                customerName: b.customer_name,
+                                propertyTitle: b.property_title,
+                                date: b.booking_date || b.created_at,
+                                amount: b.amount,
+                                status: b.status
+                            })),
+                            recentActivity: (d.recent_activities || []).map(a => ({
+                                type: a.action || 'message',
+                                title: a.action,
+                                description: a.entity_type ? `${a.entity_type} #${a.entity_id}` : '',
+                                createdAt: a.created_at
+                            })),
+                            revenueChart: ch.monthly_revenue || [],
+                            propertiesByType: (ch.properties_by_type || []).map(t => ({ type: t.type_name, count: t.count }))
+                        });
+                    } else if (currentRole === 'agent') {
+                        const [propRes, bookRes, salesRes] = await Promise.all([
+                            api.get('/agents/dashboard/properties'),
+                            api.get('/agents/dashboard/bookings'),
+                            api.get('/agents/dashboard/sales')
+                        ]);
+                        const props = (propRes.data && propRes.data.properties) || [];
+                        const bookings = (bookRes.data && bookRes.data.bookings) || [];
+                        const sales = (salesRes.data && salesRes.data.sales) || [];
+                        const totalViews = props.reduce((sum, p) => sum + (p.views_count || 0), 0);
+                        const salesByMonth = {};
+                        sales.forEach(s => {
+                            const m = (s.paid_at || '').substring(0, 7);
+                            if (!m) return;
+                            salesByMonth[m] = (salesByMonth[m] || 0) + Number(s.amount || 0);
+                        });
+                        const typeMap = {};
+                        props.forEach(p => { const t = p.type_name || 'Other'; typeMap[t] = (typeMap[t] || 0) + 1; });
+                        renderAgentDashboard({
+                            totalProperties: props.length,
+                            activeBookings: bookings.filter(b => ['pending', 'confirmed'].includes(b.status)).length,
+                            totalSales: (salesRes.data && salesRes.data.total_commission) || sales.reduce((s, x) => s + Number(x.amount || 0), 0),
+                            totalViews,
+                            upcomingVisits: [],
+                            recentMessages: bookings.slice(0, 5).map(b => ({
+                                senderName: `${b.customer_first_name || ''} ${b.customer_last_name || ''}`.trim() || 'Customer',
+                                subject: b.property_title,
+                                createdAt: b.booking_date || b.created_at
+                            })),
+                            salesChart: Object.keys(salesByMonth).sort().map(m => ({ month: m, sales: salesByMonth[m] })),
+                            propertiesByType: Object.keys(typeMap).map(t => ({ type: t, count: typeMap[t] }))
+                        });
+                    } else {
+                        const res = await api.get('/users/dashboard');
+                        const d = res.data || res;
+                        const s = d.stats || {};
+                        renderCustomerDashboard({
+                            totalBookings: s.total_bookings,
+                            totalPayments: s.total_payments,
+                            totalFavorites: s.favorites,
+                            unreadMessages: 0,
+                            recentBookings: (d.recent_bookings || []).map(b => ({
+                                propertyTitle: b.property_title,
+                                date: b.booking_date || b.created_at,
+                                amount: b.amount,
+                                status: b.status
+                            })),
+                            recentPayments: (d.recent_payments || []).map(p => ({
+                                date: p.created_at,
+                                amount: p.amount,
+                                status: p.status
+                            })),
+                            favorites: (d.recommendations || []).map(r => ({
+                                title: r.title,
+                                price: r.price,
+                                location: r.city
+                            })),
+                            recentMessages: []
+                        });
+                    }
+                } catch (err) {
+                    console.error('Dashboard load error:', err);
+                    showToast('error', 'Failed to load dashboard data');
+                    if (currentRole === 'admin') renderAdminDashboard({});
+                    else if (currentRole === 'agent') renderAgentDashboard({});
+                    else renderCustomerDashboard({});
+                }
+            }
+
+            document.getElementById('sidebar-nav-items').addEventListener('click', function (e) {
+                const link = e.target.closest('.nav-link');
+                if (!link) return;
+                e.preventDefault();
+                document.querySelectorAll('.sidebar-nav .nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                const tab = link.getAttribute('data-tab');
+                document.getElementById('page-title').textContent = link.querySelector('span').textContent;
+                if (tab === 'dashboard') {
+                    showDashboard();
+                } else {
+                    showToast('info', 'Navigation to ' + link.querySelector('span').textContent + ' coming soon');
+                }
+            });
+
+                        document.getElementById('logout-btn').addEventListener('click', function () {
+                Swal.fire({
+                    title: 'Logout',
+                    text: 'Are you sure you want to logout?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#e94560',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, logout'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('accessToken');
+                        window.location.href = 'login.html';
+                    }
+                });
+            });
+
+            buildSidebar();
+            setUserDisplay();
+            showDashboard();
+            loadDashboard();
+        })();
+    </script>
+</body>
+</html>

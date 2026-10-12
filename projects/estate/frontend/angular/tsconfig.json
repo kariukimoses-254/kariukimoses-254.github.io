@@ -1,0 +1,20 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-cache",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": false,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "lib": ["ES2022", "dom"]
+  }
+}

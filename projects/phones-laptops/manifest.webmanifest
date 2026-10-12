@@ -1,0 +1,19 @@
+{
+  "name": "Mosey Technologies",
+  "short_name": "Mosey",
+  "description": "Phones, laptops, tablets, audio, wearables and gadgets — genuine devices with fast delivery and warranty.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#0b1220",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

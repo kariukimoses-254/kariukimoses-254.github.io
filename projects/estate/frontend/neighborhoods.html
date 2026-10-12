@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neighborhood Guides | Lil Mosey Estate 6G Edition</title>
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><span class="brand-icon"><i class="fas fa-home"></i></span>Lil<span class="brand-accent"> Mosey</span> Estate</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" href="mortgage-calculator.html">Calculator</a></li>
+        <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div id="auth-buttons" class="d-flex ms-3 gap-2">
+        <a href="login.html" class="btn btn-outline-custom btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary-custom btn-sm">Register</a>
+      </div>
+      <div id="user-menu" class="dropdown ms-3" style="display:none;">
+        <a href="#" class="d-flex align-items-center gap-2 text-decoration-none" data-bs-toggle="dropdown">
+          <img id="user-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle fill='%23D4AF37' cx='18' cy='18' r='18'/%3E%3Ctext fill='%230B1F3A' font-family='Arial' font-size='14' text-anchor='middle' x='18' y='23'%3E U %3C/text%3E%3C/svg%3E" alt="Avatar" class="rounded-circle" width="36" height="36">
+          <span id="user-name" class="fw-semibold text-dark"></span><i class="fas fa-chevron-down small"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a id="dashboard-link" class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+          <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+          <li><a class="dropdown-item" href="favorites.html"><i class="fas fa-heart me-2"></i>Favorites</a></li>
+          <li><a class="dropdown-item" href="appointments.html"><i class="fas fa-calendar me-2"></i>Bookings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section style="background:var(--primary);padding:120px 0 60px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 80% 50%,rgba(212,175,55,0.06) 0%,transparent 50%);pointer-events:none;"></div>
+  <div class="container position-relative">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Explore Nairobi</span>
+      <h2 style="color:white;">Neighborhood Guides</h2>
+      <p style="color:rgba(255,255,255,0.7);">Discover what makes each Nairobi neighborhood unique. Find the area that fits your lifestyle.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up">
+        <a href="properties.html?city=Westlands" class="neighborhood-card">
+          <div class="nh-image" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="nh-overlay"></div>
+          <div class="nh-content"><span class="nh-tag">Urban Living</span><h4>Westlands</h4><div class="nh-price">Avg: KES 12M - 35M</div><div class="nh-amenities"><span><i class="fas fa-utensils"></i> Dining</span><span><i class="fas fa-shopping-bag"></i> Shopping</span><span><i class="fas fa-music"></i> Nightlife</span></div><p>Vibrant hub with world-class restaurants, malls, and entertainment. Perfect for young professionals.</p></div>
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <a href="properties.html?city=Karen" class="neighborhood-card">
+          <div class="nh-image" style="background-image:url('https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="nh-overlay"></div>
+          <div class="nh-content"><span class="nh-tag">Luxury</span><h4>Karen</h4><div class="nh-price">Avg: KES 30M - 80M</div><div class="nh-amenities"><span><i class="fas fa-tree"></i> Green</span><span><i class="fas fa-shield-halved"></i> Secure</span><span><i class="fas fa-school"></i> Schools</span></div><p>Exclusive gated community with sprawling estates, golf courses, and proximity to nature reserves.</p></div>
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <a href="properties.html?city=Kilimani" class="neighborhood-card">
+          <div class="nh-image" style="background-image:url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="nh-overlay"></div>
+          <div class="nh-content"><span class="nh-tag">Family-Friendly</span><h4>Kilimani</h4><div class="nh-price">Avg: KES 15M - 40M</div><div class="nh-amenities"><span><i class="fas fa-school"></i> Schools</span><span><i class="fas fa-hospital"></i> Hospitals</span><span><i class="fas fa-tree"></i> Parks</span></div><p>Central location with excellent schools, hospitals, and family-friendly atmosphere.</p></div>
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up">
+        <a href="properties.html?city=Runda" class="neighborhood-card">
+          <div class="nh-image" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="nh-overlay"></div>
+          <div class="nh-content"><span class="nh-tag">Prestigious</span><h4>Runda</h4><div class="nh-price">Avg: KES 45M - 120M</div><div class="nh-amenities"><span><i class="fas fa-shield-halved"></i> Gated</span><span><i class="fas fa-tree"></i> Nature</span><span><i class="fas fa-leaf"></i> Serene</span></div><p>Nairobi's most prestigious address. Ultra-private estates surrounded by lush greenery.</p></div>
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <a href="properties.html?city=Langata" class="neighborhood-card">
+          <div class="nh-image" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="nh-overlay"></div>
+          <div class="nh-content"><span class="nh-tag">Diverse</span><h4>Langata</h4><div class="nh-price">Avg: KES 18M - 50M</div><div class="nh-amenities"><span><i class="fas fa-paw"></i> Wildlife</span><span><i class="fas fa-graduation-cap"></i> Colleges</span><span><i class="fas fa-mug-hot"></i> Cafes</span></div><p>Home to Nairobi National Park and Giraffe Centre. A blend of urban convenience and wildlife.</p></div>
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <a href="properties.html?city=CBD" class="neighborhood-card">
+          <div class="nh-image" style="background-image:url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="nh-overlay"></div>
+          <div class="nh-content"><span class="nh-tag">Commercial</span><h4>CBD</h4><div class="nh-price">Avg: KES 8M - 25M</div><div class="nh-amenities"><span><i class="fas fa-briefcase"></i> Business</span><span><i class="fas fa-bus"></i> Transit</span><span><i class="fas fa-building"></i> Offices</span></div><p>The beating heart of Nairobi's commerce. Ideal for professionals who want to live near work.</p></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bg-light);">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Why These Areas</span>
+      <h2>What Matters When Choosing</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4" data-aos="fade-up"><div class="why-us-card"><div class="icon-box-modern" style="background:rgba(212,175,55,0.12);color:var(--secondary);margin:0 auto 20px;"><i class="fas fa-school"></i></div><h4>Top Schools</h4><p>All our recommended neighborhoods have access to top-rated schools and educational institutions.</p></div></div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100"><div class="why-us-card"><div class="icon-box-modern" style="background:rgba(46,139,87,0.12);color:var(--accent);margin:0 auto 20px;"><i class="fas fa-bus"></i></div><h4>Transport Links</h4><p>Easy access to major roads, public transport, and proximity to the CBD and business hubs.</p></div></div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200"><div class="why-us-card"><div class="icon-box-modern" style="background:rgba(52,152,219,0.12);color:#3498db;margin:0 auto 20px;"><i class="fas fa-shield-halved"></i></div><h4>Security</h4><p>Gated communities, 24/7 security, CCTV surveillance, and well-lit streets for peace of mind.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section gradient-animate">
+  <div class="container text-center">
+    <h2 data-aos="fade-up">Find Your Perfect Neighborhood</h2>
+    <p data-aos="fade-up" data-aos-delay="100">Explore properties in Nairobi's best neighborhoods today.</p>
+    <div data-aos="fade-up" data-aos-delay="200">
+      <a href="properties.html" class="btn btn-primary-custom btn-lg me-3"><i class="fas fa-search me-2"></i>Browse Properties</a>
+      <a href="contact.html" class="btn btn-outline-custom btn-lg"><i class="fas fa-phone me-2"></i>Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4"><h5>Lil Mosey Estate 6G Edition</h5><p>Finding Your Perfect Property, Simplified. Kenya's premier real estate platform.</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+      <div class="col-lg-2"><h5>Quick Links</h5><ul class="footer-links"><li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="properties.html"><i class="fas fa-chevron-right"></i> Properties</a></li><li><a href="mortgage-calculator.html"><i class="fas fa-chevron-right"></i> Calculator</a></li><li><a href="agents.html"><i class="fas fa-chevron-right"></i> Agents</a></li><li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li><li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li></ul></div>
+      <div class="col-lg-3"><h5>Property Types</h5><ul class="footer-links"><li><a href="properties.html?type=1"><i class="fas fa-chevron-right"></i> Apartments</a></li><li><a href="properties.html?type=2"><i class="fas fa-chevron-right"></i> Villas</a></li><li><a href="properties.html?type=3"><i class="fas fa-chevron-right"></i> Townhouses</a></li><li><a href="properties.html?type=4"><i class="fas fa-chevron-right"></i> Bungalows</a></li><li><a href="properties.html?type=5"><i class="fas fa-chevron-right"></i> Penthouses</a></li></ul></div>
+      <div class="col-lg-3"><h5>Contact Info</h5><ul class="footer-links"><li><a href="#"><i class="fas fa-map-marker-alt"></i> Westlands Business Park, Nairobi</a></li><li><a href="tel:+254793489901"><i class="fas fa-phone"></i> +254 793 489 901</a></li><li><a href="tel:+254105727456"><i class="fas fa-phone"></i> +254 105 727 456</a></li><li><a href="mailto:kariukimoseswambugu@gmail.com"><i class="fas fa-envelope"></i> kariukimoseswambugu@gmail.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 <span class="gold">Lil Mosey Estate 6G Edition</span>. All rights reserved. | Powered by 6G Technology</p></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/main.js"></script>
+<script>AOS.init({duration:800,easing:'ease-in-out',once:true});</script>
+</body>
+</html>

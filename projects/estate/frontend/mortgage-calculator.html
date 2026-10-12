@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mortgage Calculator - Lil Mosey Estate 6G Edition</title>
+  <meta name="description" content="Calculate your monthly mortgage payments for properties in Kenya. Free mortgage calculator with amortization schedule.">
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo">Lil Mosey Estate 6G Edition</div>
+    <div class="preloader-spinner"></div>
+  </div>
+</div>
+
+<div id="toast-container" class="toast-container"></div>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-icon"><i class="fas fa-home"></i></span>
+      Lil<span class="brand-accent"> Mosey</span> Estate
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
+        <li class="nav-item"><a class="nav-link active" href="mortgage-calculator.html">Calculator</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div id="auth-buttons" class="d-flex ms-3 gap-2">
+        <a href="login.html" class="btn btn-outline-custom btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary-custom btn-sm">Register</a>
+      </div>
+      <div id="user-menu" class="dropdown ms-3" style="display:none;">
+        <a href="#" class="d-flex align-items-center gap-2 text-decoration-none" data-bs-toggle="dropdown">
+          <img id="user-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle fill='%23D4AF37' cx='18' cy='18' r='18'/%3E%3Ctext fill='%230B1F3A' font-family='Arial' font-size='14' text-anchor='middle' x='18' y='23'%3E U %3C/text%3E%3C/svg%3E" alt="Avatar" class="rounded-circle" width="36" height="36">
+          <span id="user-name" class="fw-semibold text-dark"></span>
+          <i class="fas fa-chevron-down small"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a id="dashboard-link" class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+          <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+          <li><a class="dropdown-item" href="favorites.html"><i class="fas fa-heart me-2"></i>Favorites</a></li>
+          <li><a class="dropdown-item" href="appointments.html"><i class="fas fa-calendar me-2"></i>Bookings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="container">
+    <h1 data-aos="fade-up"><i class="fas fa-calculator me-2 text-gold"></i>Mortgage Calculator</h1>
+    <p data-aos="fade-up" data-aos-delay="100">Estimate your monthly payments and plan your property purchase with confidence.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-7" data-aos="fade-right">
+        <div class="calc-card card-3d shadow-3d">
+          <h3 class="fw-bold mb-4 text-3d">Loan Details</h3>
+
+          <div class="calc-group">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <label class="form-label fw-semibold mb-0">Property Price</label>
+              <span class="calc-value" id="price-display">KES 10,000,000</span>
+            </div>
+            <input type="range" class="form-range calc-range" id="calc-price" min="1000000" max="100000000" step="500000" value="10000000">
+            <div class="d-flex justify-content-between"><small class="text-muted">KES 1M</small><small class="text-muted">KES 100M</small></div>
+          </div>
+
+          <div class="calc-group">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <label class="form-label fw-semibold mb-0">Down Payment</label>
+              <span class="calc-value" id="down-display">20% (KES 2,000,000)</span>
+            </div>
+            <input type="range" class="form-range calc-range" id="calc-down" min="5" max="80" step="5" value="20">
+            <div class="d-flex justify-content-between"><small class="text-muted">5%</small><small class="text-muted">80%</small></div>
+          </div>
+
+          <div class="calc-group">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <label class="form-label fw-semibold mb-0">Interest Rate (Annual)</label>
+              <span class="calc-value" id="rate-display">12.5%</span>
+            </div>
+            <input type="range" class="form-range calc-range" id="calc-rate" min="5" max="25" step="0.5" value="12.5">
+            <div class="d-flex justify-content-between"><small class="text-muted">5%</small><small class="text-muted">25%</small></div>
+          </div>
+
+          <div class="calc-group">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <label class="form-label fw-semibold mb-0">Loan Term</label>
+              <span class="calc-value" id="term-display">20 years</span>
+            </div>
+            <input type="range" class="form-range calc-range" id="calc-term" min="5" max="30" step="1" value="20">
+            <div class="d-flex justify-content-between"><small class="text-muted">5 years</small><small class="text-muted">30 years</small></div>
+          </div>
+
+          <div class="calc-group">
+            <label class="form-label fw-semibold">Your Monthly Income (optional)</label>
+            <div class="input-group">
+              <span class="input-group-text">KES</span>
+              <input type="number" class="form-control" id="calc-income" placeholder="e.g. 200000" value="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5" data-aos="fade-left">
+        <div class="calc-result-card card-3d">
+          <div class="text-center mb-4">
+            <small class="text-muted text-uppercase fw-bold">Estimated Monthly Payment</small>
+            <div class="calc-monthly" id="monthly-payment">KES 0</div>
+          </div>
+          <div class="calc-breakdown">
+            <div class="calc-row">
+              <span>Loan Amount</span>
+              <span id="loan-amount">KES 0</span>
+            </div>
+            <div class="calc-row">
+              <span>Total Interest</span>
+              <span id="total-interest" class="text-danger">KES 0</span>
+            </div>
+            <div class="calc-row">
+              <span>Total Cost</span>
+              <span id="total-cost">KES 0</span>
+            </div>
+            <hr>
+            <div class="calc-row">
+              <span>Principal / Month</span>
+              <span id="monthly-principal">KES 0</span>
+            </div>
+            <div class="calc-row">
+              <span>Interest / Month</span>
+              <span id="monthly-interest">KES 0</span>
+            </div>
+          </div>
+          <div id="affordability-check" class="mt-4" style="display:none;">
+            <hr>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="fas fa-heart-pulse"></i>
+              <span class="fw-bold">Affordability Check</span>
+            </div>
+            <div id="affordability-result"></div>
+          </div>
+        </div>
+
+        <div class="calc-result-card card-3d mt-4">
+          <h6 class="fw-bold mb-3 text-3d"><i class="fas fa-chart-pie me-2 text-gold"></i>Payment Split</h6>
+          <canvas id="payment-chart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-12" data-aos="fade-up">
+        <h3 class="fw-bold mb-4 text-center text-3d">Amortization Summary</h3>
+        <div class="table-responsive">
+          <table class="table table-hover calc-table shadow-3d" id="amortization-table">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Principal Paid</th>
+                <th>Interest Paid</th>
+                <th>Total Paid</th>
+                <th>Balance Remaining</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container text-center">
+    <h2 data-aos="fade-up" class="text-3d">Ready to Find Your Property?</h2>
+    <p data-aos="fade-up" data-aos-delay="100">Browse our listings and find the perfect home within your budget.</p>
+    <div data-aos="fade-up" data-aos-delay="200">
+      <a href="properties.html" class="btn btn-primary-custom btn-lg me-3"><i class="fas fa-search me-2"></i>Browse Properties</a>
+      <a href="contact.html" class="btn btn-outline-custom btn-lg"><i class="fas fa-phone me-2"></i>Talk to an Agent</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>&copy; 2026 <span class="gold">Lil Mosey Estate 6G Edition</span>. All rights reserved. | Powered by 6G Technology</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/main.js"></script>
+<script>
+let paymentChart = null;
+
+function formatKES(num) {
+  return 'KES ' + Math.round(num).toLocaleString();
+}
+
+function calculateMortgage() {
+  const price = parseFloat(document.getElementById('calc-price').value);
+  const downPct = parseFloat(document.getElementById('calc-down').value);
+  const annualRate = parseFloat(document.getElementById('calc-rate').value);
+  const years = parseInt(document.getElementById('calc-term').value);
+  const income = parseFloat(document.getElementById('calc-income').value) || 0;
+
+  const downPayment = price * (downPct / 100);
+  const loanAmount = price - downPayment;
+  const monthlyRate = (annualRate / 100) / 12;
+  const totalMonths = years * 12;
+
+  let monthlyPayment = 0;
+  if (monthlyRate > 0) {
+    monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / (Math.pow(1 + monthlyRate, totalMonths) - 1);
+  } else {
+    monthlyPayment = loanAmount / totalMonths;
+  }
+
+  const totalPaid = monthlyPayment * totalMonths;
+  const totalInterest = totalPaid - loanAmount;
+
+  document.getElementById('price-display').textContent = formatKES(price);
+  document.getElementById('down-display').textContent = downPct + '% (' + formatKES(downPayment) + ')';
+  document.getElementById('rate-display').textContent = annualRate + '%';
+  document.getElementById('term-display').textContent = years + ' years';
+
+  document.getElementById('monthly-payment').textContent = formatKES(monthlyPayment);
+  document.getElementById('loan-amount').textContent = formatKES(loanAmount);
+  document.getElementById('total-interest').textContent = formatKES(totalInterest);
+  document.getElementById('total-cost').textContent = formatKES(totalPaid);
+  document.getElementById('monthly-principal').textContent = formatKES(loanAmount / totalMonths);
+  document.getElementById('monthly-interest').textContent = formatKES(totalInterest / totalMonths);
+
+  const affordDiv = document.getElementById('affordability-check');
+  const affordResult = document.getElementById('affordability-result');
+  if (income > 0) {
+    affordDiv.style.display = 'block';
+    const ratio = (monthlyPayment / income) * 100;
+    let status, color, icon;
+    if (ratio <= 28) {
+      status = 'Healthy — you\'re within safe limits';
+      color = 'var(--accent)';
+      icon = 'fa-circle-check';
+    } else if (ratio <= 40) {
+      status = 'Stretchable — manageable but tight';
+      color = 'var(--secondary)';
+      icon = 'fa-circle-exclamation';
+    } else {
+      status = 'Risky — exceeds recommended 40% threshold';
+      color = '#e74c3c';
+      icon = 'fa-circle-xmark';
+    }
+    affordResult.innerHTML = '<div class="d-flex align-items-center gap-2"><i class="fas ' + icon + '" style="color:' + color + ';font-size:1.2rem;"></i><div><div class="fw-semibold">' + ratio.toFixed(1) + '% of income</div><small style="color:' + color + ';">' + status + '</small></div></div>';
+  } else {
+    affordDiv.style.display = 'none';
+  }
+
+  updateChart(loanAmount / totalMonths, totalInterest / totalMonths);
+  buildAmortization(loanAmount, monthlyRate, monthlyPayment, totalMonths, years);
+}
+
+function updateChart(principal, interest) {
+  const ctx = document.getElementById('payment-chart').getContext('2d');
+  if (paymentChart) paymentChart.destroy();
+  paymentChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Principal', 'Interest'],
+      datasets: [{
+        data: [Math.round(principal), Math.round(interest)],
+        backgroundColor: ['#0B1F3A', '#D4AF37'],
+        borderWidth: 0,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '65%',
+      plugins: {
+        legend: { position: 'bottom', labels: { padding: 15, usePointStyle: true, pointStyle: 'circle' } }
+      }
+    }
+  });
+}
+
+function buildAmortization(loan, monthlyRate, monthlyPayment, totalMonths, years) {
+  const tbody = document.querySelector('#amortization-table tbody');
+  tbody.innerHTML = '';
+  let balance = loan;
+  let yearlyPrincipal = 0, yearlyInterest = 0, yearlyTotal = 0;
+
+  for (let m = 1; m <= totalMonths; m++) {
+    const interestPart = balance * monthlyRate;
+    const principalPart = monthlyPayment - interestPart;
+    balance = Math.max(0, balance - principalPart);
+    yearlyPrincipal += principalPart;
+    yearlyInterest += interestPart;
+    yearlyTotal += monthlyPayment;
+
+    if (m % 12 === 0 || m === totalMonths) {
+      const year = Math.ceil(m / 12);
+      const row = document.createElement('tr');
+      row.innerHTML = '<td>' + year + '</td><td>' + formatKES(yearlyPrincipal) + '</td><td>' + formatKES(yearlyInterest) + '</td><td>' + formatKES(yearlyTotal) + '</td><td>' + formatKES(Math.max(0, balance)) + '</td>';
+      tbody.appendChild(row);
+      yearlyPrincipal = 0;
+      yearlyInterest = 0;
+      yearlyTotal = 0;
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  ['calc-price', 'calc-down', 'calc-rate', 'calc-term', 'calc-income'].forEach(id => {
+    document.getElementById(id).addEventListener('input', calculateMortgage);
+  });
+  calculateMortgage();
+
+  if (typeof AOS !== 'undefined') AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
+});
+</script>
+</body>
+</html>

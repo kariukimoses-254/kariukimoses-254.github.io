@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare Hospital - Database</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="client.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🏥 MediCare Hospital</h1>
+    <nav>
+      <a href="home.html" class="nav-btn">Home</a>
+      <a href="db.html" class="nav-btn active">Database</a>
+      <a href="index.html" class="nav-btn">Staff Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>📊 Database Overview</h2>
+    <div class="stats-grid" id="dbStats">
+      <div class="spinner"></div>
+    </div>
+
+    <h2>Recent Records</h2>
+    <table>
+      <thead><tr><th>Patient</th><th>Department</th><th>Doctor</th><th>Diagnosis</th><th>Status</th></tr></thead>
+      <tbody id="recentRecords"></tbody>
+    </table>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div>
+    <p>© 2026 MediCare Hospital. All rights reserved.</p>
+  </footer>
+
+  <script>
+    fetch('/api/db-summary')
+      .then(r => r.json())
+      .then(s => {
+        document.getElementById('dbStats').innerHTML = Object.entries(s).map(([table, count]) =>
+          `<div class="stat-card"><h3>${count}</h3><p>${table.replace('_', ' ')}</p></div>`).join('');
+      });
+
+    fetch('/api/records')
+      .then(r => r.json())
+      .then(rows => {
+        document.getElementById('recentRecords').innerHTML = rows.slice(0, 6).map(r =>
+          `<tr><td>${r.patient_name}</td><td>${r.department}</td><td>${r.doctor}</td><td>${r.diagnosis}</td><td>${r.status}</td></tr>`
+        ).join('') || '<tr><td colspan="5">No records yet.</td></tr>';
+      });
+  </script>
+  <script src="theme.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
+

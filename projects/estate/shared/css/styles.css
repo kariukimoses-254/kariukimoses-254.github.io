@@ -1,0 +1,38 @@
+:root {
+  --brand-dark: #0d2955;
+  --brand-primary: #1e7fd0;
+  --brand-light: #3b9df6;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #f8fafc;
+}
+
+.brand-navbar {
+  background: var(--brand-dark);
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-primary) 60%, var(--brand-light) 100%);
+}
+
+.tech-chip {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  margin: 0.15rem;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+}
+
+.tech-frontend { background: #c7d2fe; color: #1e3a8a; }
+.tech-lib      { background: #fde68a; color: #713f12; }
+.tech-lang     { background: #bbf7d0; color: #14532d; }
+.tech-api      { background: #fecaca; color: #7f1d1d; }
+.tech-db       { background: #ddd6fe; color: #4c1d95; }
+
+pre code {
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: 0.8rem;
+}

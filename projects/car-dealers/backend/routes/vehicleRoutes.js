@@ -1,0 +1,16 @@
+const router = require('express').Router();
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const controller = require('../controllers/vehicleController');
+const { authenticate, adminOnly } = require('../middleware/auth');
+const uploadDir = path.join(__dirname, '..', 'uploads');
+fs.mkdirSync(uploadDir, { recursive: true });
+const storage = multer.diskStorage({ destination: (_req, _file, cb) => cb(null, uploadDir), filename: (_req, file, cb) => cb(null, `${Date.now()}-${Math.round(Math.random()*1e9)}${path.extname(file.originalname).toLowerCase()}`) });
+const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 }, fileFilter: (_req, file, cb) => cb(null, /^image\/(jpeg|png|webp|gif)$/.test(file.mimetype)) });
+router.get('/', controller.list);
+router.get('/:id', controller.getOne);
+router.post('/', authenticate, adminOnly, upload.single('image'), controller.create);
+router.put('/:id', authenticate, adminOnly, upload.single('image'), controller.update);
+router.delete('/:id', authenticate, adminOnly, controller.remove);
+module.exports = router;

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare Hospital - Guidance Sheet</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="client.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🏥 MediCare Hospital</h1>
+    <nav>
+      <a href="home.html" class="nav-btn">Home</a>
+      <a href="about.html" class="nav-btn">About</a>
+      <a href="services.html" class="nav-btn">Services</a>
+      <a href="doctors.html" class="nav-btn">Doctors</a>
+      <a href="appointments.html" class="nav-btn">Appointments</a>
+      <a href="contact.html" class="nav-btn">Contact</a>
+      <a href="guidance.html" class="nav-btn active">Guidance</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>📋 Guidance Sheet</h2>
+    <div class="form-card" style="flex-direction:column;gap:8px">
+      <p><strong>1. Register:</strong> New patients should create an account on the <a href="register.html">Register</a> page with a valid email.</p>
+      <p><strong>2. Login:</strong> Sign in at <a href="login.html">Login</a> using your email and password.</p>
+      <p><strong>3. Find a Doctor:</strong> Browse <a href="doctors.html">Doctors</a>, filter by qualification, and rate them.</p>
+      <p><strong>4. Book an Appointment:</strong> On the <a href="appointments.html">Appointments</a> page, pick a qualification, a doctor, date, and time.</p>
+      <p><strong>5. Staff Dashboard:</strong> Admins/staff log in and manage patients, doctors, appointments, applications, and records.</p>
+      <p><strong>6. Doctor Applications:</strong> Prospective doctors apply via <a href="apply.html">Doctor Apply</a> and are reviewed by staff.</p>
+      <p><strong>7. Visiting Hours:</strong> Open 24/7; OPD 08:00–20:00, ICU restricted as listed on About.</p>
+    </div>
+
+    <h2>Web Development Technologies</h2>
+    <div class="form-card" style="flex-direction:column;gap:12px">
+      <h3>WEB DEVELOPMENT</h3>
+      <p><strong>→ BACK END</strong> (server, database, APIs, application logic)</p>
+      <ul style="margin-left:20px">
+        <li><strong>API:</strong> GraphQL, REST API</li>
+        <li><strong>Database:</strong> PostgreSQL, MySQL, MongoDB</li>
+        <li><strong>Programming Languages:</strong> Java, PHP, JavaScript (Node.js), Ruby</li>
+      </ul>
+      <p><strong>→ FRONT END</strong> (what users see and interact with in the browser)</p>
+      <ul style="margin-left:20px">
+        <li><strong>Libraries:</strong> Bootstrap, Tailwind CSS, jQuery</li>
+        <li><strong>Frameworks:</strong> Angular, Vue, React</li>
+        <li><strong>Languages:</strong> HTML, CSS, JavaScript</li>
+      </ul>
+    </div>
+
+    <h2>Technologies This Site Uses</h2>
+    <div class="form-card" style="flex-direction:column;gap:8px">
+      <p><strong>🌐 Front end:</strong> HTML, CSS, JavaScript (plain, no framework)</p>
+      <p><strong>🗄️ Backend:</strong> JavaScript (Node.js) with Express</p>
+      <p><strong>💾 Database:</strong> MySQL (via the mysql2 client)</p>
+      <p><strong>🖼️ Extras:</strong> local images, emoji reactions, dark mode, animation effects</p>
+    </div>
+
+    <h2>Everything Available on This Site</h2>
+    <div class="form-card" style="flex-direction:column;gap:8px">
+      <p>🏠 <strong>Home:</strong> overview, stats, services gallery, and a left side panel with Patients/Doctors/Dashboard quick links.</p>
+      <p>ℹ️ <strong>About:</strong> hospital info, mission, vision, Quality Goals, visiting hours.</p>
+      <p>💉 <strong>Services:</strong> department cards with photos and facilities.</p>
+      <p>👨‍⚕️ <strong>Doctors:</strong> photo, specialization, rating (staff & patient), availability, and star rating.</p>
+      <p>📝 <strong>Doctor Apply:</strong> doctors submit applications with photo; staff can approve/reject.</p>
+      <p>📅 <strong>Appointments:</strong> logged-in patients book by qualification sector; their own history shown.</p>
+      <p>👤 <strong>Register / Login:</strong> new emails allowed; admin/staff/patient roles; hashed passwords.</p>
+      <p>💬 <strong>Messages:</strong> contact-form messages stored privately per email; My Messages page.</p>
+      <p>📂 <strong>Records:</strong> department-wise patient records stored in the database.</p>
+      <p>📊 <strong>Database:</strong> live table counts at db.html.</p>
+      <p>⚙️ <strong>Staff Dashboard (left sidebar):</strong> patients, doctors, appointments, applications, records, messages.</p>
+      <p>🎨 <strong>Design:</strong> dark/light mode, morphing background photos, animations, reactions, help button, toast, confetti.</p>
+    </div>
+  </main>
+
+  <div class="bg-slideshow"><img src="images/hero.jpg" alt=""/><img src="images/cardiology.jpg" alt=""/><img src="images/orthopedics.jpg" alt=""/><img src="images/emergency.jpg" alt=""/><img src="images/dentistry.jpg" alt=""/></div>
+  <footer class="footer"><div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div><div class="footer-socials"><a class="fb" href="https://facebook.com/medicarehospital" target="_blank" title="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a> <a class="tw" href="https://x.com/medicarehospital" target="_blank" title="X"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a> <a class="ig" href="https://instagram.com/medicarehospital" target="_blank" title="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a> <a class="yt" href="https://youtube.com/@medicarehospital" target="_blank" title="YouTube"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .502 5.814 3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></div><p>� 2026 MediCare Hospital. All rights reserved.</p></footer>
+  <script src="theme.js"></script>
+  <script src="auth.js"></script>
+  <script src="help.js"></script>
+  <script src="reactions.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

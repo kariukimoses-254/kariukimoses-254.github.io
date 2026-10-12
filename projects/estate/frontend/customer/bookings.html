@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bookings - Lil Mosey Estate 6G Edition</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">LM</div>
+      <div class="sidebar-logo-text">
+        <h3><span class="gold">Lil Mosey</span> Estate</h3>
+        <small>Customer Portal</small>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">C</div>
+      <div class="sidebar-user-info">
+        <h6 id="user-name">Customer</h6>
+        <small>Tenant</small>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="sidebar-nav-label">Overview</span>
+      <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a class="nav-link active" href="bookings.html"><i class="fas fa-calendar-check"></i> My Bookings</a>
+      <a class="nav-link" href="favorites.html"><i class="fas fa-heart"></i> Favorites</a>
+      <span class="sidebar-nav-label">Account</span>
+      <a class="nav-link" href="payments.html"><i class="fas fa-credit-card"></i> My Payments</a>
+      <span class="sidebar-separator"></span>
+      <span class="sidebar-nav-label">Support</span>
+      <a class="nav-link" href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+      <a class="nav-link" href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a>
+      <a class="nav-link" href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-link" href="../index.html"><i class="fas fa-arrow-left"></i> Back to Site</a>
+      <a class="nav-link" href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </aside>
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+<button class="btn d-md-none" id="sidebar-toggle" title="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+        <h4>My Bookings</h4>
+      </div>
+      <div class="topbar-right">
+        <div class="d-flex align-items-center gap-2">
+          <div class="user-avatar" id="user-avatar">C</div>
+<span class="fw-semibold user-name-text">Customer</span>
+        </div>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </header>
+    <div class="dash-content">
+      <div class="content-card shadow-3d">
+        <div class="card-header"><h5><i class="fas fa-calendar-check me-2"></i>My Property Bookings</h5></div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table">
+              <thead><tr><th>Property</th><th>Agent</th><th>Date</th><th>Time</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="bookings-tbody"><tr><td colspan="6" class="text-center py-5 text-muted">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/main.js"></script>
+  <script>
+  function formatDate(d) { if(!d) return '-'; return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+
+  (function(){
+    try {
+      const user = JSON.parse(localStorage.getItem('user')||'{}');
+      if(user.first_name) {
+        document.getElementById('user-name').textContent = user.first_name + ' ' + (user.last_name||'');
+        document.getElementById('user-avatar').textContent = user.first_name.charAt(0).toUpperCase();
+      }
+    } catch(e) {}
+
+    async function loadBookings() {
+      try {
+        const res = await api.get('/bookings/my-bookings');
+        const bookings = res.data.bookings || [];
+        const tbody = document.getElementById('bookings-tbody');
+        if(!bookings.length) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center py-5 text-muted">No bookings found. <a href="../properties.html" style="color:#D4AF37;">Browse properties</a></td></tr>';
+          return;
+        }
+        tbody.innerHTML = bookings.map(b => `
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <img src="${b.property_image||'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=100&q=80'}" class="booking-img" onerror="handleImageError(this)" alt="">
+                <div><strong>${b.property_title||'-'}</strong></div>
+              </div>
+            </td>
+            <td>${b.agent_first_name||''} ${b.agent_last_name||''}</td>
+            <td>${formatDate(b.booking_date)}</td>
+            <td>${b.booking_time||'-'}</td>
+            <td><span class="badge-status ${b.status}">${(b.status||'pending').charAt(0).toUpperCase()+(b.status||'pending').slice(1)}</span></td>
+            <td>
+              <div class="btn-group btn-group-sm">
+                ${b.status === 'pending' || b.status === 'confirmed' ? `
+                  <button class="btn btn-outline-danger" onclick="cancelBooking(${b.booking_id})" title="Cancel"><i class="fas fa-times"></i></button>
+                ` : '<span class="text-muted small">-</span>'}
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      } catch(err) {
+        document.getElementById('bookings-tbody').innerHTML = '<tr><td colspan="6" class="text-center py-5 text-muted">Failed to load bookings</td></tr>';
+      }
+    }
+
+    window.cancelBooking = async function(id) {
+      const result = await Swal.fire({icon:'warning', title:'Cancel Booking?', text:'Are you sure you want to cancel this booking?', showCancelButton:true, confirmButtonColor:'#e74c3c', confirmButtonText:'Yes, cancel'});
+      if(result.isConfirmed) {
+        try {
+          await api.put('/bookings/'+id+'/cancel', { cancellation_reason: 'Cancelled by customer' });
+          Swal.fire({icon:'success', title:'Cancelled', confirmButtonColor:'#D4AF37'});
+          loadBookings();
+        } catch(err) { Swal.fire({icon:'error', title:'Failed', text:err.message}); }
+      }
+    };
+
+        document.getElementById('logout-btn').addEventListener('click', () => auth.logout());
+    loadBookings();
+  })();
+  </script>
+</body>
+</html>

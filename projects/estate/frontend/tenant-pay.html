@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Payment | Lil Mosey Estate 6G Edition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D4AF37;
+            --primary-light: #F2D06B;
+            --primary-dark: #B8960C;
+            --accent-green: #4CAF50;
+            --dark-900: #0D0D0D;
+            --dark-800: #151515;
+            --dark-700: #1E1E1E;
+            --dark-600: #252525;
+            --text-primary: #F5F5F5;
+            --text-secondary: #999;
+            --border-subtle: rgba(255,255,255,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--dark-900);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.03) 0%, transparent 50%);
+        }
+
+        .pay-card {
+            background: rgba(30,30,30,0.85);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 48px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 32px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.05);
+        }
+
+        .pay-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .pay-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #000;
+        }
+
+        .pay-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .pay-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .pay-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .pay-property {
+            background: var(--dark-700);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-align: left;
+        }
+
+        .pay-property img {
+            width: 64px;
+            height: 64px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .pay-property-info h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .pay-property-info p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .pay-amount-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.05));
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .pay-amount-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .pay-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .pay-amount small {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .pay-details {
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .pay-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.85rem;
+        }
+
+        .pay-detail-row:last-child { border-bottom: none; }
+        .pay-detail-row .label { color: var(--text-secondary); }
+
+        .pin-section {
+            background: var(--dark-700);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .pin-section h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pin-section h4 i { color: var(--primary); }
+
+        .pin-section p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .pin-inputs {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .pin-inputs input {
+            width: 48px;
+            height: 56px;
+            background: var(--dark-600);
+            border: 2px solid var(--border-subtle);
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .pin-inputs input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 12px rgba(212,175,55,0.2);
+        }
+
+        .phone-input {
+            margin-bottom: 24px;
+        }
+
+        .phone-input label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .phone-input input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--dark-700);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .phone-input input:focus {
+            border-color: var(--primary);
+        }
+
+        .phone-input input::placeholder { color: #555; }
+
+        .pay-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent-green), #388E3C);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(76,175,80,0.3);
+        }
+
+        .pay-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(76,175,80,0.4); }
+        .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .pay-footer {
+            margin-top: 24px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .pay-success, .pay-error { display: none; text-align: center; padding: 32px 0; }
+
+        .pay-success-icon, .pay-error-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+
+        .pay-success-icon { background: rgba(76,175,80,0.15); color: var(--accent-green); }
+        .pay-error-icon { background: rgba(244,67,54,0.15); color: #F44336; }
+
+        .pay-success h2, .pay-error h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .pay-success p, .pay-error p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 520px) {
+            .pay-card { padding: 32px 24px; }
+            .pay-amount { font-size: 2rem; }
+            .pin-inputs input { width: 42px; height: 50px; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="pay-card" id="pay-card">
+        <div class="pay-logo">
+            <div class="pay-logo-icon"><i class="fas fa-building"></i></div>
+            <span class="pay-logo-text">Lil Mosey Estate 6G Edition</span>
+        </div>
+
+        <div id="pay-form-section">
+            <h1 class="pay-title">Rent Payment</h1>
+            <p class="pay-subtitle">Pay your monthly rent securely via M-Pesa</p>
+
+            <div class="pay-property" id="property-info" style="display:none;">
+                <img id="property-img" src="" alt="">
+                <div class="pay-property-info">
+                    <h3 id="property-title">-</h3>
+                    <p id="property-address">-</p>
+                </div>
+            </div>
+
+            <div class="pay-amount-box">
+                <div class="pay-amount-label">Amount Due</div>
+                <div class="pay-amount" id="pay-amount">KES 0 <small>/month</small></div>
+            </div>
+
+            <div class="pay-details" id="pay-details">
+                <div class="pay-detail-row"><span class="label">Tenant</span><span id="detail-tenant">-</span></div>
+                <div class="pay-detail-row"><span class="label">Month</span><span id="detail-month">-</span></div>
+                <div class="pay-detail-row"><span class="label">Payment Type</span><span>Monthly Rent</span></div>
+            </div>
+
+            <div class="pin-section" id="pin-section">
+                <h4><i class="fas fa-shield-alt"></i> Safe PIN Verification</h4>
+                <p>Enter your 4-6 digit payment PIN to authorize this payment</p>
+                <div class="pin-inputs">
+                    <input type="password" maxlength="1" data-pin="0" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                    <input type="password" maxlength="1" data-pin="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                    <input type="password" maxlength="1" data-pin="2" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                    <input type="password" maxlength="1" data-pin="3" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                    <input type="password" maxlength="1" data-pin="4" inputmode="numeric" pattern="[0-9]" autocomplete="off" id="pin-4">
+                    <input type="password" maxlength="1" data-pin="5" inputmode="numeric" pattern="[0-9]" autocomplete="off" id="pin-5">
+                </div>
+            </div>
+
+            <div class="phone-input">
+                <label>M-Pesa Phone Number</label>
+                <input type="tel" id="phone" placeholder="254 7XX XXX XXX" autocomplete="tel">
+            </div>
+
+            <button class="pay-btn" id="pay-btn" onclick="initiatePayment()">
+                <i class="fas fa-lock"></i> Pay with Safe PIN
+            </button>
+
+            <div class="pay-footer">
+                <p>Your Safe PIN is required for every rent payment.<br>You can set or change it in your tenant profile.</p>
+            </div>
+        </div>
+
+        <div class="pay-success" id="pay-success">
+            <div class="pay-success-icon"><i class="fas fa-check-circle"></i></div>
+            <h2>Payment Submitted!</h2>
+            <p>Your rent payment is being processed.<br>You will receive an M-Pesa confirmation shortly.</p>
+            <div class="pay-details" style="margin-top:20px;text-align:left;">
+                <div class="pay-detail-row"><span class="label">Receipt</span><span id="success-receipt">-</span></div>
+                <div class="pay-detail-row"><span class="label">Amount</span><span id="success-amount">-</span></div>
+                <div class="pay-detail-row"><span class="label">Month</span><span id="success-month">-</span></div>
+            </div>
+        </div>
+
+        <div class="pay-error" id="pay-error">
+            <div class="pay-error-icon"><i class="fas fa-times-circle"></i></div>
+            <h2 id="error-title">Payment Failed</h2>
+            <p id="error-message">Something went wrong. Please try again.</p>
+            <button class="pay-btn" style="background:var(--primary);margin-top:16px;" onclick="location.reload()">
+                <i class="fas fa-redo"></i> Try Again
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const API_BASE = 'http://localhost:5000/api/v1';
+        let tokenData = null;
+        let pinValue = '';
+
+        async function init() {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            if (!token) { showError('Invalid Link', 'This payment link is invalid.'); return; }
+
+            try {
+                const res = await fetch(`${API_BASE}/qr/verify/${token}`);
+                const data = await res.json();
+                if (data.status === 'error') {
+                    showError('Link Expired', data.message || 'This link has expired.');
+                    return;
+                }
+                tokenData = data;
+                renderPayment(data);
+            } catch (err) {
+                showError('Connection Error', 'Unable to connect to server.');
+            }
+
+            setupPinInputs();
+        }
+
+        function renderPayment(data) {
+            const payload = data.data || data;
+            document.getElementById('property-img').src = 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200&h=200&fit=crop';
+            document.getElementById('property-title').textContent = payload.property.title;
+            document.getElementById('property-address').textContent = `${payload.property.address}, ${payload.property.city}`;
+            document.getElementById('property-info').style.display = 'flex';
+            document.getElementById('pay-amount').innerHTML = `KES ${Number(payload.amount).toLocaleString()} <small>/month</small>`;
+            document.getElementById('detail-tenant').textContent = payload.tenant.name;
+            document.getElementById('detail-month').textContent = payload.payment_month;
+
+            if (!payload.has_pin) {
+                document.getElementById('pin-section').innerHTML = `
+                    <h4><i class="fas fa-exclamation-triangle" style="color:#FF9800;"></i> No PIN Set</h4>
+                    <p style="color:#FF9800;">You must set a Safe PIN in your tenant profile before making rent payments.</p>
+                `;
+                document.getElementById('pay-btn').disabled = true;
+            }
+        }
+
+        function setupPinInputs() {
+            const inputs = document.querySelectorAll('.pin-inputs input');
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    const val = e.target.value.replace(/[^0-9]/g, '');
+                    e.target.value = val;
+                    if (val && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                    updatePinValue();
+                });
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '');
+                    for (let i = 0; i < Math.min(paste.length, inputs.length); i++) {
+                        inputs[i].value = paste[i];
+                    }
+                    const nextEmpty = Array.from(inputs).findIndex(inp => !inp.value);
+                    if (nextEmpty !== -1) inputs[nextEmpty].focus();
+                    else inputs[inputs.length - 1].focus();
+                    updatePinValue();
+                });
+            });
+        }
+
+        function updatePinValue() {
+            const inputs = document.querySelectorAll('.pin-inputs input');
+            pinValue = Array.from(inputs).map(i => i.value).join('');
+        }
+
+        async function initiatePayment() {
+            updatePinValue();
+            const phone = document.getElementById('phone').value.trim();
+
+            if (pinValue.length < 4) {
+                Swal.fire({ icon: 'warning', title: 'Enter PIN', text: 'Please enter your Safe PIN (4-6 digits)', confirmButtonColor: '#D4AF37' });
+                return;
+            }
+
+            if (!phone) {
+                Swal.fire({ icon: 'warning', title: 'Phone Required', text: 'Please enter your M-Pesa phone number', confirmButtonColor: '#D4AF37' });
+                return;
+            }
+
+            const btn = document.getElementById('pay-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying PIN...';
+
+            try {
+                const token = new URLSearchParams(window.location.search).get('token');
+                const res = await fetch(`${API_BASE}/qr/pin/verify`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token, pin: pinValue, phone_number: phone })
+                });
+                const result = await res.json();
+
+                if (result.status === 'success') {
+                    document.getElementById('pay-form-section').style.display = 'none';
+                    document.getElementById('pay-success').style.display = 'block';
+                    document.getElementById('success-receipt').textContent = result.data.receipt_number;
+                    document.getElementById('success-amount').textContent = `KES ${Number(result.data.amount).toLocaleString()}`;
+                    document.getElementById('success-month').textContent = result.data.payment_month;
+                } else {
+                    showError('Payment Failed', result.message || 'Invalid PIN or payment error.');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-lock"></i> Pay with Safe PIN';
+                }
+            } catch (err) {
+                showError('Connection Error', 'Unable to process payment.');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-lock"></i> Pay with Safe PIN';
+            }
+        }
+
+        function showError(title, message) {
+            document.getElementById('pay-form-section').style.display = 'none';
+            document.getElementById('pay-error').style.display = 'block';
+            document.getElementById('error-title').textContent = title;
+            document.getElementById('error-message').textContent = message;
+        }
+
+        init();
+    </script>
+</body>
+</html>

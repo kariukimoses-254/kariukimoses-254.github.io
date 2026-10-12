@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="apple-touch-icon" href="./favicon.svg" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Mosey" />
+    <meta
+      name="description"
+      content="Mosey Technologies — your trusted store for the latest smartphones, laptops, tablets, audio, wearables, gaming, cameras and smart-home gadgets. Shop Apple, Samsung, Google, Sony, Dell and more with fast delivery and warranty."
+    />
+    <link rel="stylesheet" href="./fonts/inter.css" />
+    <title>Mosey Technologies — Phones, Laptops &amp; Gadgets Store</title>
+    <script>
+      // Apply the saved colour theme before paint to avoid a flash.
+      (function () {
+        try {
+          var t = localStorage.getItem('mosey-theme')
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          }
+          document.documentElement.dataset.theme = t
+          document.documentElement.style.colorScheme = t
+          var meta = document.querySelector('meta[name="theme-color"]')
+          if (meta) meta.setAttribute('content', t === 'dark' ? '#0b1120' : '#ffffff')
+        } catch (e) {}
+      })()
+    </script>
+    <script type="module" crossorigin src="./assets/index-DjhRc11y.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CkjrsQ69.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

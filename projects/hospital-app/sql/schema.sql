@@ -1,0 +1,80 @@
+-- MediCare Hospital Management System - Database Schema
+CREATE DATABASE IF NOT EXISTS medicare;
+USE medicare;
+
+CREATE TABLE IF NOT EXISTS doctors (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  spec VARCHAR(100) NOT NULL,
+  phone VARCHAR(20) NOT NULL,
+  photo TEXT,
+  rating DECIMAL(2,1) DEFAULT 4.5,
+  available VARCHAR(120) DEFAULT 'Mon-Fri 09:00-17:00',
+  patient_rating DECIMAL(2,1),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS patients (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  age INT NOT NULL,
+  gender ENUM('Male','Female','Other') NOT NULL,
+  disease VARCHAR(150) NOT NULL,
+  status ENUM('Admitted','Outpatient','Discharged') DEFAULT 'Outpatient',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS doctor_applications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  spec VARCHAR(100) NOT NULL,
+  phone VARCHAR(20),
+  email VARCHAR(100),
+  experience VARCHAR(50),
+  message TEXT,
+  status VARCHAR(20) DEFAULT 'pending',
+  photo TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS hospital_records (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  patient_name VARCHAR(100),
+  department VARCHAR(100),
+  doctor VARCHAR(100),
+  diagnosis VARCHAR(150),
+  treatment VARCHAR(150),
+  admission_date DATE,
+  status VARCHAR(30),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(100),
+  subject VARCHAR(150),
+  message TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS registrations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(100) UNIQUE,
+  phone VARCHAR(20),
+  password VARCHAR(100),
+  role VARCHAR(20) DEFAULT 'patient',
+  photo TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS appointments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  patient VARCHAR(100) NOT NULL,
+  doctor VARCHAR(100) NOT NULL,
+  date DATE NOT NULL,
+  time TIME NOT NULL,
+  email VARCHAR(100),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

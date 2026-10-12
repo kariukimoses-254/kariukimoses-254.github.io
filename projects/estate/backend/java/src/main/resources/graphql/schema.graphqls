@@ -1,0 +1,50 @@
+type Query {
+    listings: [Listing!]!
+    listing(id: ID!): Listing
+    customers: [Customer!]!
+}
+
+type Mutation {
+    createListing(input: ListingInput!): Listing!
+    updateListing(id: ID!, input: ListingInput!): Listing!
+    deleteListing(id: ID!): Boolean!
+    createCustomer(input: CustomerInput!): Customer!
+}
+
+type Listing {
+    id: ID!
+    title: String!
+    description: String
+    price: Float!
+    location: String
+    status: String
+    bedrooms: Int
+    bathrooms: Int
+    areaSqft: Float
+}
+
+type Customer {
+    id: ID!
+    name: String!
+    email: String!
+    phone: String
+    preferences: String
+}
+
+input ListingInput {
+    title: String!
+    description: String
+    price: Float!
+    location: String
+    status: String
+    bedrooms: Int
+    bathrooms: Int
+    areaSqft: Float
+}
+
+input CustomerInput {
+    name: String!
+    email: String!
+    phone: String
+    preferences: String
+}

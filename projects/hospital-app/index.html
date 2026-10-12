@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare Hospital Management System</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    // Role guard: only admin/staff can access the dashboard
+    const user = JSON.parse(localStorage.getItem('hms_user') || 'null');
+    if (!user || (user.role !== 'admin' && user.role !== 'staff')) {
+      location.href = 'login.html';
+    }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>🏥 MediCare Hospital</h1>
+    <button id="toggleSidebar" class="theme-btn" title="Toggle sidebar">☰</button>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <button class="nav-btn active" data-view="dashboard">📊 Dashboard</button>
+      <button class="nav-btn" data-view="patients">🧑‍🤝‍🧑 Patients <span class="badge" id="badgePatients"></span></button>
+      <button class="nav-btn" data-view="doctors">👨‍⚕️ Doctors <span class="badge" id="badgeDoctors"></span></button>
+      <button class="nav-btn" data-view="appointments">📅 Appointments <span class="badge" id="badgeAppts"></span></button>
+      <button class="nav-btn" data-view="applications">📝 Applications <span class="badge" id="badgeApps"></span></button>
+      <button class="nav-btn" data-view="records">📂 Records <span class="badge" id="badgeRecords"></span></button>
+      <button class="nav-btn" data-view="messages">💬 Messages <span class="badge" id="badgeMessages"></span></button>
+      <button class="nav-btn" data-view="billing">💰 Billing</button>
+      <button class="nav-btn" data-view="inventory">📦 Inventory</button>
+      <button class="nav-btn" data-view="reports">📈 Reports</button>
+      <button class="nav-btn" data-view="audit">🔒 Audit Log</button>
+      <a href="db.html" class="nav-btn">📊 Database</a>
+      <hr style="border-color:rgba(255,255,255,.2);margin:8px 0" />
+      <a href="home.html" class="nav-btn">🏠 Home</a>
+      <a href="about.html" class="nav-btn">ℹ️ About</a>
+      <a href="services.html" class="nav-btn">💉 Services</a>
+      <a href="contact.html" class="nav-btn">📞 Contact</a>
+      <a href="register.html" class="nav-btn">✍️ Register</a>
+      <a href="login.html" class="nav-btn">🔑 Login</a>
+      <a href="guidance.html" class="nav-btn">📋 Guidance</a>
+    </aside>
+
+    <main>
+    <!-- Dashboard -->
+    <section id="dashboard" class="view active">
+      <h2>Dashboard</h2>
+      <div class="stats-grid">
+        <div class="stat-card"><h3 id="statPatients">0</h3><p>Total Patients</p></div>
+        <div class="stat-card"><h3 id="statDoctors">0</h3><p>Doctors</p></div>
+        <div class="stat-card"><h3 id="statAppointments">0</h3><p>Appointments</p></div>
+        <div class="stat-card"><h3 id="statAdmitted">0</h3><p>Admitted</p></div>
+      </div>
+      <h3>Upcoming Appointments</h3>
+      <table>
+        <thead><tr><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th></tr></thead>
+        <tbody id="upcomingBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Patients -->
+    <section id="patients" class="view">
+      <h2>Patients</h2>
+      <div class="form-card" style="margin-bottom:12px">
+        <input id="pSearch" placeholder="🔍 Search by name/condition" />
+        <select id="pFilter">
+          <option value="">All statuses</option>
+          <option>Admitted</option>
+          <option>Outpatient</option>
+          <option>Discharged</option>
+        </select>
+        <select id="pSort">
+          <option value="">Sort by</option>
+          <option value="name">Name</option>
+          <option value="age">Age</option>
+          <option value="status">Status</option>
+        </select>
+      </div>
+      <form id="patientForm" class="form-card">
+        <input type="hidden" id="patientId" />
+        <input id="pName" placeholder="Name" required />
+        <input id="pAge" type="number" placeholder="Age" required />
+        <select id="pGender" required>
+          <option value="">Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+        <input id="pDisease" placeholder="Condition" required />
+        <select id="pStatus">
+          <option value="Admitted">Admitted</option>
+          <option value="Outpatient">Outpatient</option>
+          <option value="Discharged">Discharged</option>
+        </select>
+        <button type="submit">Save Patient</button>
+        <button type="button" id="cancelPatient" class="secondary">Cancel</button>
+      </form>
+      <table>
+        <thead><tr><th>Name</th><th>Age</th><th>Gender</th><th>Condition</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="patientBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Doctors -->
+    <section id="doctors" class="view">
+      <h2>Doctors</h2>
+      <form id="doctorForm" class="form-card">
+        <input id="dName" placeholder="Name" required />
+        <input id="dSpec" placeholder="Specialization" required />
+        <input id="dPhone" placeholder="Phone" required />
+        <select id="dRating">
+          <option value="5.0">⭐ 5.0</option>
+          <option value="4.5">⭐ 4.5</option>
+          <option value="4.0">⭐ 4.0</option>
+          <option value="3.5">⭐ 3.5</option>
+        </select>
+        <input id="dAvailable" placeholder="Availability (e.g. Mon-Fri 09:00-17:00)" />
+        <input id="dPhoto" type="file" accept="image/*" title="Upload doctor photo" />
+        <button type="submit">Add Doctor</button>
+      </form>
+      <div id="doctorList" class="card-grid"></div>
+    </section>
+
+    <!-- Appointments -->
+    <section id="appointments" class="view">
+      <h2>Appointments</h2>
+      <form id="apptForm" class="form-card">
+        <input id="aPatient" placeholder="Patient Name" required />
+        <select id="aDoctor" required></select>
+        <input id="aDate" type="date" required />
+        <input id="aTime" type="time" required />
+        <button type="submit">Book Appointment</button>
+      </form>
+      <table>
+        <thead><tr><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Actions</th></tr></thead>
+        <tbody id="apptBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Doctor Applications -->
+    <section id="applications" class="view">
+      <h2>Doctor Applications</h2>
+      <table>
+        <thead><tr><th>Name</th><th>Specialization</th><th>Phone</th><th>Email</th><th>Experience</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="appBody"></tbody>
+      </table>
+    </section>
+    <!-- Messages -->
+    <section id="messages" class="view">
+      <h2>Messages & Feedback</h2>
+      <table>
+        <thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody id="messagesBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Billing -->
+    <section id="billing" class="view">
+      <h2>Billing</h2>
+      <form id="billingForm" class="form-card">
+        <input id="bPatient" placeholder="Patient" required />
+        <input id="bDept" placeholder="Department" required />
+        <input id="bAmount" type="number" step="0.01" placeholder="Amount" required />
+        <select id="bStatus"><option>Pending</option><option>Paid</option><option>Insurance</option></select>
+        <button type="submit">Add Invoice</button>
+      </form>
+      <table>
+        <thead><tr><th>Patient</th><th>Department</th><th>Amount</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody id="billingBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Inventory -->
+    <section id="inventory" class="view">
+      <h2>Inventory</h2>
+      <form id="inventoryForm" class="form-card">
+        <input id="iItem" placeholder="Item" required />
+        <input id="iQty" type="number" placeholder="Quantity" required />
+        <input id="iExpiry" type="date" required />
+        <button type="submit">Add Item</button>
+      </form>
+      <table>
+        <thead><tr><th>Item</th><th>Quantity</th><th>Expiry</th><th>Actions</th></tr></thead>
+        <tbody id="inventoryBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Reports -->
+    <section id="reports" class="view">
+      <h2>Reports</h2>
+      <div class="stats-grid" id="reportStats"></div>
+    </section>
+
+    <!-- Audit Log -->
+    <section id="audit" class="view">
+      <h2>Audit Log</h2>
+      <table>
+        <thead><tr><th>User</th><th>Action</th><th>Date</th></tr></thead>
+        <tbody id="auditBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Hospital Records -->
+    <section id="records" class="view">
+      <h2>Hospital Records (All Departments)</h2>
+      <form id="recordForm" class="form-card">
+        <input id="rPatient" placeholder="Patient Name" required />
+        <input id="rDept" placeholder="Department" required />
+        <input id="rDoctor" placeholder="Doctor" required />
+        <input id="rDiagnosis" placeholder="Diagnosis" required />
+        <input id="rTreatment" placeholder="Treatment" required />
+        <input id="rDate" type="date" required />
+        <select id="rStatus">
+          <option>Admitted</option>
+          <option>Outpatient</option>
+          <option>Discharged</option>
+        </select>
+        <button type="submit">Add Record</button>
+      </form>
+      <table>
+        <thead><tr><th>Patient</th><th>Department</th><th>Doctor</th><th>Diagnosis</th><th>Treatment</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="recordsBody"></tbody>
+      </table>
+    </section>
+  </main>
+  </div>
+
+  <div id="toast">🔔 New notification</div>
+
+  <script src="script.js"></script>
+  <script>
+    // Auto-open a specific tab when the home sidebar link is used
+    const params = new URLSearchParams(location.search);
+    const viewParam = params.get('view');
+    if (viewParam) {
+      const btn = document.querySelector(`.nav-btn[data-view="${viewParam}"]`);
+      if (btn) btn.click();
+    }
+  </script>
+  <script>
+    document.getElementById('toggleSidebar').addEventListener('click', () => {
+      document.querySelector('.layout').classList.toggle('collapsed');
+    });
+  </script>
+  <script>
+    document.querySelectorAll('a.nav-btn').forEach(a => {
+      a.addEventListener('click', e => {
+        if (e.ctrlKey) return;
+        e.preventDefault();
+        const url = a.href;
+        document.body.style.transition = 'opacity .4s ease';
+        document.body.style.opacity = '0';
+        setTimeout(() => location.href = url, 400);
+      });
+    });
+  </script>
+  <script src="theme.js"></script>
+  <script src="auth.js"></script>
+  <script src="help.js"></script>
+  <script src="reactions.js"></script>
+</body>
+</html>
+
+
+
+
+
+

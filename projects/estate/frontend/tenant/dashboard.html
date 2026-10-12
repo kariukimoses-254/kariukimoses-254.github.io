@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tenant Dashboard - Lil Mosey Estate 6G Edition</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">LM</div>
+      <div class="sidebar-logo-text">
+        <h3><span class="gold">Lil Mosey</span> Estate</h3>
+        <small>Tenant Portal</small>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">T</div>
+      <div class="sidebar-user-info">
+        <h6 id="user-name">Tenant</h6>
+        <small>Renter</small>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="sidebar-nav-label">Overview</span>
+      <a class="nav-link active" href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a class="nav-link" href="payments.html"><i class="fas fa-credit-card"></i> Rent Payments</a>
+      <span class="sidebar-nav-label">Manage</span>
+      <a class="nav-link" href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a>
+      <a class="nav-link" href="documents.html"><i class="fas fa-file-alt"></i> Documents</a>
+      <span class="sidebar-separator"></span>
+      <a class="nav-link" href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-link" href="../index.html"><i class="fas fa-arrow-left"></i> Back to Site</a>
+      <a class="nav-link" href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </aside>
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="btn d-md-none" id="sidebar-toggle" style="font-size:1.2rem;color:#0B1F3A;"><i class="fas fa-bars"></i></button>
+        <h4>Tenant Dashboard</h4>
+      </div>
+      <div class="topbar-right">
+        <div class="d-flex align-items-center gap-2">
+          <div class="user-avatar" id="user-avatar">T</div>
+          <span class="fw-semibold" style="font-size:0.9rem;color:#333;">Tenant</span>
+        </div>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </header>
+    <div class="dash-content">
+      <!-- Active Lease -->
+      <div id="active-lease-container"></div>
+
+      <!-- Stats -->
+      <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-icon gold"><i class="fas fa-file-contract"></i></div>
+            <div class="stat-value" id="stat-total-rent">KES 0</div>
+            <div class="stat-label">Total Rent Paid</div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-value" id="stat-documents">0</div>
+            <div class="stat-label">Documents</div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fas fa-tools"></i></div>
+            <div class="stat-value" id="stat-maintenance">0</div>
+            <div class="stat-label">Maintenance</div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fas fa-bell"></i></div>
+            <div class="stat-value" id="stat-notifications">0</div>
+            <div class="stat-label">Notifications</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Payments -->
+      <div class="row g-4">
+        <div class="col-12">
+          <div class="content-card">
+            <div class="card-header">
+              <h5>Recent Rent Payments</h5>
+              <a href="payments.html" class="btn btn-sm btn-outline-custom">View All</a>
+            </div>
+            <div class="card-body" id="recent-payments">
+              <div class="text-center text-muted py-4">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/main.js"></script>
+  <script>
+  (function(){
+    function formatCurrency(v){return 'KES '+Number(v||0).toLocaleString()}
+    function formatDate(d){if(!d)return '-';return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
+
+    try{
+      const user=JSON.parse(localStorage.getItem('user')||'{}');
+      if(user.first_name){
+        document.getElementById('user-name').textContent=user.first_name+' '+(user.last_name||'');
+        document.getElementById('user-avatar').textContent=user.first_name.charAt(0).toUpperCase();
+      }
+    }catch(e){}
+
+    async function loadDashboard(){
+      try{
+        const res=await api.get('/tenants/dashboard');
+        const d=res.data||{};
+        
+        // Active lease
+        const lease=d.active_lease;
+        const leaseContainer=document.getElementById('active-lease-container');
+        if(lease){
+          leaseContainer.innerHTML=`
+            <div class="lease-card">
+              <div class="row align-items-center">
+                <div class="col-md-8">
+                  <div class="prop-title">${lease.property_title||'Property'}</div>
+                  <div class="prop-address"><i class="fas fa-map-marker-alt me-1"></i>${lease.property_address||''}</div>
+                </div>
+                <div class="col-md-4 text-md-end">
+                  <div class="rent-amount">${formatCurrency(lease.rent_amount)}</div>
+                  <div class="rent-label">Monthly Rent</div>
+                </div>
+              </div>
+              <div class="meta-row">
+                <div class="meta-item"><div class="value">${formatDate(lease.start_date)}</div><div class="label">Start Date</div></div>
+                <div class="meta-item"><div class="value">${formatDate(lease.end_date)}</div><div class="label">End Date</div></div>
+                <div class="meta-item"><div class="value">Due: ${lease.due_day||1}th</div><div class="label">Payment Day</div></div>
+                <div class="meta-item"><div class="value">${lease.payment_frequency||'monthly'}</div><div class="label">Frequency</div></div>
+              </div>
+            </div>`;
+        } else {
+          leaseContainer.innerHTML=`
+            <div class="content-card">
+              <div class="card-body text-center text-muted py-4">
+                <i class="fas fa-file-contract" style="font-size:3rem;display:block;margin-bottom:15px;"></i>
+                <h5>No Active Lease</h5>
+                <p>You do not have an active lease agreement.</p>
+              </div>
+            </div>`;
+        }
+
+        // Stats
+        const stats=d.stats||{};
+        document.getElementById('stat-total-rent').textContent=formatCurrency(stats.total_rent_paid||0);
+        document.getElementById('stat-documents').textContent=stats.documents||0;
+        document.getElementById('stat-maintenance').textContent=stats.maintenance_requests||0;
+        document.getElementById('stat-notifications').textContent=stats.unread_notifications||0;
+
+        // Recent payments
+        const payments=d.recent_payments||[];
+        const payList=document.getElementById('recent-payments');
+        if(payments.length){
+          payList.innerHTML=payments.map(p=>`
+            <div class="activity-item">
+              <div class="activity-icon payment"><i class="fas fa-credit-card"></i></div>
+              <div class="activity-info">
+                <h6>${formatCurrency(p.amount)} - ${p.payment_month||''}</h6>
+                <p>${p.property_title||'Rent'} &middot; ${p.payment_method||'-'} &middot; ${formatDate(p.paid_at||p.created_at)}</p>
+              </div>
+              <span class="badge-status ${p.status}">${(p.status||'pending').charAt(0).toUpperCase()+(p.status||'pending').slice(1)}</span>
+            </div>
+          `).join('');
+        } else {
+          payList.innerHTML='<div class="text-center text-muted py-4">No payments yet</div>';
+        }
+      }catch(err){
+        console.error('Dashboard error:',err);
+        document.getElementById('active-lease-container').innerHTML='<div class="text-center text-muted py-4">Failed to load dashboard</div>';
+      }
+    }
+
+        document.getElementById('logout-btn').addEventListener('click',()=>auth.logout());
+    loadDashboard();
+  })();
+  </script>
+</body>
+</html>

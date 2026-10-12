@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lil Mosey Estate 6G Edition - Finding Your Perfect Property, Simplified</title>
+  <meta name="description" content="Lil Mosey Estate 6G Edition - Premium real estate management system. Find your dream property in Kenya.">
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo">Lil Mosey Estate 6G Edition</div>
+    <div class="preloader-spinner"></div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container"></div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-icon"><i class="fas fa-home"></i></span>
+      Lil<span class="brand-accent"> Mosey</span> Estate
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" href="mortgage-calculator.html">Calculator</a></li>
+        <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div id="auth-buttons" class="d-flex ms-3 gap-2">
+        <a href="login.html" class="btn btn-outline-custom btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary-custom btn-sm">Register</a>
+      </div>
+      <div id="user-menu" class="dropdown ms-3" style="display:none;">
+        <a href="#" class="d-flex align-items-center gap-2 text-decoration-none" data-bs-toggle="dropdown">
+          <img id="user-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle fill='%23D4AF37' cx='18' cy='18' r='18'/%3E%3Ctext fill='%230B1F3A' font-family='Arial' font-size='14' text-anchor='middle' x='18' y='23'%3E U %3C/text%3E%3C/svg%3E" alt="Avatar" class="rounded-circle" width="36" height="36">
+          <span id="user-name" class="fw-semibold" style="color:var(--text);"></span>
+          <i class="fas fa-chevron-down small"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a id="dashboard-link" class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+          <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+          <li><a class="dropdown-item" href="favorites.html"><i class="fas fa-heart me-2"></i>Favorites</a></li>
+          <li><a class="dropdown-item" href="appointments.html"><i class="fas fa-calendar me-2"></i>Bookings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Slideshow -->
+<section class="hero hero-slideshow">
+  <div class="hero-slides">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1920&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1920&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1920&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1920&q=80')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <button class="prev-btn" aria-label="Previous slide"></button>
+  <button class="next-btn" aria-label="Next slide"></button>
+  <div class="hero-slideshow-nav">
+    <button class="dot hero-slide-btn active" data-slide="0"><span class="slide-label">Luxury Villa</span></button>
+    <button class="dot hero-slide-btn" data-slide="1"><span class="slide-label">Modern Penthouse</span></button>
+    <button class="dot hero-slide-btn" data-slide="2"><span class="slide-label">Family Townhouse</span></button>
+    <button class="dot hero-slide-btn" data-slide="3"><span class="slide-label">Exclusive Estate</span></button>
+    <button class="dot hero-slide-btn" data-slide="4"><span class="slide-label">Beachfront Home</span></button>
+  </div>
+  <canvas id="particles-canvas"></canvas>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 hero-content" data-aos="fade-right">
+        <h1 class="hero-text-3d">
+          <span id="typing-text"></span><span class="typing-cursor">|</span>
+          <span class="text-gold">Perfect Property</span>
+        </h1>
+        <p style="font-size:1.15rem; line-height:1.8; color:rgba(255,255,255,0.85); max-width:520px;">Discover premium properties across Kenya powered by next-gen <strong>6G technology</strong> &mdash; ultra-fast smart homes, seamless virtual tours, and instant AI-driven recommendations.</p>
+        <div class="d-flex gap-3">
+          <a href="properties.html" class="btn btn-primary-custom btn-3d btn-3d-gold">
+            <i class="fas fa-search me-2"></i>Browse Properties
+          </a>
+          <a href="#video-tour" class="btn btn-outline-custom btn-3d" style="border-color:var(--secondary);color:var(--secondary);border-bottom-color:var(--secondary-dark);">
+            <i class="fas fa-play-circle me-2"></i>Watch Tour
+          </a>
+        </div>
+        <div class="hero-stats stagger-fade">
+          <div class="hero-stat" style="background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);border-radius:var(--radius);padding:20px 28px;border:1px solid rgba(255,255,255,0.1);">
+            <div class="number counter counter-value text-3d" data-target="500" style="font-size:2.8rem;">0</div>
+            <div class="label" style="font-size:0.85rem;opacity:0.8;">Properties Listed</div>
+          </div>
+          <div class="hero-stat" style="background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);border-radius:var(--radius);padding:20px 28px;border:1px solid rgba(255,255,255,0.1);">
+            <div class="number counter counter-value text-3d" data-target="250" style="font-size:2.8rem;">0</div>
+            <div class="label" style="font-size:0.85rem;opacity:0.8;">Happy Clients</div>
+          </div>
+          <div class="hero-stat" style="background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);border-radius:var(--radius);padding:20px 28px;border:1px solid rgba(255,255,255,0.1);">
+            <div class="number counter counter-value text-3d" data-target="50" style="font-size:2.8rem;">0</div>
+            <div class="label" style="font-size:0.85rem;opacity:0.8;">Expert Agents</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 d-none d-lg-block" data-aos="fade-left">
+        <div class="text-center">
+          <svg viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:450px;">
+            <defs>
+              <linearGradient id="houseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#1a3a5c;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#0B1F3A;stop-opacity:1" />
+              </linearGradient>
+              <linearGradient id="roofGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#b8962e;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <rect x="80" y="140" width="240" height="180" rx="8" fill="url(#houseGrad)" opacity="0.9"/>
+            <polygon points="60,145 200,40 340,145" fill="url(#roofGrad)"/>
+            <rect x="150" y="220" width="60" height="100" rx="4" fill="#D4AF37" opacity="0.8"/>
+            <circle cx="200" cy="268" r="5" fill="#0B1F3A"/>
+            <rect x="100" y="170" width="50" height="40" rx="4" fill="rgba(255,255,255,0.15)"/>
+            <rect x="250" y="170" width="50" height="40" rx="4" fill="rgba(255,255,255,0.15)"/>
+            <rect x="100" y="260" width="50" height="40" rx="4" fill="rgba(255,255,255,0.15)"/>
+            <rect x="250" y="260" width="50" height="40" rx="4" fill="rgba(255,255,255,0.15)"/>
+            <circle cx="200" cy="80" r="15" fill="rgba(212,175,55,0.3)"/>
+            <text x="200" y="85" text-anchor="middle" fill="#D4AF37" font-size="14" font-weight="bold">LME</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Search Box -->
+<section class="search-box glass-modern" style="margin-top:-60px; position:relative; z-index:10;">
+  <div class="container">
+    <form id="search-form" class="row g-3 align-items-end">
+      <div class="col-md-3">
+        <label class="form-label fw-semibold">Location</label>
+        <input type="text" class="form-control" id="search-location" placeholder="City or County">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label fw-semibold">Property Type</label>
+        <select class="form-select" id="search-type">
+          <option value="">All Types</option>
+          <option value="1">Apartment</option>
+          <option value="2">Villa</option>
+          <option value="3">Townhouse</option>
+          <option value="4">Bungalow</option>
+          <option value="5">Penthouse</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label fw-semibold">Min Price</label>
+        <input type="number" class="form-control" id="search-min-price" placeholder="Min">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label fw-semibold">Max Price</label>
+        <input type="number" class="form-control" id="search-max-price" placeholder="Max">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label fw-semibold">Bedrooms</label>
+        <select class="form-select" id="search-bedrooms">
+          <option value="">Any</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5+</option>
+        </select>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-search w-100">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Featured Properties -->
+<section class="section featured-section">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Featured Properties</span>
+      <h2>Premium Properties</h2>
+      <p>Handpicked properties that offer exceptional value and luxury living experiences.</p>
+    </div>
+<div class="row g-4" id="featured-properties">
+      <div class="col-lg-4 col-md-6">
+        <div class="property-card card-glow tilt-card skeleton-custom" style="height:440px;">
+          <div class="skeleton skeleton-image" style="height:260px;"></div>
+          <div class="p-3"><div class="skeleton skeleton-text w-50 mb-2"></div><div class="skeleton skeleton-text w-75 mb-2"></div><div class="skeleton skeleton-text w-100"></div></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 d-none d-md-block">
+        <div class="property-card card-glow tilt-card skeleton-custom" style="height:440px;">
+          <div class="skeleton skeleton-image" style="height:260px;"></div>
+          <div class="p-3"><div class="skeleton skeleton-text w-50 mb-2"></div><div class="skeleton skeleton-text w-75 mb-2"></div><div class="skeleton skeleton-text w-100"></div></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 d-none d-md-block">
+        <div class="property-card card-glow tilt-card skeleton-custom" style="height:440px;">
+          <div class="skeleton skeleton-image" style="height:260px;"></div>
+          <div class="p-3"><div class="skeleton skeleton-text w-50 mb-2"></div><div class="skeleton skeleton-text w-75 mb-2"></div><div class="skeleton skeleton-text w-100"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5" data-aos="fade-up">
+      <a href="properties.html" class="btn btn-primary-custom">View All Properties <i class="fas fa-arrow-right ms-2"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Market Insights Teaser -->
+<section class="section" style="background:var(--bg-light);">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7" data-aos="fade-up">
+        <div class="section-title" style="text-align:left;margin-bottom:0;">
+          <span class="subtitle">Market Insights</span>
+          <h2>Nairobi Real Estate Trends</h2>
+          <p>Stay informed with the latest property market data, price trends, and investment opportunities across Nairobi's top neighborhoods.</p>
+        </div>
+        <div class="d-flex flex-wrap gap-4 mt-3">
+          <div><h4 style="font-weight:800;color:var(--secondary);">+12.5%</h4><small class="text-muted">Annual Growth</small></div>
+          <div><h4 style="font-weight:800;color:var(--secondary);">KES 28M</h4><small class="text-muted">Avg. Price</small></div>
+          <div><h4 style="font-weight:800;color:var(--secondary);">2,450</h4><small class="text-muted">Properties Sold</small></div>
+        </div>
+        <a href="market-insights.html" class="btn btn-primary-custom mt-3"><i class="fas fa-chart-line me-2"></i>View Full Market Report</a>
+      </div>
+      <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+        <div style="background:var(--card-bg,#fff);border-radius:var(--radius-lg);padding:30px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;">
+          <canvas id="mini-price-chart" height="200"></canvas>
+          <div style="position:absolute;top:15px;right:15px;"><a href="market-insights.html" class="badge bg-gold text-dark text-decoration-none"><i class="fas fa-external-link-alt me-1"></i>Details</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Neighborhood Guides Teaser -->
+<section class="section">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Explore Nairobi</span>
+      <h2>Neighborhood Guides</h2>
+      <p>Discover what makes each Nairobi neighborhood unique.</p>
+    </div>
+    <div class="row g-3 stagger-fade">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up">
+        <a href="neighborhoods.html" class="explore-card" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80');">
+          <div class="explore-overlay"></div>
+          <div class="explore-content"><i class="fas fa-map-marker-alt"></i><h4>Westlands & Kilimani</h4><p>Urban living with top dining & shopping</p></div>
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <a href="neighborhoods.html" class="explore-card" style="background-image:url('https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=600&q=80');">
+          <div class="explore-overlay"></div>
+          <div class="explore-content"><i class="fas fa-tree"></i><h4>Karen & Runda</h4><p>Luxury estates with gated security</p></div>
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <a href="neighborhoods.html" class="explore-card" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80');">
+          <div class="explore-overlay"></div>
+          <div class="explore-content"><i class="fas fa-building"></i><h4>Langata & CBD</h4><p>Diverse neighborhoods for every lifestyle</p></div>
+        </a>
+      </div>
+    </div>
+    <div class="text-center mt-4" data-aos="fade-up">
+      <a href="neighborhoods.html" class="btn btn-outline-custom"><i class="fas fa-compass me-2"></i>Explore All Neighborhoods</a>
+    </div>
+  </div>
+</section>
+
+<!-- Smart Property Guide Teaser -->
+<section class="section" style="background:var(--bg-light);">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Resources</span>
+      <h2>Smart Property Guide</h2>
+      <p>Practical tips to help you make informed property decisions.</p>
+    </div>
+    <div class="row g-4 stagger-fade">
+      <div class="col-lg-3 col-md-6" data-aos="fade-up">
+        <div class="tip-card card-glow" style="text-align:center;">
+          <div class="tip-icon"><i class="fas fa-road"></i></div>
+          <div class="tip-step">Step 1</div>
+          <h5>Assess Your Budget</h5>
+          <p>Use our mortgage calculator to understand what you can afford.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="tip-card card-glow" style="text-align:center;">
+          <div class="tip-icon"><i class="fas fa-map-location-dot"></i></div>
+          <div class="tip-step">Step 2</div>
+          <h5>Choose Your Area</h5>
+          <p>Consider commute, schools, security, and lifestyle fit.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="tip-card card-glow" style="text-align:center;">
+          <div class="tip-icon"><i class="fas fa-house-chimney"></i></div>
+          <div class="tip-step">Step 3</div>
+          <h5>Visit Properties</h5>
+          <p>Book viewings through our platform with verified agents.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="tip-card card-glow" style="text-align:center;">
+          <div class="tip-icon"><i class="fas fa-file-signature"></i></div>
+          <div class="tip-step">Step 4</div>
+          <h5>Close the Deal</h5>
+          <p>Zero hidden fees, 100% transparent process.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4" data-aos="fade-up">
+      <a href="guide.html" class="btn btn-primary-custom"><i class="fas fa-book-open me-2"></i>Read Full Guide</a>
+    </div>
+  </div>
+</section>
+
+<!-- 6G Smart Homes Section -->
+<section class="section" style="background:linear-gradient(135deg,var(--bg-dark),#0d1b3a,var(--bg-dark));">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Next-Gen Living</span>
+      <h2>6G Smart Home Technology</h2>
+      <p>Every Lil Mosey Estate 6G Edition property is built for the future &mdash; connected, intelligent, and ready for ultra-fast living.</p>
+    </div>
+    <div class="row g-4 stagger-fade">
+      <div class="col-lg-3 col-md-6" data-aos="fade-up">
+        <div class="why-us-card hover-bounce">
+          <div class="icon-box-modern" style="background:rgba(52,152,219,0.12);color:#3498db;margin:0 auto 20px;"><i class="fas fa-tower-broadcast"></i></div>
+          <h4>6G Connectivity</h4>
+          <p>Terabit-speed wireless built into the estate infrastructure for instant streaming and gaming.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="why-us-card hover-bounce">
+          <div class="icon-box-modern" style="background:rgba(46,139,87,0.12);color:var(--accent);margin:0 auto 20px;"><i class="fas fa-robot"></i></div>
+          <h4>AI-Powered Homes</h4>
+          <p>Smart assistants adapt lighting, climate, and security to your daily routine automatically.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="why-us-card hover-bounce">
+          <div class="icon-box-modern" style="background:rgba(212,175,55,0.12);color:var(--secondary);margin:0 auto 20px;"><i class="fas fa-bolt"></i></div>
+          <h4>Energy Intelligence</h4>
+          <p>Smart grids and IoT sensors cut energy bills while powering a greener, self-sustaining home.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="why-us-card hover-bounce">
+          <div class="icon-box-modern" style="background:rgba(231,76,60,0.12);color:#e74c3c;margin:0 auto 20px;"><i class="fas fa-shield-virus"></i></div>
+          <h4>Secure &amp; Private</h4>
+          <p>Quantum-grade security and real-time threat detection keep every connected device safe.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5" data-aos="fade-up">
+      <a href="properties.html" class="btn btn-primary-custom btn-3d btn-3d-gold">
+        <i class="fas fa-home me-2"></i>Explore 6G-Ready Properties
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="section">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Why Choose Us</span>
+      <h2>Why Lil Mosey Estate 6G Edition</h2>
+      <p>We provide unmatched real estate services with professionalism, integrity, and next-gen technology.</p>
+    </div>
+    <div class="row g-4 stagger-fade">
+      <div class="col-lg-3 col-md-6" data-aos="fade-up">
+        <div class="why-us-card hover-bounce">
+          <div class="icon-box-modern" style="background:rgba(212,175,55,0.12);color:var(--secondary);margin:0 auto 20px;"><i class="fas fa-shield-halved"></i></div>
+          <h4>Trusted & Secure</h4>
+          <p>All our properties are verified and transactions are secure with bank-level encryption.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="why-us-card hover-bounce">
+          <div class="icon-box-modern" style="background:rgba(46,139,87,0.12);color:var(--accent);margin:0 auto 20px;"><i class="fas fa-handshake"></i></div>
+          <h4>Expert Agents</h4>
+          <p>Our certified agents have deep knowledge of the Kenyan real estate market.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="why-us-card hover-bounce">
+          <div class="icon-box-modern" style="background:rgba(52,152,219,0.12);color:#3498db;margin:0 auto 20px;"><i class="fas fa-tags"></i></div>
+          <h4>Fair Pricing</h4>
+          <p>Transparent pricing with no hidden fees. We help you get the best value.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="why-us-card hover-bounce">
+          <div class="icon-box-modern" style="background:rgba(231,76,60,0.12);color:#e74c3c;margin:0 auto 20px;"><i class="fas fa-headset"></i></div>
+          <h4>24/7 Support</h4>
+          <p>Round-the-clock customer support to assist you at every step.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Teaser -->
+<section class="section" style="background:var(--bg-light);">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Testimonials</span>
+      <h2>What Our Clients Say</h2>
+    </div>
+    <div class="row g-4 stagger-fade">
+      <div class="col-lg-4" data-aos="fade-up">
+        <div class="testimonial-card card-glow">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Lil Mosey Estate 6G Edition made finding our dream home a breeze. John was incredibly professional and found us the perfect villa in Karen."</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop&crop=face" alt="Grace Njeri" onerror="handleImageError(this)">
+            <div class="author-info"><h5>Grace Njeri</h5><span>Homeowner</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="testimonial-card card-glow">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"The team went above and beyond to help me find a commercial property. Highly recommended!"</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="David Mwangi" onerror="handleImageError(this)">
+            <div class="author-info"><h5>David Mwangi</h5><span>Business Owner</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="testimonial-card card-glow">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+          <p>"Excellent service from start to finish. The booking process was seamless and the agent was very knowledgeable."</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face" alt="Mary Akinyi" onerror="handleImageError(this)">
+            <div class="author-info"><h5>Mary Akinyi</h5><span>First-time Buyer</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4" data-aos="fade-up">
+      <a href="testimonials.html" class="btn btn-outline-custom"><i class="fas fa-comments me-2"></i>Read More Reviews</a>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Teaser -->
+<section class="section">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Gallery</span>
+      <h2>Step Inside Our Properties</h2>
+    </div>
+    <div class="row g-3 stagger-fade">
+      <div class="col-lg-3 col-md-6" data-aos="fade-up">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;height:200px;">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80" alt="Interior" style="width:100%;height:100%;object-fit:cover;">
+          <div class="overlay-content"><span style="color:white;font-weight:600;"><i class="fas fa-couch me-2"></i>Interior</span></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;height:200px;">
+          <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=600&q=80" alt="Living Room" style="width:100%;height:100%;object-fit:cover;">
+          <div class="overlay-content"><span style="color:white;font-weight:600;"><i class="fas fa-tv me-2"></i>Living Room</span></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;height:200px;">
+          <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=600&q=80" alt="Kitchen" style="width:100%;height:100%;object-fit:cover;">
+          <div class="overlay-content"><span style="color:white;font-weight:600;"><i class="fas fa-utensils me-2"></i>Kitchen</span></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;height:200px;">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="Exterior" style="width:100%;height:100%;object-fit:cover;">
+          <div class="overlay-content"><span style="color:white;font-weight:600;"><i class="fas fa-home me-2"></i>Exterior</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4" data-aos="fade-up">
+      <a href="gallery.html" class="btn btn-outline-custom"><i class="fas fa-images me-2"></i>View Full Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- Video Tour Teaser -->
+<section class="section" id="video-tour" style="background:var(--primary);color:white;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(212,175,55,0.06) 0%,transparent 60%);pointer-events:none;"></div>
+  <div class="container position-relative">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle" style="color:var(--secondary);">Virtual Tour</span>
+      <h2 style="color:white;">Experience Our Properties</h2>
+    </div>
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7" data-aos="fade-up">
+        <div style="border-radius:var(--radius-lg);overflow:hidden;position:relative;background:#000;aspect-ratio:16/9;">
+          <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80" alt="Virtual Tour Preview" style="width:100%;height:100%;object-fit:cover;opacity:0.8;">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <a href="virtual-tour.html" class="play-btn-3d" style="width:90px;height:90px;border-radius:50%;background:rgba(212,175,55,0.9);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--primary);box-shadow:0 0 40px rgba(212,175,55,0.4);text-decoration:none;"><i class="fas fa-play" style="margin-left:4px;"></i></a>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:25px;background:linear-gradient(transparent,rgba(0,0,0,0.8));">
+            <h5 style="color:white;margin:0;">Luxury Compound Tour — Westlands</h5>
+            <small style="color:rgba(255,255,255,0.7);">Swimming Pool &bull; Gym &bull; Gardens &bull; Security</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+        <h4 style="color:var(--secondary);font-family:var(--font-heading);">Take a Virtual Walkthrough</h4>
+        <p style="color:rgba(255,255,255,0.7);">Explore our premium apartments, compounds, and amenities through immersive video tours. See the pool, gym, gardens, and more.</p>
+        <div class="row g-3 mt-3">
+          <div class="col-6"><div style="text-align:center;padding:15px;"><div style="width:50px;height:50px;border-radius:50%;background:rgba(212,175,55,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.1rem;color:var(--secondary);"><i class="fas fa-swimming-pool"></i></div><small style="color:rgba(255,255,255,0.8);">Swimming Pool</small></div></div>
+          <div class="col-6"><div style="text-align:center;padding:15px;"><div style="width:50px;height:50px;border-radius:50%;background:rgba(212,175,55,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.1rem;color:var(--secondary);"><i class="fas fa-dumbbell"></i></div><small style="color:rgba(255,255,255,0.8);">Fitness Center</small></div></div>
+          <div class="col-6"><div style="text-align:center;padding:15px;"><div style="width:50px;height:50px;border-radius:50%;background:rgba(212,175,55,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.1rem;color:var(--secondary);"><i class="fas fa-tree"></i></div><small style="color:rgba(255,255,255,0.8);">Gardens</small></div></div>
+          <div class="col-6"><div style="text-align:center;padding:15px;"><div style="width:50px;height:50px;border-radius:50%;background:rgba(212,175,55,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:1.1rem;color:var(--secondary);"><i class="fas fa-shield-halved"></i></div><small style="color:rgba(255,255,255,0.8);">24/7 Security</small></div></div>
+        </div>
+        <a href="virtual-tour.html" class="btn btn-primary-custom mt-3"><i class="fas fa-play-circle me-2"></i>Start Virtual Tour</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section gradient-animate">
+  <div class="container">
+    <h2 data-aos="fade-up">Ready to Find Your Dream Property?</h2>
+    <p data-aos="fade-up" data-aos-delay="100">Start your property search today and discover the perfect place to call home.</p>
+    <div data-aos="fade-up" data-aos-delay="200">
+      <a href="register.html" class="btn btn-primary-custom btn-lg me-3 shimmer btn-magnetic">
+        <i class="fas fa-user-plus me-2"></i>Get Started Free
+      </a>
+      <a href="properties.html" class="btn btn-outline-custom btn-lg">
+        <i class="fas fa-search me-2"></i>Browse Properties
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Badges -->
+<section class="trust-badges reveal">
+  <div class="container">
+    <div class="row g-3 align-items-center justify-content-center">
+      <div class="col-lg-3 col-md-6">
+        <div class="trust-badge-item">
+          <div class="badge-icon"><i class="fas fa-shield-halved"></i></div>
+          <div><h6>Secure Payments</h6><small>256-bit SSL encryption</small></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="trust-badge-item">
+          <div class="badge-icon"><i class="fas fa-check-circle"></i></div>
+          <div><h6>Verified Listings</h6><small>All properties verified</small></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="trust-badge-item">
+          <div class="badge-icon"><i class="fas fa-clock"></i></div>
+          <div><h6>Fast Response</h6><small>24/7 customer support</small></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="trust-badge-item">
+          <div class="badge-icon"><i class="fas fa-handshake"></i></div>
+          <div><h6>No Hidden Fees</h6><small>100% transparent pricing</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section reveal">
+  <div class="container text-center">
+    <h3>Stay Updated with New Properties</h3>
+    <p class="mb-4">Subscribe to our newsletter and be the first to know about new listings and exclusive deals.</p>
+    <form id="newsletter-form" class="newsletter-form">
+      <input type="email" class="form-control" placeholder="Enter your email address" required>
+      <button type="submit" class="btn btn-primary-custom"><i class="fas fa-paper-plane me-2"></i>Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <h5>Lil Mosey Estate 6G Edition</h5>
+        <p>Finding Your Perfect Property, Simplified. We are Kenya's premier real estate platform, connecting buyers, sellers, and renters with their ideal properties &mdash; powered by 6G smart home technology.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <h5>Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="properties.html"><i class="fas fa-chevron-right"></i> Properties</a></li>
+          <li><a href="mortgage-calculator.html"><i class="fas fa-chevron-right"></i> Mortgage Calculator</a></li>
+          <li><a href="agents.html"><i class="fas fa-chevron-right"></i> Agents</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5>Property Types</h5>
+        <ul class="footer-links">
+          <li><a href="properties.html?type=1"><i class="fas fa-chevron-right"></i> Apartments</a></li>
+          <li><a href="properties.html?type=2"><i class="fas fa-chevron-right"></i> Villas</a></li>
+          <li><a href="properties.html?type=3"><i class="fas fa-chevron-right"></i> Townhouses</a></li>
+          <li><a href="properties.html?type=4"><i class="fas fa-chevron-right"></i> Bungalows</a></li>
+          <li><a href="properties.html?type=5"><i class="fas fa-chevron-right"></i> Penthouses</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5>Contact Info</h5>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Westlands Business Park, Nairobi</a></li>
+          <li><a href="tel:+254793489901"><i class="fas fa-phone"></i> +254 793 489 901</a></li>
+          <li><a href="tel:+254105727456"><i class="fas fa-phone"></i> +254 105 727 456</a></li>
+          <li><a href="mailto:kariukimoseswambugu@gmail.com"><i class="fas fa-envelope"></i> kariukimoseswambugu@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <span class="gold">Lil Mosey Estate 6G Edition</span>. All rights reserved. | Finding Your Perfect Property, Simplified. | Powered by 6G Technology</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  loadFeaturedProperties();
+});
+
+function loadFeaturedProperties() {
+  const container = document.getElementById('featured-properties');
+  if (!container) return;
+  const images = [
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80'
+  ];
+  api.get('/properties?featured=1&page=1&limit=6')
+    .then(data => {
+      const props = (data.data && data.data.properties) || [];
+      if (props.length === 0) return;
+      const fragment = document.createDocumentFragment();
+      props.forEach((p, i) => {
+        const col = document.createElement('div');
+        col.className = 'col-lg-4 col-md-6';
+        col.innerHTML = `
+          <div class="property-card card-glow tilt-card" data-aos="fade-up" data-aos-delay="${i * 100}">
+            <div class="card-image img-overlay">
+              <img src="${p.primary_image || images[p.property_id % images.length]}" alt="${p.title}" loading="lazy" onerror="handleImageError(this)">
+            </div>
+            <div class="card-badge">
+              <span class="badge badge-status">${p.purpose === 'rent' ? 'For Rent' : 'For Sale'}</span>
+              ${p.is_featured ? '<span class="badge badge-featured"><i class="fas fa-star"></i></span>' : ''}
+            </div>
+            <div class="card-content">
+              <div class="card-price">${formatCurrency(p.price)}${p.purpose === 'rent' ? '/month' : ''}</div>
+              <h5 class="card-title">${p.title}</h5>
+              <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${p.city || ''}, ${p.county || ''}</div>
+              <div class="card-features">
+                <span class="feature"><i class="fas fa-bed"></i> ${p.bedrooms} Beds</span>
+                <span class="feature"><i class="fas fa-bath"></i> ${p.bathrooms} Baths</span>
+                <span class="feature"><i class="fas fa-ruler-combined"></i> ${p.area_sqft ? Number(p.area_sqft).toLocaleString() + ' sqft' : 'N/A'}</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              ${p.status === 'available' ? `<a href="property-details.html?id=${p.property_id}#booking-form" class="btn btn-primary-custom btn-sm"><i class="fas fa-calendar-check me-1"></i>Book</a>` : ''}
+              <a href="property-details.html?id=${p.property_id}" class="btn btn-outline-custom btn-sm">View Details</a>
+            </div>
+          </div>`;
+        fragment.appendChild(col);
+      });
+      container.innerHTML = '';
+      container.appendChild(fragment);
+      if (typeof AOS !== 'undefined') AOS.refresh();
+    })
+    .catch(() => { /* keep skeleton placeholders on fetch failure */ });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard - Lil Mosey Estate 6G Edition</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">LM</div>
+      <div class="sidebar-logo-text">
+        <h3><span class="gold">Lil Mosey</span> Estate</h3>
+        <small>Customer Portal</small>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">C</div>
+      <div class="sidebar-user-info">
+        <h6 id="user-name">Customer</h6>
+        <small>Tenant</small>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="sidebar-nav-label">Overview</span>
+      <a class="nav-link active" href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a class="nav-link" href="bookings.html"><i class="fas fa-calendar-check"></i> My Bookings</a>
+      <a class="nav-link" href="favorites.html"><i class="fas fa-heart"></i> Favorites</a>
+      <span class="sidebar-nav-label">Account</span>
+      <a class="nav-link" href="payments.html"><i class="fas fa-credit-card"></i> My Payments</a>
+      <span class="sidebar-separator"></span>
+      <span class="sidebar-nav-label">Support</span>
+      <a class="nav-link" href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+      <a class="nav-link" href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a>
+      <a class="nav-link" href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-link" href="../index.html"><i class="fas fa-arrow-left"></i> Back to Site</a>
+      <a class="nav-link" href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </aside>
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="btn d-md-none" id="sidebar-toggle" title="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+        <h4>Customer Dashboard</h4>
+      </div>
+      <div class="topbar-right">
+        <div class="d-flex align-items-center gap-2">
+          <div class="user-avatar" id="user-avatar">C</div>
+          <span class="fw-semibold user-name-text">Customer</span>
+        </div>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </header>
+    <div class="dash-content">
+      <!-- Stats -->
+      <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+          <div class="stat-card card-3d shadow-3d">
+            <div class="stat-icon blue"><i class="fas fa-calendar-check"></i></div>
+            <div class="stat-value" id="stat-bookings">0</div>
+            <div class="stat-label">My Bookings</div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="stat-card card-3d shadow-3d">
+            <div class="stat-icon green"><i class="fas fa-dollar-sign"></i></div>
+            <div class="stat-value" id="stat-payments">KES 0</div>
+            <div class="stat-label">Total Payments</div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="stat-card card-3d shadow-3d">
+            <div class="stat-icon gold"><i class="fas fa-heart"></i></div>
+            <div class="stat-value" id="stat-favorites">0</div>
+            <div class="stat-label">Favorites</div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="stat-card card-3d shadow-3d">
+            <div class="stat-icon red"><i class="fas fa-envelope"></i></div>
+            <div class="stat-value" id="stat-unread-msgs">0</div>
+            <div class="stat-label">Unread Messages</div>
+          </div>
+        </div>
+      </div>
+      <!-- Content -->
+      <div class="row g-4">
+        <div class="col-xl-7">
+          <div class="content-card shadow-3d">
+            <div class="card-header">
+              <h5>Recent Bookings</h5>
+              <a href="bookings.html" class="btn btn-sm btn-outline-custom">View All</a>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead><tr><th>Property</th><th>Date</th><th>Time</th><th>Status</th></tr></thead>
+                  <tbody id="recent-bookings"><tr><td colspan="4" class="text-center py-4 text-muted">Loading...</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-5">
+          <div class="content-card shadow-3d">
+            <div class="card-header"><h5>Recent Payments</h5></div>
+            <div class="card-body" id="recent-payments">
+              <div class="text-center text-muted py-4">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/main.js"></script>
+  <script>
+  (function() {
+    function formatCurrency(v) { return 'KES ' + Number(v||0).toLocaleString(); }
+    function formatDate(d) { if(!d) return '-'; return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+
+    // Set user info
+    try {
+      const user = JSON.parse(localStorage.getItem('user')||'{}');
+      if(user.first_name) {
+        document.getElementById('user-name').textContent = user.first_name + ' ' + (user.last_name||'');
+        document.getElementById('user-avatar').textContent = user.first_name.charAt(0).toUpperCase();
+      }
+    } catch(e) {}
+
+    async function loadDashboard() {
+      try {
+        const res = await api.get('/users/dashboard');
+        const d = res.data || res;
+        const stats = d.stats || {};
+        document.getElementById('stat-bookings').textContent = stats.total_bookings || 0;
+        document.getElementById('stat-payments').textContent = formatCurrency(stats.total_payments || stats.total_revenue || 0);
+        document.getElementById('stat-favorites').textContent = stats.favorites || 0;
+
+        // Get unread messages
+        try {
+          const msgRes = await api.get('/messages/my-messages');
+          document.getElementById('stat-unread-msgs').textContent = msgRes.data?.unread_count || 0;
+        } catch(e) {}
+
+        // Recent bookings
+        const bookings = d.recent_bookings || [];
+        const tbody = document.getElementById('recent-bookings');
+        if(bookings.length) {
+          tbody.innerHTML = bookings.map(b => `
+            <tr>
+              <td>${b.property_title || '-'}</td>
+              <td>${formatDate(b.booking_date||b.createdAt)}</td>
+              <td>${b.booking_time||'-'}</td>
+              <td><span class="badge-status ${b.status}">${(b.status||'pending').charAt(0).toUpperCase()+(b.status||'pending').slice(1)}</span></td>
+            </tr>
+          `).join('');
+        } else {
+          tbody.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-muted">No bookings yet</td></tr>';
+        }
+
+        // Recent payments
+        const payments = d.recent_payments || [];
+        const payList = document.getElementById('recent-payments');
+        if(payments.length) {
+          payList.innerHTML = payments.map(p => `
+            <div class="activity-item">
+              <div class="activity-icon payment"><i class="fas fa-credit-card"></i></div>
+              <div class="activity-info">
+                <h6>${formatCurrency(p.amount)}</h6>
+                <p>${p.property_title||'Payment'} &middot; ${formatDate(p.paid_at||p.created_at)}</p>
+              </div>
+              <span class="badge-status ${p.status}">${(p.status||'pending').charAt(0).toUpperCase()+(p.status||'pending').slice(1)}</span>
+            </div>
+          `).join('');
+        } else {
+          payList.innerHTML = '<div class="text-center text-muted py-4">No payments yet</div>';
+        }
+      } catch(err) {
+        console.error('Dashboard error:', err);
+      }
+    }
+
+        document.getElementById('logout-btn').addEventListener('click', () => auth.logout());
+    loadDashboard();
+  })();
+  </script>
+</body>
+</html>

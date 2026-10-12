@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare Hospital - Appointments</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="client.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🏥 MediCare Hospital</h1>
+    <nav>
+      <a href="home.html" class="nav-btn">Home</a>
+      <a href="about.html" class="nav-btn">About</a>
+      <a href="services.html" class="nav-btn">Services</a>
+      <a href="doctors.html" class="nav-btn">Doctors</a>
+      <a href="apply.html" class="nav-btn">Doctor Apply</a>
+      <a href="appointments.html" class="nav-btn active">Appointments</a>
+      <a href="contact.html" class="nav-btn">Contact</a>
+      <a href="register.html" class="nav-btn">Register</a>
+      <a href="login.html" class="nav-btn">Login</a>
+      <a href="guidance.html" class="nav-btn">Guidance</a>
+      <a href="index.html" class="nav-btn">Staff Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Book an Appointment</h2>
+    <div id="bookingArea"><div class="spinner"></div></div>
+
+    <h2 style="margin-top:30px">Scheduled Appointments</h2>
+    <table>
+      <thead><tr><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th></tr></thead>
+      <tbody id="apptBody"></tbody>
+    </table>
+  </main>
+
+  <div class="bg-slideshow"><img src="images/hero.jpg" alt=""/><img src="images/cardiology.jpg" alt=""/><img src="images/orthopedics.jpg" alt=""/><img src="images/emergency.jpg" alt=""/><img src="images/dentistry.jpg" alt=""/></div>
+  <footer class="footer"><div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div><div class="footer-socials"><a class="fb" href="https://facebook.com/medicarehospital" target="_blank" title="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a> <a class="tw" href="https://x.com/medicarehospital" target="_blank" title="X"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a> <a class="ig" href="https://instagram.com/medicarehospital" target="_blank" title="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a> <a class="yt" href="https://youtube.com/@medicarehospital" target="_blank" title="YouTube"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .502 5.814 3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></div><p>� 2026 MediCare Hospital. All rights reserved.</p></footer>
+
+  <script>
+    const apptBody = document.getElementById('apptBody');
+    const user = JSON.parse(localStorage.getItem('hms_user') || 'null');
+    let allDoctors = [];
+
+    function spawnConfetti() {
+      const colors = ['#1e5eff', '#00b4d8', '#ffd43b', '#ff4d6d', '#69db7c'];
+      for (let i = 0; i < 30; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.background = colors[i % colors.length];
+        piece.style.borderRadius = Math.random() > .5 ? '50%' : '2px';
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 1800);
+      }
+    }
+
+    async function loadAppointments() {
+      const url = user ? `/api/appointments/mine/${encodeURIComponent(user.email)}` : '/api/appointments';
+      const appts = await fetch(url).then(r => r.json());
+      apptBody.innerHTML = appts.map(a =>
+        `<tr><td>${a.patient}</td><td>${a.doctor}</td><td>${new Date(a.date).toLocaleDateString()}</td><td>${a.time}</td></tr>`
+      ).join('') || '<tr><td colspan="4">No appointments yet.</td></tr>';
+    }
+
+    function renderBookingForm() {
+      const area = document.getElementById('bookingArea');
+      if (!user) {
+        area.innerHTML = `
+          <div class="form-card" style="text-align:center;padding:30px">
+            <p style="margin:0;flex:1 1 100%">🔒 Please <a href="login.html">sign in</a> or <a href="register.html">register</a> first to book an appointment.</p>
+          </div>`;
+        return;
+      }
+      area.innerHTML = `
+        <form id="apptForm" class="form-card">
+          <input id="patient" placeholder="Patient Name" value="${user.name}" readonly />
+          <select id="specFilter"><option value="">All Qualifications</option></select>
+          <select id="doctor" required></select>
+          <input id="date" type="date" required />
+          <input id="time" type="time" required />
+          <button type="submit">Book Appointment</button>
+        </form>
+        <p id="msg" style="color:green;margin-top:10px"></p>`;
+
+      const specFilter = document.getElementById('specFilter');
+      const doctorSel = document.getElementById('doctor');
+      [...new Set(allDoctors.map(d => d.spec))].forEach(s =>
+        specFilter.innerHTML += `<option value="${s}">${s}</option>`);
+      function fillDoctors() {
+        const list = allDoctors.filter(d => !specFilter.value || d.spec === specFilter.value);
+        doctorSel.innerHTML = list.map(d => `<option value="${d.name}">${d.name} (${d.spec})</option>`).join('') || '<option>No doctors</option>';
+      }
+      specFilter.addEventListener('change', fillDoctors);
+      fillDoctors();
+
+      document.getElementById('apptForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        const body = { patient: patient.value.trim(), doctor: doctor.value, date: date.value, time: time.value, email: user.email };
+        await fetch('/api/appointments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        spawnConfetti();
+        document.getElementById('msg').textContent = '✅ Appointment booked!';
+        e.target.reset();
+        patient.value = user.name;
+        loadAppointments();
+      });
+    }
+
+    fetch('/api/doctors').then(r => r.json()).then(d => { allDoctors = d; renderBookingForm(); });
+    loadAppointments();
+  </script>
+  <script src="theme.js"></script>
+  <script src="auth.js"></script>
+  <script src="help.js"></script>
+  <script src="reactions.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare Hospital - Contact</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="client.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🏥 MediCare Hospital</h1>
+    <nav>
+      <a href="home.html" class="nav-btn">Home</a>
+      <a href="about.html" class="nav-btn">About</a>
+      <a href="services.html" class="nav-btn">Services</a>
+      <a href="doctors.html" class="nav-btn">Doctors</a>
+      <a href="appointments.html" class="nav-btn">Appointments</a>
+      <a href="contact.html" class="nav-btn active">Contact</a>
+      <a href="index.html" class="nav-btn">Staff Dashboard</a>
+      <a href="login.html" class="nav-btn">Login</a>
+      <a href="guidance.html" class="nav-btn">Guidance</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Contact & Location</h2>
+    <div class="form-card">
+      <p><strong>📍 Address:</strong> 123 Health Avenue, Jakarta</p>
+      <p><strong>📞 Phone:</strong> (021) 555-1234</p>
+      <p><strong>✉️ Email:</strong> info@medicare.example.com</p>
+      <p><strong>🕐 Hours:</strong> Open 24/7 — OPD: 08:00–20:00</p>
+    </div>
+
+    <h2>Send Us a Message</h2>
+    <form id="contactForm" class="form-card">
+      <input id="mName" placeholder="Your Name" required />
+      <input id="mEmail" type="email" placeholder="Your Email" required />
+      <input id="mSubject" placeholder="Subject" required />
+      <input id="mMessage" placeholder="Message" required style="flex:1 1 100%" />
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="msgStatus" style="color:green;margin-top:10px"></p>
+  </main>
+
+  <div class="bg-slideshow"><img src="images/hero.jpg" alt=""/><img src="images/cardiology.jpg" alt=""/><img src="images/orthopedics.jpg" alt=""/><img src="images/emergency.jpg" alt=""/><img src="images/dentistry.jpg" alt=""/></div>
+  <footer class="footer"><div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div><p>© 2026 MediCare Hospital. All rights reserved.</p></footer>
+
+  <script>
+    document.querySelectorAll('a.nav-btn').forEach(a => {
+      a.addEventListener('click', e => {
+        if (a.target === '_blank' || e.ctrlKey) return;
+        e.preventDefault();
+        const url = a.href;
+        document.body.style.transition = 'opacity .4s ease';
+        document.body.style.opacity = '0';
+        setTimeout(() => location.href = url, 400);
+      });
+    });
+  </script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      await fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: document.getElementById('mName').value, email: document.getElementById('mEmail').value, subject: document.getElementById('mSubject').value, message: document.getElementById('mMessage').value }),
+      });
+      msgStatus.textContent = '✅ Message sent! Thank you for your feedback.';
+      e.target.reset();
+    });
+  </script>
+  <script src="theme.js"></script>
+  <script src="auth.js"></script>
+  <script src="help.js"></script>
+  <script src="reactions.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

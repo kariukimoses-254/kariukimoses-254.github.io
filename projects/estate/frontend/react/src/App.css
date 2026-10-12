@@ -1,0 +1,15 @@
+.App {
+  min-height: 100vh;
+}
+
+.bg-brand-800 {
+  background-color: #124a7a;
+}
+
+.bg-brand-500 {
+  background-color: #3b9df6;
+}
+
+.text-brand-600 {
+  color: #1e7fd0;
+}

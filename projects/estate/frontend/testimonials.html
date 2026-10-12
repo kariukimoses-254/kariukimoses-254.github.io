@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Testimonials | Lil Mosey Estate 6G Edition</title>
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="preloader"><div class="preloader-inner"><div class="preloader-logo">Lil Mosey Estate 6G Edition</div><div class="preloader-spinner"></div></div></div>
+<div id="toast-container" class="toast-container"></div>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><span class="brand-icon"><i class="fas fa-home"></i></span>Lil<span class="brand-accent"> Mosey</span> Estate</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" href="mortgage-calculator.html">Calculator</a></li>
+        <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div id="auth-buttons" class="d-flex ms-3 gap-2">
+        <a href="login.html" class="btn btn-outline-custom btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary-custom btn-sm">Register</a>
+      </div>
+      <div id="user-menu" class="dropdown ms-3" style="display:none;">
+        <a href="#" class="d-flex align-items-center gap-2 text-decoration-none" data-bs-toggle="dropdown"><img id="user-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle fill='%23D4AF37' cx='18' cy='18' r='18'/%3E%3C/svg%3E" class="rounded-circle" width="36" height="36"><span id="user-name" class="fw-semibold text-dark"></span><i class="fas fa-chevron-down small"></i></a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a id="dashboard-link" class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+          <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+          <li><a class="dropdown-item" href="favorites.html"><i class="fas fa-heart me-2"></i>Favorites</a></li>
+          <li><a class="dropdown-item" href="appointments.html"><i class="fas fa-calendar me-2"></i>Bookings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section style="padding-top:100px;background:var(--gradient-primary);padding-bottom:50px;">
+  <div class="container text-center">
+    <span class="subtitle" style="color:var(--secondary);">Testimonials</span>
+    <h1 style="color:var(--white);font-family:var(--font-heading);">What Our Clients Say</h1>
+    <p style="color:rgba(255,255,255,0.8);">Real stories from satisfied clients who found their dream properties with Lil Mosey Estate 6G Edition.</p>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bg-light);">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Testimonials</span>
+      <h2>What Our Clients Say</h2>
+      <p>Real stories from satisfied clients who found their dream properties.</p>
+    </div>
+    <div class="row g-4 stagger-fade">
+      <div class="col-lg-4" data-aos="fade-up">
+        <div class="testimonial-card card-glow">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Lil Mosey Estate 6G Edition made finding our dream home a breeze. John was incredibly professional and found us the perfect villa in Karen."</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop&crop=face" alt="Grace Njeri" onerror="handleImageError(this)">
+            <div class="author-info">
+              <h5>Grace Njeri</h5>
+              <span>Homeowner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="testimonial-card card-glow">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"The team at Lil Mosey Estate 6G Edition went above and beyond to help me find a commercial property. Highly recommended!"</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="David Mwangi" onerror="handleImageError(this)">
+            <div class="author-info">
+              <h5>David Mwangi</h5>
+              <span>Business Owner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="testimonial-card card-glow">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+          <p>"Excellent service from start to finish. The booking process was seamless and the agent was very knowledgeable about the area."</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face" alt="Mary Akinyi" onerror="handleImageError(this)">
+            <div class="author-info">
+              <h5>Mary Akinyi</h5>
+              <span>First-time Buyer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="testimonial-card card-glow">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"I've purchased 3 properties through Lil Mosey Estate 6G Edition. Their market knowledge and negotiation skills are unmatched in Nairobi."</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="James Kariuki" onerror="handleImageError(this)">
+            <div class="author-info">
+              <h5>James Kariuki</h5>
+              <span>Investor</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="testimonial-card card-glow">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"The rental process was seamless. From viewing to signing, everything was handled professionally and efficiently."</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Faith Wambui" onerror="handleImageError(this)">
+            <div class="author-info">
+              <h5>Faith Wambui</h5>
+              <span>Renter</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="500">
+        <div class="testimonial-card card-glow">
+          <i class="fas fa-quote-right quote-icon"></i>
+          <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"From the first viewing to closing the deal, Lil Mosey Estate 6G Edition made the entire journey stress-free and enjoyable."</p>
+          <div class="author">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Peter Odhiambo" onerror="handleImageError(this)">
+            <div class="author-info">
+              <h5>Peter Odhiambo</h5>
+              <span>Homeowner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <span class="subtitle">Success Statistics</span>
+      <h2>Our Track Record</h2>
+      <p>Numbers that speak for themselves.</p>
+    </div>
+    <div class="row g-4 text-center">
+      <div class="col-md-3" data-aos="fade-up">
+        <div class="stat-card">
+          <div class="stat-icon primary mx-auto"><i class="fas fa-home"></i></div>
+          <div class="stat-number counter" data-target="500">0</div>
+          <div class="stat-label">Properties Sold</div>
+        </div>
+      </div>
+      <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-card">
+          <div class="stat-icon gold mx-auto"><i class="fas fa-smile"></i></div>
+          <div class="stat-number counter" data-target="250">0</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+      </div>
+      <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-card">
+          <div class="stat-icon green mx-auto"><i class="fas fa-star"></i></div>
+          <div class="stat-number counter" data-target="98">0</div>
+          <div class="stat-label">5-Star Reviews</div>
+        </div>
+      </div>
+      <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-card">
+          <div class="stat-icon red mx-auto"><i class="fas fa-calendar-check"></i></div>
+          <div class="stat-number counter" data-target="10">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section gradient-animate">
+  <div class="container">
+    <h2 data-aos="fade-up">Ready to Find Your Dream Property?</h2>
+    <p data-aos="fade-up" data-aos-delay="100">Join thousands of satisfied clients who found their perfect home with us.</p>
+    <div data-aos="fade-up" data-aos-delay="200">
+      <a href="register.html" class="btn btn-primary-custom btn-lg me-3 shimmer btn-magnetic">
+        <i class="fas fa-user-plus me-2"></i>Get Started Free
+      </a>
+      <a href="properties.html" class="btn btn-outline-custom btn-lg">
+        <i class="fas fa-search me-2"></i>Browse Properties
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <h5>Lil Mosey Estate 6G Edition</h5>
+        <p>Finding Your Perfect Property, Simplified. We are Kenya's premier real estate platform, connecting buyers, sellers, and renters with their ideal properties.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <h5>Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="properties.html"><i class="fas fa-chevron-right"></i> Properties</a></li>
+          <li><a href="mortgage-calculator.html"><i class="fas fa-chevron-right"></i> Mortgage Calculator</a></li>
+          <li><a href="agents.html"><i class="fas fa-chevron-right"></i> Agents</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5>Property Types</h5>
+        <ul class="footer-links">
+          <li><a href="properties.html?type=1"><i class="fas fa-chevron-right"></i> Apartments</a></li>
+          <li><a href="properties.html?type=2"><i class="fas fa-chevron-right"></i> Villas</a></li>
+          <li><a href="properties.html?type=3"><i class="fas fa-chevron-right"></i> Townhouses</a></li>
+          <li><a href="properties.html?type=4"><i class="fas fa-chevron-right"></i> Bungalows</a></li>
+          <li><a href="properties.html?type=5"><i class="fas fa-chevron-right"></i> Penthouses</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5>Contact Info</h5>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Westlands Business Park, Nairobi</a></li>
+          <li><a href="tel:+254793489901"><i class="fas fa-phone"></i> Safaricom: +254 793 489 901</a></li>
+          <li><a href="tel:+254105727456"><i class="fas fa-phone"></i> Airtel: +254 105 727 456</a></li>
+          <li><a href="mailto:kariukimoseswambugu@gmail.com"><i class="fas fa-envelope"></i> kariukimoseswambugu@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <span class="gold">Lil Mosey Estate 6G Edition</span>. All rights reserved. | Finding Your Perfect Property, Simplified. | Powered by 6G Technology</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

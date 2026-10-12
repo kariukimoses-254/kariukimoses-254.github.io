@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Payment | Lil Mosey Estate 6G Edition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D4AF37;
+            --primary-light: #F2D06B;
+            --primary-dark: #B8960C;
+            --accent-green: #4CAF50;
+            --accent-blue: #42A5F5;
+            --dark-900: #0D0D0D;
+            --dark-800: #151515;
+            --dark-700: #1E1E1E;
+            --dark-600: #252525;
+            --dark-500: #2D2D2D;
+            --text-primary: #F5F5F5;
+            --text-secondary: #999;
+            --border-subtle: rgba(255,255,255,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--dark-900);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(212,175,55,0.03) 0%, transparent 50%);
+        }
+
+        .pay-card {
+            background: rgba(30,30,30,0.85);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 48px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 32px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.05);
+        }
+
+        .pay-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .pay-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #000;
+            box-shadow: 0 4px 16px rgba(212,175,55,0.3);
+        }
+
+        .pay-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .pay-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .pay-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .pay-property {
+            background: var(--dark-700);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-align: left;
+        }
+
+        .pay-property img {
+            width: 64px;
+            height: 64px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .pay-property-info h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .pay-property-info p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .pay-amount-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.05));
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .pay-amount-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .pay-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .pay-amount small {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .pay-details {
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .pay-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.85rem;
+        }
+
+        .pay-detail-row:last-child { border-bottom: none; }
+
+        .pay-detail-row .label { color: var(--text-secondary); }
+
+        .pay-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent-green), #388E3C);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(76,175,80,0.3);
+        }
+
+        .pay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(76,175,80,0.4);
+        }
+
+        .pay-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .pay-btn i { font-size: 1.1rem; }
+
+        .pay-footer {
+            margin-top: 24px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .pay-success {
+            display: none;
+            text-align: center;
+            padding: 32px 0;
+        }
+
+        .pay-success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(76,175,80,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--accent-green);
+        }
+
+        .pay-success h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .pay-success p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .pay-error {
+            display: none;
+            text-align: center;
+            padding: 32px 0;
+        }
+
+        .pay-error-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(244,67,54,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: #F44336;
+        }
+
+        .pay-error h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .pay-error p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 520px) {
+            .pay-card { padding: 32px 24px; }
+            .pay-amount { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="pay-card" id="pay-card">
+        <div class="pay-logo">
+            <div class="pay-logo-icon"><i class="fas fa-building"></i></div>
+            <span class="pay-logo-text">Lil Mosey Estate 6G Edition</span>
+        </div>
+
+        <div id="pay-form-section">
+            <h1 class="pay-title">Complete Your Payment</h1>
+            <p class="pay-subtitle">Secure payment powered by M-Pesa</p>
+
+            <div class="pay-property" id="property-info" style="display:none;">
+                <img id="property-img" src="" alt="">
+                <div class="pay-property-info">
+                    <h3 id="property-title">-</h3>
+                    <p id="property-address">-</p>
+                </div>
+            </div>
+
+            <div class="pay-amount-box">
+                <div class="pay-amount-label">Amount Due</div>
+                <div class="pay-amount" id="pay-amount">KES 0 <small>/deposit</small></div>
+            </div>
+
+            <div class="pay-details" id="pay-details">
+                <div class="pay-detail-row"><span class="label">Customer</span><span id="detail-customer">-</span></div>
+                <div class="pay-detail-row"><span class="label">Booking Date</span><span id="detail-date">-</span></div>
+                <div class="pay-detail-row"><span class="label">Payment Type</span><span>Booking Deposit (10%)</span></div>
+            </div>
+
+            <button class="pay-btn" id="pay-btn" onclick="initiatePayment()">
+                <i class="fab fa-paypal"></i> Pay with M-Pesa
+            </button>
+
+            <div class="pay-footer">
+                <p>You will receive an M-Pesa STK push on your phone.<br>Enter your PIN to complete the payment.</p>
+            </div>
+        </div>
+
+        <div class="pay-success" id="pay-success">
+            <div class="pay-success-icon"><i class="fas fa-check-circle"></i></div>
+            <h2>Payment Submitted!</h2>
+            <p>Check your phone for the M-Pesa prompt.<br>Once confirmed, your booking will be activated.</p>
+            <div class="pay-details" style="margin-top:20px;text-align:left;">
+                <div class="pay-detail-row"><span class="label">Receipt</span><span id="success-receipt">-</span></div>
+                <div class="pay-detail-row"><span class="label">Amount</span><span id="success-amount">-</span></div>
+                <div class="pay-detail-row"><span class="label">Status</span><span style="color:var(--primary);">Pending Confirmation</span></div>
+            </div>
+        </div>
+
+        <div class="pay-error" id="pay-error">
+            <div class="pay-error-icon"><i class="fas fa-times-circle"></i></div>
+            <h2 id="error-title">Payment Failed</h2>
+            <p id="error-message">Something went wrong. Please try again.</p>
+            <button class="pay-btn" style="background:var(--primary);margin-top:16px;" onclick="location.reload()">
+                <i class="fas fa-redo"></i> Try Again
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const API_BASE = 'http://localhost:5000/api/v1';
+        let tokenData = null;
+
+        async function init() {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            if (!token) {
+                showError('Invalid Link', 'This payment link is invalid or has expired.');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/qr/verify/${token}`);
+                const data = await res.json();
+                if (data.status === 'error') {
+                    showError('Link Expired', data.message || 'This payment link has expired or is invalid.');
+                    return;
+                }
+                tokenData = data;
+                renderPayment(data);
+            } catch (err) {
+                showError('Connection Error', 'Unable to connect to server. Please try again.');
+            }
+        }
+
+        function renderPayment(data) {
+            const payload = data.data || data;
+            const property = payload.property || {};
+            const customer = payload.customer || {};
+            document.getElementById('property-img').src = property.image ? `http://localhost:5000/uploads/${property.image}` : 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=200&h=200&fit=crop';
+            document.getElementById('property-title').textContent = property.title;
+            document.getElementById('property-address').textContent = property.address + (property.city ? ', ' + property.city : '');
+            document.getElementById('property-info').style.display = 'flex';
+            document.getElementById('pay-amount').innerHTML = `KES ${Number(payload.amount).toLocaleString()} <small>/${payload.type === 'rent' ? 'rent' : 'deposit'}</small>`;
+            document.getElementById('detail-customer').textContent = customer.name;
+            document.getElementById('detail-date').textContent = payload.booking_date ? new Date(payload.booking_date).toLocaleDateString() : '-';
+            if (payload.type === 'rent') {
+                document.querySelector('.pay-amount-label').textContent = 'Rent Amount';
+                document.getElementById('detail-date').textContent = payload.payment_month || '-';
+            }
+            document.getElementById('pay-form-section').style.display = 'block';
+        }
+
+        async function initiatePayment() {
+            const btn = document.getElementById('pay-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending M-Pesa Prompt...';
+
+            try {
+                const phone = prompt('Enter your M-Pesa phone number (format: 254...):');
+                if (!phone) { btn.disabled = false; btn.innerHTML = '<i class="fab fa-paypal"></i> Pay with M-Pesa'; return; }
+
+                const res = await fetch(`${API_BASE}/qr/pay`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: new URLSearchParams(window.location.search).get('token'), phone_number: phone })
+                });
+                const result = await res.json();
+
+                if (result.status === 'success') {
+                    document.getElementById('pay-form-section').style.display = 'none';
+                    document.getElementById('pay-success').style.display = 'block';
+                    document.getElementById('success-receipt').textContent = result.data.receipt_number || result.data.checkout_request_id || result.data.merchant_request_id || '-';
+                    document.getElementById('success-amount').textContent = `KES ${Number(result.data.amount).toLocaleString()}`;
+                } else {
+                    showError('Payment Failed', result.message || 'Unable to process payment. Please try again.');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fab fa-paypal"></i> Pay with M-Pesa';
+                }
+            } catch (err) {
+                showError('Connection Error', 'Unable to connect to payment gateway.');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fab fa-paypal"></i> Pay with M-Pesa';
+            }
+        }
+
+        function showError(title, message) {
+            document.getElementById('pay-form-section').style.display = 'none';
+            document.getElementById('pay-error').style.display = 'block';
+            document.getElementById('error-title').textContent = title;
+            document.getElementById('error-message').textContent = message;
+        }
+
+        init();
+    </script>
+</body>
+</html>

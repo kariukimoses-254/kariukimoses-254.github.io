@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare Hospital - My Messages</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="client.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🏥 MediCare Hospital</h1>
+    <nav>
+      <a href="home.html" class="nav-btn">Home</a>
+      <a href="messages.html" class="nav-btn active">My Messages</a>
+      <a href="index.html" class="nav-btn">Staff Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>💬 My Messages</h2>
+    <p id="note"></p>
+    <table>
+      <thead><tr><th>Subject</th><th>Message</th><th>Date</th></tr></thead>
+      <tbody id="myMessages"></tbody>
+    </table>
+  </main>
+
+  <footer class="footer"><div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div><p>© 2026 MediCare Hospital. All rights reserved.</p></footer>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('hms_user') || 'null');
+    const note = document.getElementById('note');
+    const tbody = document.getElementById('myMessages');
+    if (!user) {
+      note.textContent = '🔒 Please sign in to view your messages.';
+      note.style.color = 'red';
+      document.querySelector('table').style.display = 'none';
+    } else {
+      note.textContent = `Showing only messages from ${user.email}`;
+      fetch(`/api/messages/mine/${encodeURIComponent(user.email)}`)
+        .then(r => r.json())
+        .then(rows => {
+          tbody.innerHTML = rows.map(m =>
+            `<tr><td>${m.subject}</td><td>${m.message}</td><td>${new Date(m.created_at).toLocaleString()}</td></tr>`
+          ).join('') || '<tr><td colspan="3">No messages yet.</td></tr>';
+        });
+    }
+  </script>
+  <script src="theme.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - Lil Mosey Estate 6G Edition</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">LM</div>
+      <div class="sidebar-logo-text">
+        <h3><span class="gold">Lil Mosey</span> Estate</h3>
+        <small>Tenant Portal</small>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">T</div>
+      <div class="sidebar-user-info">
+        <h6 id="user-name">Tenant</h6>
+        <small>Renter</small>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="sidebar-nav-label">Overview</span>
+      <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a class="nav-link" href="payments.html"><i class="fas fa-credit-card"></i> Rent Payments</a>
+      <span class="sidebar-nav-label">Manage</span>
+      <a class="nav-link" href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a>
+      <a class="nav-link" href="documents.html"><i class="fas fa-file-alt"></i> Documents</a>
+      <span class="sidebar-separator"></span>
+      <a class="nav-link active" href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-link" href="../index.html"><i class="fas fa-arrow-left"></i> Back to Site</a>
+      <a class="nav-link" href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </aside>
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="btn d-md-none" id="sidebar-toggle" style="font-size:1.2rem;color:#0B1F3A;"><i class="fas fa-bars"></i></button>
+        <h4>My Profile</h4>
+      </div>
+      <div class="topbar-right">
+        <div class="d-flex align-items-center gap-2">
+          <div class="user-avatar" id="user-avatar">T</div>
+          <span class="fw-semibold" style="font-size:0.9rem;color:#333;">Tenant</span>
+        </div>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </header>
+    <div class="dash-content">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="profile-card text-center">
+            <div class="card-body">
+              <img src="https://ui-avatars.com/api/?name=Tenant&background=D4AF37&color=0B1F3A&size=100" alt="Avatar" class="profile-avatar mb-3" id="profile-avatar">
+              <h5 id="profile-name">Tenant</h5>
+              <p class="text-muted" id="profile-email">tenant@email.com</p>
+              <span class="badge-status" style="background:rgba(212,175,55,0.15);color:#D4AF37;">Tenant</span>
+            </div>
+          </div>
+          <div class="profile-card mt-4">
+            <div class="card-header"><h5><i class="fas fa-shield-alt me-2" style="color:var(--secondary)"></i>Payment Security</h5></div>
+            <div class="card-body">
+              <p style="color:var(--text-light);font-size:0.88rem;margin-bottom:16px;">Set a 4-6 digit Safe PIN to authorize rent payments via QR code. This PIN is required each time you pay using a scanned QR code.</p>
+              <div id="pin-status" class="mb-3"></div>
+              <form id="pin-form">
+                <div class="mb-3">
+                  <label class="form-label fw-semibold" style="font-size:0.85rem">New PIN</label>
+                  <div class="input-group">
+                    <span class="input-group-text" style="background:var(--primary);color:var(--secondary);border:none"><i class="fas fa-lock"></i></span>
+                    <input type="password" class="form-control" id="pin-input" placeholder="Enter 4-6 digit PIN" maxlength="6" pattern="\d{4,6}" inputmode="numeric" required style="border-left:none">
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold" style="font-size:0.85rem">Confirm PIN</label>
+                  <div class="input-group">
+                    <span class="input-group-text" style="background:var(--primary);color:var(--secondary);border:none"><i class="fas fa-lock"></i></span>
+                    <input type="password" class="form-control" id="pin-confirm" placeholder="Re-enter PIN" maxlength="6" pattern="\d{4,6}" inputmode="numeric" required style="border-left:none">
+                  </div>
+                </div>
+                <button type="submit" class="btn w-100" id="pin-btn" style="background:linear-gradient(135deg,var(--secondary),#b8962e);color:var(--primary);font-weight:700;border:none;padding:10px;border-radius:8px">
+                  <i class="fas fa-key me-2"></i>Set Safe PIN
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="profile-card">
+            <div class="card-header"><h5>Personal Information</h5></div>
+            <div class="card-body">
+              <form id="profile-form">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="first-name" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="last-name" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" disabled>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-control" id="phone">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Occupation</label>
+                    <input type="text" class="form-control" id="occupation">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Employer</label>
+                    <input type="text" class="form-control" id="employer">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label">Employer Address</label>
+                    <textarea class="form-control" id="employer-address" rows="2"></textarea>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Emergency Contact</label>
+                    <input type="text" class="form-control" id="emergency-name" placeholder="Full name">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Emergency Phone</label>
+                    <input type="tel" class="form-control" id="emergency-phone" placeholder="Phone number">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label">Relation</label>
+                    <input type="text" class="form-control" id="emergency-relation" placeholder="e.g. Spouse">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary-custom mt-4" id="save-btn">Save Changes</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/main.js"></script>
+  <script>
+  (function(){
+    async function loadProfile(){
+      try{
+        const [userRes, tenantRes] = await Promise.all([
+          api.get('/users/profile'),
+          api.get('/tenants/profile')
+        ]);
+        const u=userRes.data.user||{};
+        const t=tenantRes.data.tenant||{};
+        document.getElementById('first-name').value=u.first_name||'';
+        document.getElementById('last-name').value=u.last_name||'';
+        document.getElementById('email').value=u.email||'';
+        document.getElementById('phone').value=u.phone||'';
+        document.getElementById('occupation').value=t.occupation||'';
+        document.getElementById('employer').value=t.employer_name||'';
+        document.getElementById('employer-address').value=t.employer_address||'';
+        document.getElementById('emergency-name').value=t.emergency_contact_name||'';
+        document.getElementById('emergency-phone').value=t.emergency_contact_phone||'';
+        document.getElementById('emergency-relation').value=t.emergency_contact_relation||'';
+        document.getElementById('profile-name').textContent=(u.first_name||'Tenant')+' '+(u.last_name||'');
+        document.getElementById('profile-email').textContent=u.email||'';
+        const avatar=document.getElementById('profile-avatar');
+        if(u.avatar) avatar.src='/uploads/avatars/'+u.avatar;
+        else avatar.src='https://ui-avatars.com/api/?name='+(u.first_name||'T')+'+'+(u.last_name||'U')+'&background=D4AF37&color=0B1F3A&size=100';
+        document.getElementById('user-name').textContent=(u.first_name||'Tenant')+' '+(u.last_name||'');
+        document.getElementById('user-avatar').textContent=(u.first_name||'T').charAt(0).toUpperCase();
+      }catch(err){
+        console.error('Failed to load profile:',err);
+      }
+    }
+
+    document.getElementById('profile-form').addEventListener('submit',async function(e){
+      e.preventDefault();
+      const btn=document.getElementById('save-btn');
+      btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';
+      try{
+        await Promise.all([
+          api.put('/users/profile',{
+            first_name:document.getElementById('first-name').value,
+            last_name:document.getElementById('last-name').value,
+            phone:document.getElementById('phone').value
+          }),
+          api.put('/tenants/profile',{
+            occupation:document.getElementById('occupation').value,
+            employer_name:document.getElementById('employer').value,
+            employer_address:document.getElementById('employer-address').value,
+            emergency_contact_name:document.getElementById('emergency-name').value,
+            emergency_contact_phone:document.getElementById('emergency-phone').value,
+            emergency_contact_relation:document.getElementById('emergency-relation').value
+          })
+        ]);
+        Swal.fire({icon:'success',title:'Updated!',text:'Profile updated successfully.',confirmButtonColor:'#D4AF37',timer:1500,showConfirmButton:false});
+        loadProfile();
+      }catch(err){Swal.fire({icon:'error',title:'Failed',text:err.message})}
+      finally{btn.disabled=false;btn.innerHTML='Save Changes'}
+    });
+
+        document.getElementById('logout-btn').addEventListener('click',()=>auth.logout());
+
+    document.getElementById('pin-status').innerHTML='<div class="alert alert-info" style="font-size:0.82rem;padding:8px 12px;border-radius:8px;background:rgba(52,152,219,0.1);border-color:rgba(52,152,219,0.2);color:#3498db"><i class="fas fa-info-circle me-1"></i>Set your PIN to enable QR code payments</div>';
+
+    document.getElementById('pin-form').addEventListener('submit', async function(e){
+      e.preventDefault();
+      const pin = document.getElementById('pin-input').value;
+      const confirm = document.getElementById('pin-confirm').value;
+      if(pin !== confirm){
+        Swal.fire({icon:'error',title:'PIN Mismatch',text:'Both PIN entries must match.',confirmButtonColor:'#D4AF37'});
+        return;
+      }
+      if(!/^\d{4,6}$/.test(pin)){
+        Swal.fire({icon:'error',title:'Invalid PIN',text:'PIN must be 4-6 digits.',confirmButtonColor:'#D4AF37'});
+        return;
+      }
+      const btn = document.getElementById('pin-btn');
+      btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Setting...';
+      try{
+        await api.post('/qr/pin/set', { pin });
+        document.getElementById('pin-status').innerHTML='<div class="alert alert-success" style="font-size:0.82rem;padding:8px 12px;border-radius:8px;background:rgba(46,204,113,0.1);border-color:rgba(46,204,113,0.2);color:#2ecc71"><i class="fas fa-check-circle me-1"></i>PIN set successfully! You can now pay via QR code.</div>';
+        Swal.fire({icon:'success',title:'PIN Set!',text:'Your Safe PIN has been configured. You can now scan QR codes to make rent payments.',confirmButtonColor:'#D4AF37'});
+        document.getElementById('pin-input').value='';
+        document.getElementById('pin-confirm').value='';
+      }catch(err){
+        Swal.fire({icon:'error',title:'Failed',text:err.message,confirmButtonColor:'#D4AF37'});
+      }finally{
+        btn.disabled=false;btn.innerHTML='<i class="fas fa-key me-2"></i>Set Safe PIN';
+      }
+    });
+    loadProfile();
+  })();
+  </script>
+</body>
+</html>

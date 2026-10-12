@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare Hospital - Doctors</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="client.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🏥 MediCare Hospital</h1>
+    <nav>
+      <a href="home.html" class="nav-btn">Home</a>
+      <a href="about.html" class="nav-btn">About</a>
+      <a href="services.html" class="nav-btn">Services</a>
+      <a href="doctors.html" class="nav-btn active">Doctors</a>
+      <a href="apply.html" class="nav-btn">Doctor Apply</a>
+      <a href="appointments.html" class="nav-btn">Appointments</a>
+      <a href="contact.html" class="nav-btn">Contact</a>
+      <a href="register.html" class="nav-btn">Register</a>
+      <a href="login.html" class="nav-btn">Login</a>
+      <a href="guidance.html" class="nav-btn">Guidance</a>
+      <a href="index.html" class="nav-btn">Staff Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Our Doctors</h2>
+    <p>Meet our team of specialist doctors. All doctors are added via the Staff Dashboard and loaded live from the database.</p>
+    <br />
+    <div id="doctorList" class="card-grid">
+      <div class="spinner"></div>
+    </div>
+  </main>
+
+  <div class="bg-slideshow"><img src="images/hero.jpg" alt=""/><img src="images/cardiology.jpg" alt=""/><img src="images/orthopedics.jpg" alt=""/><img src="images/emergency.jpg" alt=""/><img src="images/dentistry.jpg" alt=""/></div>
+  <footer class="footer"><div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div><div class="footer-socials"><a class="fb" href="https://facebook.com/medicarehospital" target="_blank" title="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a> <a class="tw" href="https://x.com/medicarehospital" target="_blank" title="X"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a> <a class="ig" href="https://instagram.com/medicarehospital" target="_blank" title="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a> <a class="yt" href="https://youtube.com/@medicarehospital" target="_blank" title="YouTube"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .502 5.814 3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></div><p>� 2026 MediCare Hospital. All rights reserved.</p></footer>
+
+  <script>
+    function loadDoctors() {
+      fetch('/api/doctors')
+        .then(r => r.json())
+        .then(doctors => {
+          document.getElementById('doctorList').innerHTML = doctors.map(d => `
+          <div class="doctor-card">
+            <img src="${d.photo || 'images/hero.jpg'}" alt="${d.name}" style="width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:8px;" />
+            <h4>👨‍⚕️ ${d.name}</h4>
+            <p><strong>Specialization:</strong> ${d.spec}</p>
+            <p><strong>Phone:</strong> ${d.phone}</p>
+            <p>⭐ Staff: ${d.rating ?? '4.5'} · 🕐 ${d.available || 'Mon-Fri 09:00-17:00'}</p>
+            <p>${d.patient_rating ? `⭐ Patient rating: ${d.patient_rating}` : ''}</p>
+            <p style="margin-top:6px">Rate this doctor:
+              ${[1,2,3,4,5].map(s => `<button class="edit" onclick="rateDoctor(${d.id}, ${s})" style="padding:4px 8px;margin-right:4px">${'★'.repeat(s)}</button>`).join('')}
+            </p>
+          </div>`).join('') || '<p>No doctors listed yet.</p>';
+        })
+        .catch(() => {
+          document.getElementById('doctorList').innerHTML = '<p>Could not load doctors — is the server running?</p>';
+        });
+    }
+
+    function rateDoctor(id, stars) {
+      fetch(`/api/doctors/${id}/rate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ stars }),
+      }).then(() => loadDoctors());
+    }
+
+    loadDoctors();
+  </script>
+  <script src="theme.js"></script>
+  <script src="auth.js"></script>
+  <script src="help.js"></script>
+  <script src="reactions.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCare Hospital - Doctor Application</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="client.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>🏥 MediCare Hospital</h1>
+    <nav>
+      <a href="home.html" class="nav-btn">Home</a>
+      <a href="about.html" class="nav-btn">About</a>
+      <a href="services.html" class="nav-btn">Services</a>
+      <a href="doctors.html" class="nav-btn">Doctors</a>
+      <a href="apply.html" class="nav-btn active">Doctor Apply</a>
+      <a href="appointments.html" class="nav-btn">Appointments</a>
+      <a href="contact.html" class="nav-btn">Contact</a>
+      <a href="register.html" class="nav-btn">Register</a>
+      <a href="login.html" class="nav-btn">Login</a>
+      <a href="guidance.html" class="nav-btn">Guidance</a>
+      <a href="index.html" class="nav-btn">Staff Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Doctor Application</h2>
+    <p>Apply to join MediCare Hospital's medical team.</p>
+    <form id="applyForm" class="form-card" style="margin-top:16px">
+      <input id="name" placeholder="Full Name" required />
+      <input id="spec" placeholder="Specialization" required />
+      <input id="phone" placeholder="Phone" required />
+      <input id="email" type="email" placeholder="Email" required />
+      <input id="experience" placeholder="Years of Experience" required />
+      <input id="photo" type="file" accept="image/*" title="Upload your photo" />
+      <textarea id="message" placeholder="Why do you want to join?" style="flex:1 1 100%;padding:10px;border:1px solid #ccc;border-radius:6px" required></textarea>
+      <button type="submit">Submit Application</button>
+    </form>
+    <p id="msg" style="color:green;margin-top:10px"></p>
+  </main>
+
+  <div class="bg-slideshow"><img src="images/hero.jpg" alt=""/><img src="images/cardiology.jpg" alt=""/><img src="images/orthopedics.jpg" alt=""/><img src="images/emergency.jpg" alt=""/><img src="images/dentistry.jpg" alt=""/></div>
+  <footer class="footer"><div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div><div class="footer-socials"><a class="fb" href="https://facebook.com/medicarehospital" target="_blank" title="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a> <a class="tw" href="https://x.com/medicarehospital" target="_blank" title="X"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a> <a class="ig" href="https://instagram.com/medicarehospital" target="_blank" title="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a> <a class="yt" href="https://youtube.com/@medicarehospital" target="_blank" title="YouTube"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .502 5.814 3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></div><p>� 2026 MediCare Hospital. All rights reserved.</p></footer>
+
+  <script>
+    document.getElementById('applyForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const toBase64 = f => new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsDataURL(f);
+      });
+      const photoFile = document.getElementById('photo').files[0];
+      const body = {
+        name: name.value.trim(), spec: spec.value.trim(), phone: phone.value.trim(),
+        email: email.value.trim(), experience: experience.value.trim(), message: message.value.trim(),
+        photo: photoFile ? await toBase64(photoFile) : undefined,
+      };
+      await fetch('/api/applications', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      document.getElementById('msg').textContent = '✅ Application submitted! We will contact you soon.';
+      e.target.reset();
+    });
+  </script>
+  <script src="theme.js"></script>
+  <script src="auth.js"></script>
+  <script src="help.js"></script>
+  <script src="reactions.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

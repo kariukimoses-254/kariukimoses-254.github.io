@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EstateHub — Full-Stack Real Estate Platform</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark brand-navbar">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <i class="bi bi-building"></i> EstateHub
+        <span class="badge bg-warning text-dark ms-1">Landing</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Frontend Frameworks
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" onclick="launch('react')">React (Vite)</a></li>
+              <li><a class="dropdown-item" href="#" onclick="launch('angular')">Angular</a></li>
+              <li><a class="dropdown-item" href="#" onclick="launch('vue')">Vue (Vite)</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#architecture">Architecture</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#api-demo">API Demo</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero text-white">
+    <div class="container py-5">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <span class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill">
+            HTML5 + CSS3 + JavaScript (jQuery, Bootstrap, Tailwind)
+          </span>
+          <h1 class="display-4 fw-bold mb-3">One Platform. Every Stack.</h1>
+          <p class="lead mb-4">
+            A real estate web application demonstrating full interoperability across
+            <strong>Java, PHP, Ruby, and Node.js</strong> backends using
+            <strong>REST + GraphQL</strong>, backed by
+            <strong>PostgreSQL, MySQL, and MongoDB</strong>, and rendered by
+            <strong>React, Angular, and Vue</strong>.
+          </p>
+          <div class="d-flex gap-3">
+            <a href="#architecture" class="btn btn-warning btn-lg text-dark">Explore Architecture</a>
+            <a href="#api-demo" class="btn btn-outline-light btn-lg">Live API Demo</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="card bg-white text-dark border-0 shadow-lg">
+            <div class="card-header bg-dark text-white"><i class="bi bi-stack"></i> Platform Components</div>
+            <div class="card-body">
+              <ul class="list-unstyled mb-4">
+                <li class="mb-2">
+                  <strong class="tech-chip tech-frontend">React</strong>
+                  <strong class="tech-chip tech-frontend">Angular</strong>
+                  <strong class="tech-chip tech-frontend">Vue</strong>
+                  <span class="text-muted small">frontend frameworks</span>
+                </li>
+                <li class="mb-2">
+                  <strong class="tech-chip tech-lib">Bootstrap</strong>
+                  <strong class="tech-chip tech-lib">Tailwind</strong>
+                  <strong class="tech-chip tech-lib">jQuery</strong>
+                  <span class="text-muted small">libraries</span>
+                </li>
+                <li class="mb-2">
+                  <strong class="tech-chip tech-lang">Java</strong>
+                  <strong class="tech-chip tech-lang">PHP</strong>
+                  <strong class="tech-chip tech-lang">Ruby</strong>
+                  <strong class="tech-chip tech-lang">JavaScript</strong>
+                  <span class="text-muted small">backend languages</span>
+                </li>
+                <li class="mb-2">
+                  <strong class="tech-chip tech-api">REST</strong>
+                  <strong class="tech-chip tech-api">GraphQL</strong>
+                  <span class="text-muted small">APIs</span>
+                </li>
+                <li>
+                  <strong class="tech-chip tech-db">PostgreSQL</strong>
+                  <strong class="tech-chip tech-db">MySQL</strong>
+                  <strong class="tech-chip tech-db">MongoDB</strong>
+                  <span class="text-muted small">databases</span>
+                </li>
+              </ul>
+              <div class="row g-2">
+                <div class="col-4"><div class="border rounded p-2 text-center small"><strong id="statProps">-</strong><div class="text-muted">Properties</div></div></div>
+                <div class="col-4"><div class="border rounded p-2 text-center small"><strong id="statListings">-</strong><div class="text-muted">Listings</div></div></div>
+                <div class="col-4"><div class="border rounded p-2 text-center small"><strong id="statBackends">4</strong><div class="text-muted">Backends</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="architecture" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Architecture</h2>
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="card h-100 shadow-sm border-top border-4 border-primary">
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-braces text-primary"></i> Frontend SPA</h5>
+              <p class="small text-muted">Three builds of the same app using React, Angular, and Vue — each wired to Bootstrap + Tailwind CSS and enhanced with jQuery interactions.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="card h-100 shadow-sm border-top border-4 border-success">
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-hdd-stack text-success"></i> Backend APIs</h5>
+              <p class="small text-muted">Express (Node) exposes REST + GraphQL toward MongoDB & PostgreSQL. Spring Boot (Java) serves REST + GraphQL on MySQL. Laravel (PHP) bridges both SQL engines.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="card h-100 shadow-sm border-top border-4 border-warning">
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-database text-warning"></i> Datastores</h5>
+              <p class="small text-muted">PostgreSQL &amp; MySQL for relational data (properties, agents, visitors). MongoDB for flexible listing documents and analytics.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="card h-100 shadow-sm border-top border-4 border-danger">
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-gem text-danger"></i> Microservices</h5>
+              <p class="small text-muted">Ruby (Sinatra) delivers market analytics and customer reviews. All services expose a unified CORS-enabled API surface.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="api-demo" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-1">Live API Demo</h2>
+      <p class="text-center text-muted mb-4">
+        Query the platform live. Select an endpoint and let jQuery fetch the response.
+      </p>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card shadow-sm">
+            <div class="card-header">
+              <div class="btn-group btn-group-sm" role="group" aria-label="API choose">
+                <button type="button" class="btn btn-outline-primary active" data-endpoint="properties">Properties (Node REST)</button>
+                <button type="button" class="btn btn-outline-primary" data-endpoint="listings">Listings (Node REST)</button>
+                <button type="button" class="btn btn-outline-primary" data-endpoint="graphql">Properties (GraphQL)</button>
+                <button type="button" class="btn btn-outline-primary" data-endpoint="ruby">Ruby Stats</button>
+                <button type="button" class="btn btn-outline-primary" data-endpoint="php">PHP GraphQL</button>
+                <button type="button" class="btn btn-outline-primary" data-endpoint="java">Java REST</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <pre class="bg-dark text-light p-3 rounded mb-3 overflow-auto" id="apiOutput" style="max-height: 320px;"><code>// click an endpoint to load data...</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 bg-dark text-white">
+    <div class="container text-center">
+      <h3>Ready to switch frameworks?</h3>
+      <p class="text-white-50">The same EstateHub experience, built three different ways.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <button class="btn btn-outline-info" onclick="launch('react')"><i class="bi bi-lightning"></i> Launch React</button>
+        <button class="btn btn-outline-danger" onclick="launch('angular')"><i class="bi bi-shield"></i> Launch Angular</button>
+        <button class="btn btn-outline-success" onclick="launch('vue')"><i class="bi bi-collection"></i> Launch Vue</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-4 bg-dark text-white-50">
+    <div class="container d-flex justify-content-between align-items-center">
+      <span>&copy; 2026 EstateHub — Full-Stack Demo Platform</span>
+      <span class="small">HTML · CSS · JavaScript · jQuery · Bootstrap · Tailwind</span>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

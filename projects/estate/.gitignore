@@ -1,0 +1,17 @@
+node_modules/
+.env
+backups/
+*.log
+uploads/
+.DS_Store
+Thumbs.db
+
+backend/nodejs/node_modules/
+frontend/react/node_modules/
+frontend/react/dist/
+frontend/vue/node_modules/
+frontend/vue/dist/
+frontend/angular/node_modules/
+frontend/angular/dist/
+backend/java/build/
+backend/java/.gradle/

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payments - Lil Mosey Estate 6G Edition Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon">LM</div>
+    <div class="sidebar-logo-text">
+      <h3><span class="gold">Lil Mosey</span> Estate</h3>
+      <small>Admin Panel</small>
+    </div>
+  </div>
+  <div class="sidebar-user">
+    <div class="sidebar-user-avatar">A</div>
+    <div class="sidebar-user-info">
+      <h6 id="user-name">Admin</h6>
+      <small>Administrator</small>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <span class="sidebar-nav-label">Main</span>
+    <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a class="nav-link" href="users.html"><i class="fas fa-users"></i> Users <span class="nav-badge" id="badge-users"></span></a>
+    <a class="nav-link" href="properties.html"><i class="fas fa-building"></i> Properties</a>
+    <a class="nav-link" href="bookings.html"><i class="fas fa-calendar-check"></i> Bookings <span class="nav-badge" id="badge-bookings"></span></a>
+    <span class="sidebar-nav-label">Finance</span>
+    <a class="nav-link active" href="payments.html"><i class="fas fa-credit-card"></i> Payments</a>
+    <a class="nav-link" href="reviews.html"><i class="fas fa-star"></i> Reviews</a>
+    <span class="sidebar-separator"></span>
+    <span class="sidebar-nav-label">Support</span>
+    <a class="nav-link" href="messages.html"><i class="fas fa-envelope"></i> Messages <span class="nav-badge" id="badge-messages"></span></a>
+    <a class="nav-link" href="maintenance.html"><i class="fas fa-tools"></i> Maintenance <span class="nav-badge" id="badge-maintenance"></span></a>
+    <a class="nav-link" href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a class="nav-link" href="../index.html"><i class="fas fa-arrow-left"></i> Back to Site</a>
+    <a class="nav-link" href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+</aside>
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="btn d-md-none" id="sidebar-toggle" style="font-size:1.2rem;color:#0B1F3A;"><i class="fas fa-bars"></i></button>
+        <h4>Payment History</h4>
+      </div>
+      <div class="topbar-right d-flex align-items-center gap-3">
+        <span class="fw-semibold" style="font-size:0.9rem;color:#333;">Admin</span>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </header>
+    <div class="dash-content">
+      <div class="content-card">
+        <div class="card-header"><h5><i class="fas fa-credit-card me-2"></i>All Payments</h5></div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table">
+              <thead><tr><th>Invoice</th><th>Customer</th><th>Property</th><th>Amount</th><th>Method</th><th>Status</th><th>Date</th></tr></thead>
+              <tbody id="payments-tbody"><tr><td colspan="7" class="text-center py-5 text-muted">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/main.js"></script>
+  <script>
+  function formatCurrency(val) { return 'KES ' + Number(val || 0).toLocaleString(); }
+  function formatDate(d) { if(!d) return '-'; return new Date(d).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }); }
+
+  async function loadPayments() {
+    try {
+      const res = await api.get('/payments');
+      const payments = res.data.payments || [];
+      const tbody = document.getElementById('payments-tbody');
+      if(payments.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center py-5 text-muted">No payments found</td></tr>';
+        return;
+      }
+      tbody.innerHTML = payments.map(p => `
+        <tr>
+          <td><code>${p.invoice_number || 'N/A'}</code></td>
+          <td>${p.first_name || ''} ${p.last_name || ''}</td>
+          <td>${p.property_title || 'N/A'}</td>
+          <td><strong>${formatCurrency(p.amount)}</strong></td>
+          <td><span class="text-capitalize">${p.payment_method}</span></td>
+          <td><span class="badge-status ${p.status}">${p.status.charAt(0).toUpperCase() + p.status.slice(1)}</span></td>
+          <td>${formatDate(p.paid_at || p.created_at)}</td>
+        </tr>
+      `).join('');
+    } catch(err) {
+      document.getElementById('payments-tbody').innerHTML = '<tr><td colspan="7" class="text-center py-5 text-muted">Failed to load payments</td></tr>';
+    }
+  }
+
+    document.getElementById('logout-btn').addEventListener('click', () => auth.logout());
+  loadPayments();
+  </script>
+</body>
+</html>

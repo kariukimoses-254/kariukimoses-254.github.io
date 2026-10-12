@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Lil Mosey Estate 6G Edition</title>
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-left d-none d-md-flex">
+    <div class="text-center">
+      <svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" style="width:200px;margin-bottom:30px;">
+        <defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#D4AF37"/><stop offset="100%" style="stop-color:#b8962e"/></linearGradient></defs>
+        <rect x="30" y="70" width="140" height="100" rx="6" fill="rgba(255,255,255,0.1)"/>
+        <polygon points="20,75 100,15 180,75" fill="url(#g1)"/>
+        <rect x="80" y="110" width="40" height="60" rx="3" fill="#D4AF37" opacity="0.7"/>
+        <circle cx="115" cy="140" r="3" fill="#0B1F3A"/>
+      </svg>
+      <h2 class="text-3d">Welcome Back</h2>
+      <p style="color:rgba(255,255,255,0.8);max-width:350px;margin:0 auto;">Sign in to access your dashboard, saved properties, and manage your real estate journey.</p>
+    </div>
+  </div>
+  <div class="auth-right">
+    <div class="auth-form glass-modern">
+      <a href="index.html" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-4">
+        <span class="brand-icon" style="width:36px;height:36px;background:var(--gradient-primary);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#D4AF37;font-size:1rem;"><i class="fas fa-home"></i></span>
+        <span style="font-family:var(--font-heading);font-size:1.3rem;font-weight:700;color:var(--text);">Lil Mosey <span style="color:var(--secondary);">Estate</span></span>
+      </a>
+      <h3 style="font-family:var(--font-heading);color:var(--text);margin-bottom:5px;">Sign In</h3>
+      <p class="text-muted mb-4">Enter your credentials to access your account</p>
+
+      <form id="login-form">
+        <div class="mb-3">
+          <label class="form-label">Email Address</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            <input type="email" class="form-control form-control-modern" id="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <input type="password" class="form-control form-control-modern" id="password" placeholder="Enter your password" required>
+            <button class="input-group-text" type="button" onclick="togglePassword()" style="cursor:pointer;"><i class="fas fa-eye" id="toggle-icon"></i></button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="remember-me">
+            <label class="form-check-label" for="remember-me">Remember me</label>
+          </div>
+          <a href="#" onclick="showForgotPasswordDialog()" style="color:#D4AF37;font-weight:600;font-size:0.9rem;">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary-custom btn-3d btn-3d-gold w-100 mb-3" id="login-btn">
+          <span id="login-text">Sign In</span>
+          <span id="login-spinner" class="d-none"><i class="fas fa-spinner fa-spin"></i> Signing in...</span>
+        </button>
+        <p class="text-center text-muted">Don't have an account? <a href="register.html" style="color:#D4AF37;font-weight:600;">Register</a></p>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/main.js"></script>
+<script>
+function togglePassword() {
+  const pw = document.getElementById('password');
+  const icon = document.getElementById('toggle-icon');
+  if (pw.type === 'password') { pw.type = 'text'; icon.className = 'fas fa-eye-slash'; }
+  else { pw.type = 'password'; icon.className = 'fas fa-eye'; }
+}
+
+async function showForgotPasswordDialog() {
+  const result = await Swal.fire({
+    title: 'Reset Password',
+    input: 'email',
+    inputLabel: 'Enter your email address',
+    inputPlaceholder: 'you@example.com',
+    showCancelButton: true,
+    confirmButtonColor: '#D4AF37',
+    inputValidator: function(v) { if (!v || !v.includes('@')) return 'Please enter a valid email' }
+  });
+  if (result.value) {
+    try {
+      await api.post('/auth/forgot-password', { email: result.value });
+      Swal.fire({ icon: 'success', title: 'Email Sent', text: 'If an account exists, a reset email has been sent.', confirmButtonColor: '#D4AF37' });
+    } catch(err) {
+      Swal.fire({ icon: 'success', title: 'Email Sent', text: 'If an account exists, a reset email has been sent.', confirmButtonColor: '#D4AF37' });
+    }
+  }
+}
+
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('login-btn');
+  const text = document.getElementById('login-text');
+  const spinner = document.getElementById('login-spinner');
+
+  btn.disabled = true;
+  text.classList.add('d-none');
+  spinner.classList.remove('d-none');
+
+  try {
+    const data = await api.post('/auth/login', {
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value,
+      remember_me: document.getElementById('remember-me').checked
+    });
+
+    auth.setAuth(data.data.accessToken, data.data.user);
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Welcome Back!',
+      text: `Hello ${data.data.user.first_name}!`,
+      timer: 1500,
+      showConfirmButton: false
+    }).then(() => {
+      if (data.data.user.role === 'admin') window.location.href = 'admin/dashboard.html';
+      else if (data.data.user.role === 'agent') window.location.href = 'dashboard.html?tab=agent';
+      else window.location.href = 'customer/dashboard.html';
+    });
+  } catch (error) {
+    Swal.fire({ icon: 'error', title: 'Login Failed', text: error.message });
+  } finally {
+    btn.disabled = false;
+    text.classList.remove('d-none');
+    spinner.classList.add('d-none');
+  }
+});
+</script>
+</body>
+</html>

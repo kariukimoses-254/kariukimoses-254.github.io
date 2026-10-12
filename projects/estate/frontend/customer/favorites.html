@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Favorites - Lil Mosey Estate 6G Edition</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">LM</div>
+      <div class="sidebar-logo-text">
+        <h3><span class="gold">Lil Mosey</span> Estate</h3>
+        <small>Customer Portal</small>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">C</div>
+      <div class="sidebar-user-info">
+        <h6 id="user-name">Customer</h6>
+        <small>Tenant</small>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="sidebar-nav-label">Overview</span>
+      <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a class="nav-link" href="bookings.html"><i class="fas fa-calendar-check"></i> My Bookings</a>
+      <a class="nav-link active" href="favorites.html"><i class="fas fa-heart"></i> Favorites</a>
+      <span class="sidebar-nav-label">Account</span>
+      <a class="nav-link" href="payments.html"><i class="fas fa-credit-card"></i> My Payments</a>
+      <span class="sidebar-separator"></span>
+      <span class="sidebar-nav-label">Support</span>
+      <a class="nav-link" href="messages.html"><i class="fas fa-envelope"></i> Messages</a>
+      <a class="nav-link" href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a>
+      <a class="nav-link" href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a class="nav-link" href="../index.html"><i class="fas fa-arrow-left"></i> Back to Site</a>
+      <a class="nav-link" href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </aside>
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+<button class="btn d-md-none" id="sidebar-toggle" title="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+        <h4>My Favorites</h4>
+      </div>
+      <div class="topbar-right">
+        <div class="d-flex align-items-center gap-2">
+          <div class="user-avatar" id="user-avatar">C</div>
+<span class="fw-semibold user-name-text">Customer</span>
+        </div>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </header>
+    <div class="dash-content">
+      <div id="favorites-container" class="row g-4">
+        <div class="col-12 text-center py-5 text-muted">Loading...</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../js/main.js"></script>
+  <script>
+  function formatCurrency(v){return 'KES '+Number(v||0).toLocaleString()}
+
+  (function(){
+    try{
+      const user=JSON.parse(localStorage.getItem('user')||'{}');
+      if(user.first_name){
+        document.getElementById('user-name').textContent=user.first_name+' '+(user.last_name||'');
+        document.getElementById('user-avatar').textContent=user.first_name.charAt(0).toUpperCase();
+      }
+    }catch(e){}
+
+    async function loadFavorites(){
+      try{
+        const res=await api.get('/properties/user/favorites');
+        const favorites=res.data.favorites||res.data.properties||[];
+        const container=document.getElementById('favorites-container');
+        if(!favorites.length){
+          container.innerHTML='<div class="col-12"><div class="empty-state"><i class="fas fa-heart"></i><h5>No Favorites Yet</h5><p class="text-muted">Start browsing properties and save your favorites!</p><a href="../properties.html" class="btn btn-primary-custom">Browse Properties</a></div></div>';
+          return;
+        }
+        container.innerHTML=favorites.map(f=>{
+          const p=f.property||f;
+          return `<div class="col-xl-4 col-md-6">
+            <div class="property-card card-3d shadow-3d">
+              <div style="position:relative">
+                <img src="${p.primary_image||'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=400&q=80'}" onerror="handleImageError(this)" alt="${p.title}">
+                <button class="btn position-absolute top-0 end-0 m-2" style="background:#e74c3c;color:#fff;border-radius:50%;width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;" onclick="removeFavorite(${p.property_id})" title="Remove from favorites"><i class="fas fa-heart"></i></button>
+              </div>
+              <div class="card-body">
+                <div class="price">${formatCurrency(p.price)}</div>
+                <div class="title">${p.title}</div>
+                <div class="location"><i class="fas fa-map-marker-alt"></i> ${p.city||''}, ${p.county||''}</div>
+                <div class="meta">
+                  <span><i class="fas fa-bed"></i> ${p.bedrooms||0} Beds</span>
+                  <span><i class="fas fa-bath"></i> ${p.bathrooms||0} Baths</span>
+                  <span><i class="fas fa-vector-square"></i> ${p.area_sqft||0} sqft</span>
+                </div>
+                <div class="d-flex gap-2 mt-2">
+                  ${p.status === 'available' ? `<a href="../property-details.html?id=${p.property_id}#booking-form" class="btn btn-primary-custom btn-sm flex-fill"><i class="fas fa-calendar-check me-1"></i>Book</a>` : ''}
+                  <a href="../property-details.html?id=${p.property_id}" class="btn btn-outline-custom btn-sm flex-fill">View Details</a>
+                </div>
+              </div>
+            </div>
+          </div>`;
+        }).join('');
+      }catch(err){
+        document.getElementById('favorites-container').innerHTML='<div class="col-12 text-center py-5 text-muted">Failed to load favorites</div>';
+      }
+    }
+
+    window.removeFavorite=async function(id){
+      try{
+        await api.post('/properties/'+id+'/favorite',{});
+        Swal.fire({icon:'success',title:'Removed!',text:'Removed from favorites.',confirmButtonColor:'#D4AF37',timer:1500,showConfirmButton:false});
+        loadFavorites();
+      }catch(err){Swal.fire({icon:'error',title:'Failed',text:err.message})}
+    };
+
+        document.getElementById('logout-btn').addEventListener('click',()=>auth.logout());
+    loadFavorites();
+  })();
+  </script>
+</body>
+</html>

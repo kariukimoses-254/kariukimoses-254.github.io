@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Gallery | Lil Mosey Estate 6G Edition</title>
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo">Lil Mosey Estate 6G Edition</div>
+    <div class="preloader-spinner"></div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container"></div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-icon"><i class="fas fa-home"></i></span>
+      Lil<span class="brand-accent"> Mosey</span> Estate
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" href="mortgage-calculator.html">Calculator</a></li>
+        <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div id="auth-buttons" class="d-flex ms-3 gap-2">
+        <a href="login.html" class="btn btn-outline-custom btn-sm">Login</a>
+        <a href="register.html" class="btn btn-primary-custom btn-sm">Register</a>
+      </div>
+      <div id="user-menu" class="dropdown ms-3" style="display:none;">
+        <a href="#" class="d-flex align-items-center gap-2 text-decoration-none" data-bs-toggle="dropdown">
+          <img id="user-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle fill='%23D4AF37' cx='18' cy='18' r='18'/%3E%3Ctext fill='%230B1F3A' font-family='Arial' font-size='14' text-anchor='middle' x='18' y='23'%3E U %3C/text%3E%3C/svg%3E" alt="Avatar" class="rounded-circle" width="36" height="36">
+          <span id="user-name" class="fw-semibold text-dark"></span>
+          <i class="fas fa-chevron-down small"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a id="dashboard-link" class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+          <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+          <li><a class="dropdown-item" href="favorites.html"><i class="fas fa-heart me-2"></i>Favorites</a></li>
+          <li><a class="dropdown-item" href="appointments.html"><i class="fas fa-calendar me-2"></i>Bookings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<section class="page-header" style="background:linear-gradient(135deg,var(--primary) 0%,#0a1628 100%);padding:160px 0 80px;color:white;text-align:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(212,175,55,0.06) 0%,transparent 60%);pointer-events:none;"></div>
+  <div class="container position-relative">
+    <span class="subtitle" style="color:var(--secondary);" data-aos="fade-up">Gallery</span>
+    <h1 style="color:white;font-family:var(--font-heading);margin-bottom:16px;" data-aos="fade-up" data-aos-delay="100">Step Inside Our Properties</h1>
+    <p style="color:rgba(255,255,255,0.75);max-width:600px;margin:0 auto;font-size:1.1rem;" data-aos="fade-up" data-aos-delay="200">Browse stunning interiors and envision your new lifestyle.</p>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="section">
+  <div class="container">
+    <!-- Filter Buttons -->
+    <div class="text-center mb-5" data-aos="fade-up">
+      <button class="btn btn-outline-custom gallery-filter active" data-filter="all">All</button>
+      <button class="btn btn-outline-custom gallery-filter" data-filter="interior">Interiors</button>
+      <button class="btn btn-outline-custom gallery-filter" data-filter="exterior">Exteriors</button>
+      <button class="btn btn-outline-custom gallery-filter" data-filter="kitchen">Kitchens</button>
+      <button class="btn btn-outline-custom gallery-filter" data-filter="bedroom">Bedrooms</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="row g-3 stagger-fade" id="gallery-grid">
+      <div class="col-lg-4 col-md-6 gallery-item" data-category="interior" data-aos="fade-up">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Interior Design" style="width:100%;height:300px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-couch me-2"></i>Interior Design</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 gallery-item" data-category="interior" data-aos="fade-up" data-aos-delay="100">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80" alt="Living Room" style="width:100%;height:300px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-tv me-2"></i>Living Room</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 gallery-item" data-category="kitchen" data-aos="fade-up" data-aos-delay="200">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80" alt="Kitchen" style="width:100%;height:300px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-utensils me-2"></i>Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 gallery-item" data-category="bedroom" data-aos="fade-up">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" alt="Master Bedroom" style="width:100%;height:320px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-bed me-2"></i>Master Bedroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 gallery-item" data-category="exterior" data-aos="fade-up" data-aos-delay="100">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80" alt="Modern Exterior" style="width:100%;height:320px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-home me-2"></i>Modern Exterior</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 gallery-item" data-category="interior" data-aos="fade-up">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=900&q=80" alt="Bathroom" style="width:100%;height:300px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-bath me-2"></i>Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 gallery-item" data-category="kitchen" data-aos="fade-up" data-aos-delay="100">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80" alt="Dining Area" style="width:100%;height:300px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-chair me-2"></i>Dining Area</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 gallery-item" data-category="exterior" data-aos="fade-up" data-aos-delay="200">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1572331165267-854da2b021b1?auto=format&fit=crop&w=900&q=80" alt="Pool Area" style="width:100%;height:300px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-swimming-pool me-2"></i>Pool Area</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 gallery-item" data-category="exterior" data-aos="fade-up">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=900&q=80" alt="Garden" style="width:100%;height:300px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-seedling me-2"></i>Garden</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 gallery-item" data-category="exterior" data-aos="fade-up" data-aos-delay="100">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Parking" style="width:100%;height:300px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-car me-2"></i>Parking</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 gallery-item" data-category="interior" data-aos="fade-up" data-aos-delay="200">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80" alt="Office" style="width:100%;height:300px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-desktop me-2"></i>Office</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 gallery-item" data-category="bedroom" data-aos="fade-up">
+        <div class="img-overlay lift-3d" style="border-radius:var(--radius);overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80" alt="Rooftop" style="width:100%;height:300px;object-fit:cover;">
+          <div class="overlay-content">
+            <span style="color:white;font-weight:600;"><i class="fas fa-building me-2"></i>Rooftop</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section gradient-animate">
+  <div class="container">
+    <h2 data-aos="fade-up">Ready to Find Your Dream Property?</h2>
+    <p data-aos="fade-up" data-aos-delay="100">Start your property search today and discover the perfect place to call home.</p>
+    <div data-aos="fade-up" data-aos-delay="200">
+      <a href="properties.html" class="btn btn-primary-custom btn-lg me-3 shimmer btn-magnetic">
+        <i class="fas fa-search me-2"></i>Browse Properties
+      </a>
+      <a href="register.html" class="btn btn-outline-custom btn-lg">
+        <i class="fas fa-user-plus me-2"></i>Get Started Free
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <h5>Lil Mosey Estate 6G Edition</h5>
+        <p>Finding Your Perfect Property, Simplified. We are Kenya's premier real estate platform, connecting buyers, sellers, and renters with their ideal properties.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <h5>Quick Links</h5>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="properties.html"><i class="fas fa-chevron-right"></i> Properties</a></li>
+          <li><a href="mortgage-calculator.html"><i class="fas fa-chevron-right"></i> Mortgage Calculator</a></li>
+          <li><a href="agents.html"><i class="fas fa-chevron-right"></i> Agents</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5>Property Types</h5>
+        <ul class="footer-links">
+          <li><a href="properties.html?type=1"><i class="fas fa-chevron-right"></i> Apartments</a></li>
+          <li><a href="properties.html?type=2"><i class="fas fa-chevron-right"></i> Villas</a></li>
+          <li><a href="properties.html?type=3"><i class="fas fa-chevron-right"></i> Townhouses</a></li>
+          <li><a href="properties.html?type=4"><i class="fas fa-chevron-right"></i> Bungalows</a></li>
+          <li><a href="properties.html?type=5"><i class="fas fa-chevron-right"></i> Penthouses</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5>Contact Info</h5>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Westlands Business Park, Nairobi</a></li>
+          <li><a href="tel:+254793489901"><i class="fas fa-phone"></i> +254 793 489 901</a></li>
+          <li><a href="tel:+254105727456"><i class="fas fa-phone"></i> +254 105 727 456</a></li>
+          <li><a href="mailto:kariukimoseswambugu@gmail.com"><i class="fas fa-envelope"></i> kariukimoseswambugu@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <span class="gold">Lil Mosey Estate 6G Edition</span>. All rights reserved. | Finding Your Perfect Property, Simplified. | Powered by 6G Technology</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const filterBtns = document.querySelectorAll('.gallery-filter');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+      galleryItems.forEach(function(item) {
+        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+          item.style.display = '';
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(20px)';
+          setTimeout(function() {
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, 50);
+        } else {
+          item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(20px)';
+          setTimeout(function() { item.style.display = 'none'; }, 300);
+        }
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>
