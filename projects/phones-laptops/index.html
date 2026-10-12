@@ -23,7 +23,6 @@
           var path = window.location.pathname
           var p = path.replace(/\/(index\.html)?$/, '')
           window.__ROUTER_BASE__ = p || '/'
-          // Normalise ".../index.html" to the directory URL so client-side routing works.
           if (/\/index\.html$/.test(path) && window.history && window.history.replaceState) {
             window.history.replaceState(null, '', p + '/' + window.location.search + window.location.hash)
           }
@@ -47,7 +46,7 @@
         } catch (e) {}
       })()
     </script>
-    <script type="module" crossorigin src="./assets/index-CeM_4C44.js"></script>
+    <script type="module" crossorigin src="./assets/index-2y7hh-t0.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-bLzvMuQ5.css">
   </head>
   <body>
