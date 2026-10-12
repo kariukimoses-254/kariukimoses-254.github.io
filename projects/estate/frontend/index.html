@@ -680,10 +680,19 @@ function loadFeaturedProperties() {
     'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80',
     'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80'
   ];
-  api.get('/properties?featured=1&page=1&limit=6')
-    .then(data => {
-      const props = (data.data && data.data.properties) || [];
-      if (props.length === 0) return;
+  // Static demo fallback so the landing page looks complete when the
+  // backend API is not reachable (e.g. static hosting such as GitHub Pages).
+  const FALLBACK = [
+    { property_id: 1, title: 'Luxury Villa, Karen', purpose: 'sale', price: 78000000, city: 'Nairobi', county: 'Nairobi', bedrooms: 5, bathrooms: 4, area_sqft: 6500, status: 'available', is_featured: 1, primary_image: images[0] },
+    { property_id: 2, title: 'Modern Penthouse, Westlands', purpose: 'rent', price: 350000, city: 'Nairobi', county: 'Nairobi', bedrooms: 4, bathrooms: 3, area_sqft: 3200, status: 'available', is_featured: 1, primary_image: images[1] },
+    { property_id: 3, title: 'Family Townhouse, Kiambu', purpose: 'sale', price: 24500000, city: 'Kiambu', county: 'Kiambu', bedrooms: 4, bathrooms: 3, area_sqft: 2800, status: 'available', is_featured: 1, primary_image: images[2] },
+    { property_id: 4, title: 'Beachfront Home, Nyali', purpose: 'sale', price: 53000000, city: 'Mombasa', county: 'Mombasa', bedrooms: 3, bathrooms: 3, area_sqft: 3400, status: 'available', is_featured: 1, primary_image: images[3] },
+    { property_id: 5, title: 'Elegant Apartment, Kilimani', purpose: 'rent', price: 95000, city: 'Nairobi', county: 'Nairobi', bedrooms: 2, bathrooms: 2, area_sqft: 1400, status: 'available', is_featured: 1, primary_image: images[4] },
+    { property_id: 6, title: 'Garden Maisonette, Runda', purpose: 'sale', price: 62000000, city: 'Nairobi', county: 'Nairobi', bedrooms: 5, bathrooms: 4, area_sqft: 5200, status: 'available', is_featured: 1, primary_image: images[5] }
+  ];
+
+  const renderProperties = (props) => {
+      if (!props.length) return;
       const fragment = document.createDocumentFragment();
       props.forEach((p, i) => {
         const col = document.createElement('div');
@@ -717,8 +726,14 @@ function loadFeaturedProperties() {
       container.innerHTML = '';
       container.appendChild(fragment);
       if (typeof AOS !== 'undefined') AOS.refresh();
+  };
+
+  api.get('/properties?featured=1&page=1&limit=6')
+    .then(data => {
+      const props = (data.data && data.data.properties) || [];
+      renderProperties(props.length ? props : FALLBACK);
     })
-    .catch(() => { /* keep skeleton placeholders on fetch failure */ });
+    .catch(() => { renderProperties(FALLBACK); });
 }
 </script>
 </body>
