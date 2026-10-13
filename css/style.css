@@ -386,16 +386,13 @@ section { padding: 4.5rem 0; position: relative; }
 .social__link--instagram { --brand: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); --brand-glow: rgba(220, 39, 67, .6); }
 .social__link--email     { --brand: linear-gradient(160deg, #ff8070, #ea4335 55%, #c5221f); --brand-glow: rgba(234, 67, 53, .6); }
 
-/* hero portrait / monogram card */
+/* hero portrait card */
 .hero__portrait {
     position: relative;
     aspect-ratio: 1 / 1;
     border-radius: 32px;
     background: var(--surface);
     border: 1px solid var(--border);
-    backdrop-filter: blur(14px);
-    display: grid;
-    place-items: center;
     box-shadow: var(--shadow);
     overflow: hidden;
 }
@@ -404,16 +401,14 @@ section { padding: 4.5rem 0; position: relative; }
     position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: var(--grad);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude; opacity: .65;
+    z-index: 3; pointer-events: none;
 }
-.hero__monogram {
-    font-family: var(--font-head); font-weight: 700; font-size: clamp(4rem, 12vw, 7rem); line-height: 1;
-    background: var(--grad); background-size: 220% 100%;
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    animation: gradShift 8s linear infinite;
+/* The card is square and the file is square, so nothing is cropped; keep cover
+   anyway so a taller or wider replacement still fills the card neatly. */
+.hero__photo {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 35%;
 }
-.hero__ring { position: absolute; inset: 8%; border-radius: 50%; border: 1px dashed var(--border-strong); animation: spin 26s linear infinite; }
-.hero__ring--2 { inset: 20%; border-style: solid; border-color: var(--border); animation-duration: 40s; animation-direction: reverse; }
-@keyframes spin { to { transform: rotate(360deg); } }
 .hero__chip {
     position: absolute; z-index: 2;
     display: inline-flex; align-items: center; gap: .4rem;

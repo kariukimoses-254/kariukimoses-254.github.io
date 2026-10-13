@@ -87,7 +87,7 @@ contact.html        Contact
 css/style.css       Design tokens, themes and all components
 js/main.js          Theme, nav, reveal, counters, tilt, ripple interactions
 js/contact-modal.js "Get In Touch" dialog + form submission logic
-assets/images/      Site assets: nav logo, About portrait, project screenshots
+assets/images/      Site assets: nav logo, hero + About portraits, project screenshots
 projects/           Embedded, runnable project demos
 ```
 
@@ -121,9 +121,11 @@ The portfolio includes live demos of all projects embedded directly in this repo
 Every project is embedded in this repository and opens directly from the **Projects** page.
 Each card cover is a real screenshot of the running demo, stored in `assets/images/`.
 
-The nav brand mark uses `assets/images/logo.jpg` and the About page portrait uses
-`assets/images/about-portrait.jpg` — both square crops of the same photograph. Drop in a
-replacement at the same paths (square, ideally 480×480 or larger) to swap them.
+The nav brand mark uses `assets/images/logo.jpg`, the About page portrait uses
+`assets/images/about-portrait.jpg` and the home hero card uses
+`assets/images/hero-portrait.jpg` — square crops of the same photograph. All three are framed
+around the face by a face-detection crop, so drop in a replacement at the same paths (square,
+ideally 600×600 or larger) to swap them.
 
 Most projects are self-contained (HTML/CSS/JS) and run as-is on GitHub Pages. Several also
 ship the Node.js/Express + MySQL backends they were built against:
