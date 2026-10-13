@@ -2,6 +2,12 @@
 
 Personal portfolio website built with vanilla HTML, CSS, and JavaScript. Designed with a modern minimal aesthetic and optimized for GitHub Pages deployment.
 
+## Live Site
+
+**<https://kariukimoseswambugu-lang.github.io/portfolio/>**
+
+Deployed from the `main` branch via GitHub Pages.
+
 ## Getting Started
 
 1. Clone or download this repository
@@ -10,7 +16,14 @@ Personal portfolio website built with vanilla HTML, CSS, and JavaScript. Designe
 
 ## Deployment
 
-This site is ready to deploy on GitHub Pages. Push to a `yourusername.github.io` repo or enable Pages on the `main` branch.
+This site is a static build (no build tools), so it can be served from any static host.
+It is currently published with GitHub Pages:
+
+- Repository: <https://github.com/kariukimoseswambugu-lang/portfolio>
+- Pages source: `main` branch, `/` (root)
+- URL: <https://kariukimoseswambugu-lang.github.io/portfolio/>
+
+To publish a change, commit and push to `main`; GitHub Pages rebuilds automatically.
 
 ## Customization
 
@@ -28,10 +41,18 @@ The portfolio includes live demos of all projects embedded directly in this repo
 | Phones & Laptops Store | `projects/phones-laptops/index.html` |
 | Real Estate Platform | `projects/estate/frontend/index.html` |
 
-Most projects are self-contained (HTML/CSS/JS) and run directly on GitHub Pages.
-The Real Estate Platform has a full-stack backend (Node/Express on port 5000); its
-static UI renders on GitHub Pages, but data-driven sections require the backend
-running locally.
+Every project is embedded in this repository and opens directly from the portfolio's
+**Projects** section.
+
+Most projects are self-contained (HTML/CSS/JS) and run as-is on GitHub Pages.
+The Real Estate Platform (`projects/estate/`) has a full-stack backend (Node/Express on
+port 5000), so it ships with a bundled static demo data set (`frontend/js/demo-data.js`).
+When the backend is unreachable, its read-only pages (landing, property list, property
+details, agents) render from that demo data, so they work on GitHub Pages too.
+
+> **Note:** the Phones & Laptops store is a React single-page app. Deep-linking directly
+> to a sub-route (then refreshing) is not supported on a static host such as GitHub Pages;
+> open it from the portfolio link / root URL instead.
 
 ## License
 
