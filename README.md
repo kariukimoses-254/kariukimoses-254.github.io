@@ -24,13 +24,23 @@ can move through it page by page.
 | 4 | Projects | `projects.html` | Five projects with screenshot covers and live demos |
 | 5 | Contact | `contact.html` | Email, WhatsApp, GitHub, Facebook, Instagram, X |
 
-## Contact Dialog
+## Contact Form
 
-"Get In Touch" opens a dialog (reachable from the nav **Hire Me** button on every page, the
-home page hero, the About page and the Contact page) with a form for the visitor's details
-and request:
+One reusable form component (`js/contact-modal.js`) renders in two places:
 
-- **Full name**, **Email** and **Subject** and **Your request** are required; **Phone /
+| Page | How it appears |
+|---|---|
+| **Contact** | Inline, permanently in the page under the contact methods (`<div data-contact-inline>`) |
+| Every other page | Inside the "Get In Touch" dialog, opened by any `[data-contact-modal]` element |
+
+On the Contact page the nav **Hire Me** button smooth-scrolls to the inline form and focuses
+the first empty field instead of opening a dialog. Everywhere else the same button opens the
+dialog. Without JavaScript the triggers are ordinary links to `contact.html`, so the form is
+still reachable.
+
+The form itself:
+
+- **Full name**, **Email**, **Subject** and **Your request** are required; **Phone /
   WhatsApp** is optional. Fields validate inline and show per-field messages.
 - Submissions POST to [FormSubmit](https://formsubmit.co) at
   `https://formsubmit.co/ajax/kariukimoseswambugu@gmail.com` (no signup, no backend needed)
@@ -45,7 +55,8 @@ and request:
 > the email-app fallback instead.
 
 To point the form at a different inbox, change `OWNER_EMAIL` at the top of
-`js/contact-modal.js`.
+`js/contact-modal.js`. To move the inline form, move the `<div data-contact-inline></div>`
+mount — the component goes wherever the mount is.
 
 ## Getting Started
 

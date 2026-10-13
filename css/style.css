@@ -765,11 +765,27 @@ section { padding: 4.5rem 0; position: relative; }
 
 body.modal-open { overflow: hidden; }
 
+/* ------------------------------------------------------------
+   Inline variant (Contact page)
+   ------------------------------------------------------------ */
+.contact__form-head { margin-top: 3rem; }
+.contact__form-title { font-family: var(--font-head); font-size: clamp(1.3rem, 2.6vw, 1.65rem); font-weight: 700; letter-spacing: -.02em; }
+.contact__form-title::after { content: ""; display: block; width: 64px; height: 3px; margin: .85rem auto 0; border-radius: 3px; background: var(--grad); }
+.contact__form-sub { color: var(--muted); font-size: .96rem; margin-top: .8rem; }
+
+.cform-wrap--inline {
+    position: relative; max-width: 640px; margin: 1.7rem auto 0; padding: 2rem 1.8rem 1.7rem;
+    text-align: left; border-radius: 22px;
+    background: var(--bg-2); border: 1px solid var(--border-strong); box-shadow: var(--shadow);
+}
+.cform-wrap--inline .cform__done { padding-top: 1rem; }
+
 @media (max-width: 560px) {
     .modal { padding: .7rem; }
     .modal__dialog { padding: 1.7rem 1.2rem; max-height: 94svh; }
     .cform__actions { flex-direction: column; }
     .cform__actions .btn { width: 100%; }
+    .cform-wrap--inline { padding: 1.5rem 1.15rem; }
 }
 
 /* ============================================================
