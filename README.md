@@ -94,8 +94,10 @@ claim the site for you):
 
 1. Google — <https://search.google.com/search-console> → add a property for
    `https://kariukimoseswambugu-lang.github.io/portfolio/` → verify with the **HTML tag**
-   method (the `<meta name="google-site-verification" …>` tag goes in `index.html`) or the
-   **HTML file** method (drop their file into the repository root).
+   method. The tag is already in the `<head>` of `index.html`:
+   `<meta name="google-site-verification" content="Kzp5dWBeUi4fPUMjnoJH4JnkGVHnM8z8xB_8ad7cjxg">`
+   — leave it there, Google re-checks it periodically. (The **HTML file** method — dropping
+   their file into the repository root — works too if you ever need a fallback.)
 2. Submit the sitemap: `https://kariukimoseswambugu-lang.github.io/portfolio/sitemap.xml`.
 3. Bing, which also feeds DuckDuckGo — <https://www.bing.com/webmasters> → same two steps.
 4. Links are what actually get you found: put the site URL in your GitHub profile, and in
