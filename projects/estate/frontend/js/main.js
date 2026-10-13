@@ -28,18 +28,27 @@ const api = {
       delete config.headers['Content-Type'];
     }
 
+    let response;
     try {
-      const response = await fetch(`${API_BASE}${endpoint}`, config);
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Request failed');
+      response = await fetch(`${API_BASE}${endpoint}`, config);
+    } catch (networkError) {
+      // No backend reachable (e.g. static hosting such as GitHub Pages).
+      // Fall back to the bundled demo data set for read-only endpoints.
+      const method = (config.method || 'GET').toUpperCase();
+      if (method === 'GET' && window.DemoData && typeof window.DemoData.get === 'function') {
+        const demo = window.DemoData.get(endpoint);
+        if (demo !== null && demo !== undefined) return demo;
       }
-
-      return data;
-    } catch (error) {
-      throw error;
+      throw networkError;
     }
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Request failed');
+    }
+
+    return data;
   },
 
   get(endpoint) { return this.request(endpoint); },
