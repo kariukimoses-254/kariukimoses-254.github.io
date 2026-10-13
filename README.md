@@ -88,6 +88,10 @@ projects/           Embedded, runnable project demos
   under `km-theme`.
 - **Interactions** — page state, counters, skill bars, 3D tilt and the button ripple are in
   `js/main.js`.
+- **Social colours** — each social account keeps its real brand colour. The hero icon tiles
+  use `.social__link--github|facebook|whatsapp|x|instagram|email` and the Contact page pills
+  use `.contact__method--*`. Both are driven by a `--brand` (fill/gradient) and
+  `--brand-ink` (resting icon colour) custom property, so a new network is a two-line rule.
 - **Images** — drop files in `assets/images/`.
 
 ## Embedded Project Demos

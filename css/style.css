@@ -351,12 +351,30 @@ section { padding: 4.5rem 0; position: relative; }
 .hero__social { display: flex; gap: .9rem; flex-wrap: wrap; }
 
 .social__link {
+    --brand: var(--grad);
+    --brand-glow: rgba(139, 92, 246, .6);
+    --brand-ring: transparent;
     position: relative; display: grid; place-items: center; width: 50px; height: 50px;
-    border-radius: 15px; color: var(--muted); background: var(--surface);
-    border: 1px solid var(--border); backdrop-filter: blur(10px); transition: var(--transition);
+    border-radius: 15px; color: #fff; background: var(--brand);
+    border: 1px solid transparent;
+    box-shadow: 0 0 0 1px var(--brand-ring), 0 12px 26px -15px var(--brand-glow);
+    transition: var(--transition);
 }
-.social__link:hover { color: #fff; transform: translateY(-4px) rotate(-6deg); background: var(--grad); border-color: transparent; box-shadow: 0 18px 34px -14px rgba(139, 92, 246, .95); }
+.social__link:hover {
+    color: #fff; transform: translateY(-4px) scale(1.06) rotate(-6deg);
+    background: var(--brand); border-color: transparent;
+    filter: saturate(1.12) brightness(1.07);
+    box-shadow: 0 0 0 1px var(--brand-ring), 0 20px 38px -14px var(--brand-glow);
+}
 .social__icon { width: 22px; height: 22px; }
+
+/* real brand colours */
+.social__link--github    { --brand: linear-gradient(160deg, #3a4148, #181717 62%); --brand-glow: rgba(150, 160, 180, .45); --brand-ring: rgba(255, 255, 255, .18); }
+.social__link--facebook  { --brand: linear-gradient(160deg, #4aa3ff, #1877f2 55%, #0d5fc4); --brand-glow: rgba(24, 119, 242, .65); }
+.social__link--whatsapp  { --brand: linear-gradient(160deg, #4ae587, #25d366 55%, #128c7e); --brand-glow: rgba(37, 211, 102, .6); }
+.social__link--x         { --brand: linear-gradient(160deg, #3a3a3a, #0a0a0a 62%); --brand-glow: rgba(150, 160, 180, .45); --brand-ring: rgba(255, 255, 255, .18); }
+.social__link--instagram { --brand: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); --brand-glow: rgba(220, 39, 67, .6); }
+.social__link--email     { --brand: linear-gradient(160deg, #ff8070, #ea4335 55%, #c5221f); --brand-glow: rgba(234, 67, 53, .6); }
 
 /* hero portrait / monogram card */
 .hero__portrait {
@@ -594,12 +612,32 @@ section { padding: 4.5rem 0; position: relative; }
 .contact__text { font-size: 1.08rem; color: var(--muted); line-height: 1.85; margin-bottom: 2rem; }
 .contact__methods { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 .contact__method {
+    --brand: var(--grad);
+    --brand-ink: var(--c-violet);
+    --brand-glow: rgba(139, 92, 246, .6);
     display: inline-flex; align-items: center; gap: .7rem; padding: .9rem 1.4rem; border-radius: 14px;
     text-decoration: none; color: var(--text); font-size: .95rem;
     background: var(--surface-2); border: 1px solid var(--border); transition: var(--transition);
 }
-.contact__method:hover { transform: translateY(-4px); background: var(--grad); color: #fff; border-color: transparent; box-shadow: 0 20px 40px -18px rgba(139, 92, 246, .95); }
-.contact__icon { width: 20px; height: 20px; }
+.contact__method:hover {
+    transform: translateY(-4px); background: var(--brand); color: #fff;
+    border-color: transparent; box-shadow: 0 20px 40px -18px var(--brand-glow);
+}
+.contact__icon { width: 20px; height: 20px; color: var(--brand-ink); transition: color .3s ease; }
+.contact__method:hover .contact__icon { color: #fff; }
+
+/* real brand colours */
+.contact__method--email     { --brand-ink: #ea4335; --brand: linear-gradient(160deg, #ff8070, #ea4335 55%, #c5221f); --brand-glow: rgba(234, 67, 53, .6); }
+.contact__method--whatsapp  { --brand-ink: #25d366; --brand: linear-gradient(160deg, #4ae587, #25d366 55%, #128c7e); --brand-glow: rgba(37, 211, 102, .55); }
+.contact__method--github    { --brand-ink: #a9b4c6; --brand: linear-gradient(160deg, #3a4148, #181717 62%); --brand-glow: rgba(150, 160, 180, .5); }
+.contact__method--facebook  { --brand-ink: #1877f2; --brand: linear-gradient(160deg, #4aa3ff, #1877f2 55%, #0d5fc4); --brand-glow: rgba(24, 119, 242, .6); }
+.contact__method--instagram { --brand-ink: #dc2743; --brand: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); --brand-glow: rgba(220, 39, 67, .55); }
+.contact__method--x         { --brand-ink: #a9b4c6; --brand: linear-gradient(160deg, #3a3a3a, #0a0a0a 62%); --brand-glow: rgba(150, 160, 180, .5); }
+
+/* GitHub and X are near-black: keep the true brand colour on light backgrounds,
+   and lighten it on the dark theme so the glyph stays visible */
+[data-theme="light"] .contact__method--github { --brand-ink: #181717; }
+[data-theme="light"] .contact__method--x      { --brand-ink: #0f0f0f; }
 
 /* ============================================================
    Pager (pagination between pages)
