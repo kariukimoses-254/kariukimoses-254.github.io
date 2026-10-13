@@ -42,17 +42,18 @@ The form itself:
 
 - **Full name**, **Email**, **Subject** and **Your request** are required; **Phone /
   WhatsApp** is optional. Fields validate inline and show per-field messages.
-- Submissions POST to [FormSubmit](https://formsubmit.co) at
-  `https://formsubmit.co/ajax/kariukimoseswambugu@gmail.com` (no signup, no backend needed)
-  and are delivered to that inbox as a table. A hidden honeypot field filters bots.
-- The visitor's reply address is set from the `email` field, so you can reply directly.
+- Submissions POST to [Web3Forms](https://web3forms.com) at `https://api.web3forms.com/submit`
+  (no signup flow, no backend needed) and arrive in the inbox as a table. A hidden `botcheck`
+  checkbox filters bots.
+- The visitor's address travels as `replyto` and their name as the sender name, so you can
+  reply straight from the email without copying anything.
 - **Open in my email app** is a fallback that opens the visitor's mail client with the same
   details pre-filled. It is also offered automatically if the automatic send fails.
 
-> **One-time setup:** the first submission makes FormSubmit email
-> `kariukimoseswambugu@gmail.com` an *Activate Form* link. Click it once and every later
-> submission is delivered automatically. Until it is activated, visitors see a prompt to use
-> the email-app fallback instead.
+> **One-time setup:** paste the free access key from [web3forms.com](https://web3forms.com)
+> into `ACCESS_KEY` at the top of `js/contact-modal.js`. The key is safe to publish — it only
+> routes mail to `OWNER_EMAIL`. While `ACCESS_KEY` is empty the form skips the doomed request
+> and points the visitor at the mail-app fallback instead.
 
 To point the form at a different inbox, change `OWNER_EMAIL` at the top of
 `js/contact-modal.js`. To move the inline form, move the `<div data-contact-inline></div>`

@@ -6,7 +6,7 @@
        (the Contact page), or
      - inside the "Get In Touch" dialog on every other page.
 
-   Submissions go straight to the inbox via FormSubmit, with the
+   Submissions go straight to the inbox via Web3Forms, with the
    visitor's own mail app as a fallback. Any element marked
    [data-contact-modal] opens it (and degrades to a link without JS).
    ============================================================ */
@@ -14,7 +14,13 @@
     'use strict';
 
     var OWNER_EMAIL = 'kariukimoseswambugu@gmail.com';
-    var ENDPOINT = 'https://formsubmit.co/ajax/' + OWNER_EMAIL;
+
+    /* Web3Forms access key. It is meant to be public in the page source - it only
+       routes mail addressed to OWNER_EMAIL. Get one free at https://web3forms.com.
+       While it is empty the form points the visitor at the mail-app fallback
+       instead of making a request that is certain to fail. */
+    var ACCESS_KEY = '65dddb44-beea-49fc-bb59-9fa1ebcad2ef';
+    var ENDPOINT = 'https://api.web3forms.com/submit';
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
     var FIELD_ORDER = ['name', 'email', 'phone', 'subject', 'message'];
 
@@ -53,7 +59,8 @@
                 '<textarea class="cfield__input cfield__input--area" name="message" placeholder="Tell me what you would like built, fixed or improved..." required></textarea>' +
                 '<span class="cfield__error">Please write at least 10 characters.</span>' +
             '</label>' +
-            '<input class="cform__honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+            /* Web3Forms spam trap: a bot that fills in every field ticks this one. */
+            '<input class="cform__honey" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">' +
             '<div class="cform__actions">' +
                 '<button type="submit" class="btn btn--primary cform__submit">Send Message <span class="btn__arrow">&rarr;</span></button>' +
                 '<button type="button" class="btn btn--secondary cform__mail">Open in my email app</button>' +
@@ -169,6 +176,11 @@
                 return;
             }
 
+            if (!ACCESS_KEY) {
+                setStatus('Automatic sending is not switched on yet \u2014 please use "Open in my email app" below. Your details are already filled in.', 'err');
+                return;
+            }
+
             var v = values();
             var originalHTML = submitBtn.innerHTML;
             sending = true;
@@ -180,14 +192,15 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({
+                    access_key: ACCESS_KEY,
+                    subject: 'Portfolio: ' + v.subject,
+                    from_name: v.name,
+                    replyto: v.email,
                     name: v.name,
                     email: v.email,
-                    phone: v.phone,
-                    subject: v.subject,
-                    message: v.message,
-                    _subject: 'Portfolio: ' + v.subject,
-                    _template: 'table',
-                    _captcha: 'false'
+                    phone: v.phone || '(not provided)',
+                    enquiry: v.subject,
+                    message: v.message
                 })
             })
             .then(function (res) {
@@ -213,7 +226,7 @@
                 var msg = (err && err.message) ? String(err.message) : 'network error';
                 if (window.console && console.warn) console.warn('[contact form]', msg);
                 setStatus(
-                    /activ/i.test(msg)
+                    /access key|not configured/i.test(msg)
                         ? 'Automatic sending is not switched on yet \u2014 please use "Open in my email app" below. Your details are already filled in.'
                         : 'Could not send automatically. Use "Open in my email app" below \u2014 your details are already filled in.',
                     'err'
@@ -289,7 +302,7 @@
             if (e.key !== 'Tab') return;
             var dialog = modalEl.querySelector('.modal__dialog');
             var focusable = Array.prototype.slice.call(dialog.querySelectorAll('button, input, textarea, select, a[href]'))
-                .filter(function (el) { return !el.disabled && el.name !== '_honey' && el.offsetParent !== null; });
+                .filter(function (el) { return !el.disabled && el.name !== 'botcheck' && el.offsetParent !== null; });
             if (!focusable.length) return;
             var first = focusable[0], last = focusable[focusable.length - 1];
             if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
