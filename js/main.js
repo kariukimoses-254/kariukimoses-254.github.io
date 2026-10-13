@@ -66,6 +66,7 @@
         navMenu.classList.remove('active');
         navToggle.classList.remove('active');
         navToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
     }
 
     if (navToggle && navMenu) {
@@ -73,6 +74,11 @@
             var open = navMenu.classList.toggle('active');
             navToggle.classList.toggle('active', open);
             navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            // lock the page behind the open menu (matters on short landscape screens)
+            document.body.classList.toggle('menu-open', open);
+        });
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768) closeMenu();
         });
         $$('.nav__link', navMenu).forEach(function (link) {
             link.addEventListener('click', closeMenu);

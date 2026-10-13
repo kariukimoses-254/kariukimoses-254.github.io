@@ -105,6 +105,27 @@ claim the site for you):
 > the host root instead. The sitemap submission is what matters; the file is kept for
 > documentation and for crawlers that do follow it.
 
+## Works on Every Screen
+
+Every page was measured in real layout viewports from **280×653** (Galaxy Fold) to
+**1920×1080**, including landscape phones (740×360, 390×300) and an iPad in both
+orientations. All five pages are free of horizontal overflow and of clipped content at every
+one of them.
+
+| Area | What was done |
+| --- | --- |
+| Layout | Grid tracks use `minmax(min(330px, 100%), 1fr)`, so a card can never be forced wider than its column. The hero card carries an explicit `width` — an `auto` inline margin wins over `justify-self: stretch`, which had been collapsing the card (and its photo) to 2px on phones and tablets |
+| Tap targets | Menu toggle, theme button, dialog close and pager dots are all at least 44×44px |
+| Touch | `touch-action: manipulation` removes the double-tap delay and the grey tap flash. The hover-only "View project" pill is shown outright where there is no hover (`@media (hover: none)`) |
+| Notches & bars | `viewport-fit=cover` plus `env(safe-area-inset-*)` on the nav, dialog, back-to-top button and footer |
+| Short screens | The mobile menu caps itself to the visible height, scrolls inside itself and locks the page behind it — landscape phones used to cut off the last links |
+| Mobile keyboards | Form inputs are 16px, so iOS Safari does not zoom the page when a field is focused |
+| Text | Long addresses wrap instead of overflowing; the smallest labels step up to about 12px on phones |
+| Performance | Fewer and softer blurred layers below 768px, and the orb parallax only runs for `pointer: fine` |
+| Home screen | `manifest.json` + `assets/icons/` give Android and iOS a proper icon when the site is saved to the home screen |
+
+Pinch-to-zoom is never disabled (there is no `maximum-scale` or `user-scalable=no`).
+
 ## Project Structure
 
 ```
@@ -117,6 +138,8 @@ css/style.css       Design tokens, themes and all components
 js/main.js          Theme, nav, reveal, counters, tilt, ripple interactions
 js/contact-modal.js "Get In Touch" dialog + form submission logic
 assets/images/      Site assets: nav logo, hero + About portraits, project screenshots
+assets/icons/       Home-screen icons (192, 512 and apple-touch-icon)
+manifest.json       Web app manifest: name, colours, icons
 projects/           Embedded, runnable project demos
 ```
 
@@ -133,7 +156,9 @@ projects/           Embedded, runnable project demos
   use `.social__link--github|facebook|whatsapp|x|instagram|email` and the Contact page pills
   use `.contact__method--*`. Both are driven by a `--brand` (fill/gradient) and
   `--brand-ink` (resting icon colour) custom property, so a new network is a two-line rule.
-- **Images** — drop files in `assets/images/`.
+- **Images** — drop files in `assets/images/`. If you swap `hero-portrait.jpg`, regenerate
+  `assets/icons/` from it as well (a square crop centred on the face, resized to 512, 192 and
+  180px), otherwise the home-screen icon keeps the old photo.
 
 ## Embedded Project Demos
 
