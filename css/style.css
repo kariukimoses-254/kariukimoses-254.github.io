@@ -77,12 +77,18 @@ body {
     flex-direction: column;
     transition: background-color .5s ease, color .5s ease;
     -webkit-font-smoothing: antialiased;
-    animation: pageIn .6s var(--ease) both;
+    /* Opacity only. `body` must never carry a transform: it is the shared
+       ancestor of every `position: fixed` layer (nav, progress bar, cursor
+       glow, the contact dialog, back-to-top), and any non-none transform
+       makes the body their containing block instead of the viewport, which
+       pushes the dialog below the fold. The slide-in lives on `main`. */
+    animation: pageFade .6s var(--ease) both;
 }
 
+@keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
-main { flex: 1 0 auto; }
+main { flex: 1 0 auto; animation: pageIn .6s var(--ease); }
 
 ::selection { background: rgba(168, 85, 247, .35); color: #fff; }
 a { color: inherit; }

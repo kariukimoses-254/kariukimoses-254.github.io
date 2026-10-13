@@ -305,15 +305,32 @@
             e.preventDefault();
 
             if (inlineForm) {                       // already on the page: go to it
-                inlineForm.root.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                window.setTimeout(function () { inlineForm.focusFirstEmpty(true); }, 460);
+                var smooth = !window.matchMedia ||
+                    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                inlineForm.root.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+                window.setTimeout(function () { inlineForm.focusFirstEmpty(true); }, smooth ? 460 : 60);
+                /* Smooth scrolling can be skipped or interrupted (reduced motion,
+                   older engines), which would leave the form off-screen while the
+                   caret sits in a field the visitor cannot see. Make sure it lands
+                   in view either way. */
+                window.setTimeout(function () {
+                    var box = inlineForm.root.getBoundingClientRect();
+                    if (box.top < 0 || box.bottom > window.innerHeight) {
+                        inlineForm.root.scrollIntoView({ block: 'center' });
+                    }
+                }, 900);
                 return;
             }
 
             lastFocus = el;
             modalEl.hidden = false;
             document.body.classList.add('modal-open');
+            /* The dialog was display:none a moment ago, so focus cannot move into it
+               until the browser has laid it out. Try immediately, then once more after
+               paint (the timer also covers throttled/background frames). */
+            modalForm.focusFirstEmpty();
             window.requestAnimationFrame(function () { modalForm.focusFirstEmpty(); });
+            window.setTimeout(function () { modalForm.focusFirstEmpty(); }, 60);
         });
     });
 })();
