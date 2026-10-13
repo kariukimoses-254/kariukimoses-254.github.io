@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kariuki Moses | Web Developer</title>
-    <meta name="description" content="Portfolio of Kariuki Moses, Web Developer based in Nakuru, Kenya. Interactive, responsive web experiences built with HTML, CSS and JavaScript.">
+    <meta name="description" content="Portfolio of Kariuki Moses, a web developer based in Nakuru, Kenya. Front-end and back-end work built with HTML, CSS, JavaScript, Node.js, Express and MySQL.">
     <meta name="theme-color" content="#05060f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,16 +29,16 @@
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="nav__container">
-            <a href="#home" class="nav__logo">KM</a>
+            <a href="index.html" class="nav__logo">KM</a>
 
             <ul class="nav__menu" id="navMenu">
-                <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
-                <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
-                <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
-                <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="about.html" class="nav__link">About</a></li>
+                <li class="nav__item"><a href="skills.html" class="nav__link">Skills</a></li>
+                <li class="nav__item"><a href="projects.html" class="nav__link">Projects</a></li>
+                <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
                 <li class="nav__item nav__item--resume">
-                    <a href="assets/resume.pdf" class="nav__link nav__link--resume" target="_blank" rel="noopener">Resume</a>
+                    <a href="contact.html" class="nav__link nav__link--resume">Hire Me</a>
                 </li>
             </ul>
 
@@ -61,336 +61,153 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header id="home" class="hero">
-        <div class="container">
-            <div class="hero__content">
-                <p class="hero__pill reveal"><span class="hero__dot"></span> Available for new projects</p>
-                <p class="hero__greeting reveal" style="--d:60ms">Hello, I'm</p>
-                <h1 class="hero__name reveal" style="--d:120ms">Kariuki Moses</h1>
-                <p class="hero__role reveal" style="--d:180ms"><span id="typedRole"></span><span class="hero__caret" aria-hidden="true"></span></p>
-                <p class="hero__location reveal" style="--d:230ms">📍 Based in Nakuru, Kenya</p>
-                <p class="hero__bio reveal" style="--d:280ms">
-                    I build clean, responsive and interactive websites with HTML, CSS and JavaScript.
-                    I love turning ideas into fast, accessible digital experiences that feel great on every screen.
-                </p>
-                <div class="hero__actions reveal" style="--d:340ms">
-                    <a href="#projects" class="btn btn--primary">View Projects <span class="btn__arrow">→</span></a>
-                    <a href="#contact" class="btn btn--secondary">Get In Touch</a>
-                </div>
-                <div class="hero__social reveal" style="--d:400ms">
-                    <a href="https://github.com/kariukimoseswambugu-lang" class="social__link" target="_blank" rel="noopener" aria-label="GitHub">
-                        <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.facebook.com/lily.mosey.64994" class="social__link" target="_blank" rel="noopener" aria-label="Facebook">
-                        <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.891h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
-                        </svg>
-                    </a>
-                    <a href="https://wa.me/254793489901" class="social__link" target="_blank" rel="noopener" aria-label="WhatsApp">
-                        <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                        </svg>
-                    </a>
-                    <a href="https://x.com/kariukimos70975" class="social__link" target="_blank" rel="noopener" aria-label="Twitter/X">
-                        <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/mosey2757?exln=NmK3YzZtenNzb2VI" class="social__link" target="_blank" rel="noopener" aria-label="Instagram">
-                        <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm4.75-2.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:kariukimoseswambugu@gmail.com" class="social__link" aria-label="Email">
-                        <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Stats -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats__grid reveal">
-                <div class="stat">
-                    <span class="stat__num" data-count="5" data-suffix="">0</span>
-                    <span class="stat__label">Projects Shipped</span>
-                </div>
-                <div class="stat">
-                    <span class="stat__num" data-count="5" data-suffix="">0</span>
-                    <span class="stat__label">Core Technologies</span>
-                </div>
-                <div class="stat">
-                    <span class="stat__num" data-count="100" data-suffix="%">0</span>
-                    <span class="stat__label">Responsive Design</span>
-                </div>
-                <div class="stat">
-                    <span class="stat__num" data-count="5" data-suffix="">0</span>
-                    <span class="stat__label">Live Demos</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about">
-        <div class="container">
-            <h2 class="section__title reveal">About <span>Me</span></h2>
-            <p class="section__subtitle reveal" style="--d:80ms">A bit more about who I am</p>
-            <div class="about__grid">
-                <div class="about__card reveal">
-                    <div class="about__avatar">KM</div>
-                    <h3 class="about__name">Kariuki Moses</h3>
-                    <p class="about__role">Web Developer · Nakuru, Kenya</p>
-                    <div class="about__chips">
-                        <span class="about__chip">HTML</span>
-                        <span class="about__chip">CSS</span>
-                        <span class="about__chip">JavaScript</span>
-                        <span class="about__chip">Git</span>
-                        <span class="about__chip">GitHub</span>
-                    </div>
-                </div>
-                <div class="about__body reveal" style="--d:140ms">
-                    <p class="about__text">
-                        I am a passionate web developer based in Nakuru, Kenya, focused on creating responsive and accessible
-                        web applications. I enjoy learning new technologies and building practical solutions that solve real
-                        world problems.
-                    </p>
-                    <p class="about__text">
-                        I currently work primarily with vanilla HTML, CSS and JavaScript, but I'm always eager to expand my
-                        skillset and take on new challenges. When I'm not coding, I enjoy exploring new ideas and continuously
-                        improving my craft.
-                    </p>
-                    <ul class="about__highlights">
-                        <li>Responsive, mobile-first layouts that work on every device</li>
-                        <li>Clean, semantic and accessible markup</li>
-                        <li>Interactive UI and animations with vanilla JavaScript</li>
-                        <li>Version control and collaboration with Git &amp; GitHub</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section skills">
-        <div class="container">
-            <h2 class="section__title reveal">My <span>Skills</span></h2>
-            <p class="section__subtitle reveal" style="--d:80ms">Technologies I work with</p>
-            <div class="skills__grid">
-                <article class="skill__card reveal" data-tilt>
-                    <div class="skill__top">
-                        <span class="skill__icon">🧩</span>
-                        <h3 class="skill__name">HTML</h3>
-                        <span class="skill__pct">95%</span>
-                    </div>
-                    <div class="skill__bar"><span class="skill__fill" data-level="95"></span></div>
-                </article>
-                <article class="skill__card reveal" style="--d:80ms" data-tilt>
-                    <div class="skill__top">
-                        <span class="skill__icon">🎨</span>
-                        <h3 class="skill__name">CSS</h3>
-                        <span class="skill__pct">92%</span>
-                    </div>
-                    <div class="skill__bar"><span class="skill__fill" data-level="92"></span></div>
-                </article>
-                <article class="skill__card reveal" style="--d:160ms" data-tilt>
-                    <div class="skill__top">
-                        <span class="skill__icon">⚡</span>
-                        <h3 class="skill__name">JavaScript</h3>
-                        <span class="skill__pct">88%</span>
-                    </div>
-                    <div class="skill__bar"><span class="skill__fill" data-level="88"></span></div>
-                </article>
-                <article class="skill__card reveal" style="--d:240ms" data-tilt>
-                    <div class="skill__top">
-                        <span class="skill__icon">🌿</span>
-                        <h3 class="skill__name">Git</h3>
-                        <span class="skill__pct">85%</span>
-                    </div>
-                    <div class="skill__bar"><span class="skill__fill" data-level="85"></span></div>
-                </article>
-                <article class="skill__card reveal" style="--d:320ms" data-tilt>
-                    <div class="skill__top">
-                        <span class="skill__icon">🚀</span>
-                        <h3 class="skill__name">GitHub</h3>
-                        <span class="skill__pct">90%</span>
-                    </div>
-                    <div class="skill__bar"><span class="skill__fill" data-level="90"></span></div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section projects">
-        <div class="container">
-            <h2 class="section__title reveal">My <span>Projects</span></h2>
-            <p class="section__subtitle reveal" style="--d:80ms">A selection of my work — every one runs live</p>
-            <div class="projects__grid">
-                <!-- Project 1 - Hospital App -->
-                <article class="project__card reveal" data-tilt>
-                    <div class="project__image project__image--a">
-                        <span class="project__no">01</span>
-                        <div class="project__placeholder">🏥</div>
-                    </div>
-                    <div class="project__content">
-                        <h3 class="project__title">Hospital Management App</h3>
-                        <p class="project__description">
-                            A comprehensive hospital management system with appointment booking, services and a patient portal, built with HTML, CSS and JavaScript.
+    <main>
+        <!-- Hero -->
+        <header class="hero">
+            <div class="container">
+                <div class="hero__inner">
+                    <div class="hero__content">
+                        <p class="hero__pill reveal"><span class="hero__dot"></span> Available for new projects</p>
+                        <p class="hero__greeting reveal" style="--d:60ms">Hello, I'm</p>
+                        <h1 class="hero__name reveal" style="--d:120ms">Kariuki Moses</h1>
+                        <p class="hero__role reveal" style="--d:180ms"><span id="typedRole"></span><span class="hero__caret" aria-hidden="true"></span></p>
+                        <p class="hero__location reveal" style="--d:230ms">📍 Based in Nakuru, Kenya</p>
+                        <p class="hero__bio reveal" style="--d:280ms">
+                            I design and build full-stack web applications — polished interfaces on the front end and
+                            solid Node.js, Express and MySQL services behind them. I love turning ideas into fast,
+                            accessible products that feel great on every screen.
                         </p>
-                        <div class="project__tech">
-                            <span class="tech__tag">HTML</span>
-                            <span class="tech__tag">CSS</span>
-                            <span class="tech__tag">JavaScript</span>
+                        <div class="hero__actions reveal" style="--d:340ms">
+                            <a href="projects.html" class="btn btn--primary">View Projects <span class="btn__arrow">→</span></a>
+                            <a href="contact.html" class="btn btn--secondary">Get In Touch</a>
                         </div>
-                        <div class="project__links">
-                            <a href="projects/hospital-app/home.html" class="project__link project__link--demo" target="_blank" rel="noopener">Live Demo</a>
-                            <a href="https://github.com/kariukimoseswambugu-lang" class="project__link project__link--github" target="_blank" rel="noopener">Source Code</a>
+                        <div class="hero__social reveal" style="--d:400ms">
+                            <a href="https://github.com/kariukimoseswambugu-lang" class="social__link" target="_blank" rel="noopener" aria-label="GitHub">
+                                <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.facebook.com/lily.mosey.64994" class="social__link" target="_blank" rel="noopener" aria-label="Facebook">
+                                <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.891h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                                </svg>
+                            </a>
+                            <a href="https://wa.me/254793489901" class="social__link" target="_blank" rel="noopener" aria-label="WhatsApp">
+                                <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                                </svg>
+                            </a>
+                            <a href="https://x.com/kariukimos70975" class="social__link" target="_blank" rel="noopener" aria-label="Twitter/X">
+                                <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/mosey2757?exln=NmK3YzZtenNzb2VI" class="social__link" target="_blank" rel="noopener" aria-label="Instagram">
+                                <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm4.75-2.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z"/>
+                                </svg>
+                            </a>
+                            <a href="mailto:kariukimoseswambugu@gmail.com" class="social__link" aria-label="Email">
+                                <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
-                </article>
 
-                <!-- Project 2 - Car Dealers -->
-                <article class="project__card reveal" style="--d:100ms" data-tilt>
-                    <div class="project__image project__image--b">
-                        <span class="project__no">02</span>
-                        <div class="project__placeholder">🚗</div>
+                    <div class="hero__portrait reveal" style="--d:220ms">
+                        <span class="hero__ring"></span>
+                        <span class="hero__ring hero__ring--2"></span>
+                        <span class="hero__monogram">KM</span>
+                        <span class="hero__chip hero__chip--1">⚡ Fast &amp; responsive</span>
+                        <span class="hero__chip hero__chip--2">🎨 Clean interfaces</span>
+                        <span class="hero__chip hero__chip--3">🛠️ 5 live demos</span>
                     </div>
-                    <div class="project__content">
-                        <h3 class="project__title">Car Dealership Website</h3>
-                        <p class="project__description">
-                            A modern car dealership platform featuring vehicle listings, financing options and contact functionality with a sleek responsive design.
-                        </p>
-                        <div class="project__tech">
-                            <span class="tech__tag">HTML</span>
-                            <span class="tech__tag">CSS</span>
-                            <span class="tech__tag">JavaScript</span>
-                        </div>
-                        <div class="project__links">
-                            <a href="projects/car-dealers/index.html" class="project__link project__link--demo" target="_blank" rel="noopener">Live Demo</a>
-                            <a href="https://github.com/kariukimoseswambugu-lang" class="project__link project__link--github" target="_blank" rel="noopener">Source Code</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 3 - Motorcycle Dealers -->
-                <article class="project__card reveal" style="--d:200ms" data-tilt>
-                    <div class="project__image project__image--c">
-                        <span class="project__no">03</span>
-                        <div class="project__placeholder">🏍️</div>
-                    </div>
-                    <div class="project__content">
-                        <h3 class="project__title">Motorcycle Dealership</h3>
-                        <p class="project__description">
-                            A motorcycle dealership website showcasing bikes, parts and services with an intuitive interface designed for enthusiasts.
-                        </p>
-                        <div class="project__tech">
-                            <span class="tech__tag">HTML</span>
-                            <span class="tech__tag">CSS</span>
-                            <span class="tech__tag">JavaScript</span>
-                        </div>
-                        <div class="project__links">
-                            <a href="projects/motorcycle-dealers/home.html" class="project__link project__link--demo" target="_blank" rel="noopener">Live Demo</a>
-                            <a href="https://github.com/kariukimoseswambugu-lang" class="project__link project__link--github" target="_blank" rel="noopener">Source Code</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 4 - Phones & Laptops Store -->
-                <article class="project__card reveal" style="--d:300ms" data-tilt>
-                    <div class="project__image project__image--d">
-                        <span class="project__no">04</span>
-                        <div class="project__placeholder">📱</div>
-                    </div>
-                    <div class="project__content">
-                        <h3 class="project__title">Phones &amp; Laptops Store</h3>
-                        <p class="project__description">
-                            An e-commerce storefront for smartphones, laptops and gadgets with product listings, search, cart and a responsive modern interface.
-                        </p>
-                        <div class="project__tech">
-                            <span class="tech__tag">HTML</span>
-                            <span class="tech__tag">CSS</span>
-                            <span class="tech__tag">JavaScript</span>
-                        </div>
-                        <div class="project__links">
-                            <a href="projects/phones-laptops/index.html" class="project__link project__link--demo" target="_blank" rel="noopener">Live Demo</a>
-                            <a href="https://github.com/kariukimoseswambugu-lang" class="project__link project__link--github" target="_blank" rel="noopener">Source Code</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 5 - Real Estate Platform -->
-                <article class="project__card reveal" style="--d:400ms" data-tilt>
-                    <div class="project__image project__image--e">
-                        <span class="project__no">05</span>
-                        <div class="project__placeholder">🏘️</div>
-                    </div>
-                    <div class="project__content">
-                        <h3 class="project__title">Real Estate Platform</h3>
-                        <p class="project__description">
-                            A property listing and management platform with property search, virtual tours, a mortgage calculator and tenant and customer portals.
-                        </p>
-                        <div class="project__tech">
-                            <span class="tech__tag">HTML</span>
-                            <span class="tech__tag">CSS</span>
-                            <span class="tech__tag">JavaScript</span>
-                        </div>
-                        <div class="project__links">
-                            <a href="projects/estate/frontend/index.html" class="project__link project__link--demo" target="_blank" rel="noopener">Live Demo</a>
-                            <a href="https://github.com/kariukimoseswambugu-lang" class="project__link project__link--github" target="_blank" rel="noopener">Source Code</a>
-                        </div>
-                    </div>
-                </article>
+                </div>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <h2 class="section__title reveal">Get In <span>Touch</span></h2>
-            <p class="section__subtitle reveal" style="--d:80ms">Feel free to reach out</p>
-            <div class="contact__content reveal">
-                <p class="contact__text">
-                    I'm always open to new opportunities and collaborations. Whether you have a project in mind or just want
-                    to say hi, feel free to reach out!
-                </p>
-                <div class="contact__methods">
-                    <a href="mailto:kariukimoseswambugu@gmail.com" class="contact__method">
-                        <svg class="contact__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                        <span>kariukimoseswambugu@gmail.com</span>
+        <!-- Stats -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats__grid reveal">
+                    <div class="stat">
+                        <span class="stat__num" data-count="5" data-suffix="">0</span>
+                        <span class="stat__label">Projects Shipped</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__num" data-count="10" data-suffix="+">0</span>
+                        <span class="stat__label">Technologies Used</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__num" data-count="100" data-suffix="%">0</span>
+                        <span class="stat__label">Responsive Design</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__num" data-count="5" data-suffix="">0</span>
+                        <span class="stat__label">Live Demos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore -->
+        <section class="section explore">
+            <div class="container">
+                <h2 class="section__title reveal">Explore <span>The Site</span></h2>
+                <p class="section__subtitle reveal" style="--d:80ms">Flip through the pages with the arrows below, or jump straight in</p>
+                <div class="explore__grid">
+                    <a class="explore__card reveal" href="about.html">
+                        <span class="explore__arrow">↗</span>
+                        <span class="explore__icon">👤</span>
+                        <h3 class="explore__title">About Me</h3>
+                        <p class="explore__text">Who I am, what drives me, and how I like to work.</p>
                     </a>
-                    <a href="https://github.com/kariukimoseswambugu-lang" class="contact__method" target="_blank" rel="noopener">
-                        <svg class="contact__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.525 2 12 2z"/>
-                        </svg>
-                        <span>GitHub</span>
+                    <a class="explore__card reveal" style="--d:90ms" href="skills.html">
+                        <span class="explore__arrow">↗</span>
+                        <span class="explore__icon">🧠</span>
+                        <h3 class="explore__title">Skills</h3>
+                        <p class="explore__text">Front-end and back-end tools I build with every day.</p>
                     </a>
-                    <a href="https://wa.me/254793489901" class="contact__method" target="_blank" rel="noopener">
-                        <svg class="contact__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                        </svg>
-                        <span>WhatsApp</span>
+                    <a class="explore__card reveal" style="--d:180ms" href="projects.html">
+                        <span class="explore__arrow">↗</span>
+                        <span class="explore__icon">🚀</span>
+                        <h3 class="explore__title">Projects</h3>
+                        <p class="explore__text">Five real builds — every one opens a live, working demo.</p>
                     </a>
-                    <a href="https://www.facebook.com/lily.mosey.64994" class="contact__method" target="_blank" rel="noopener">
-                        <svg class="contact__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.891h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
-                        </svg>
-                        <span>Facebook</span>
+                    <a class="explore__card reveal" style="--d:270ms" href="contact.html">
+                        <span class="explore__arrow">↗</span>
+                        <span class="explore__icon">✉️</span>
+                        <h3 class="explore__title">Contact</h3>
+                        <p class="explore__text">Let's talk about your next project or collaboration.</p>
                     </a>
                 </div>
             </div>
+        </section>
+
+        <!-- Pagination -->
+        <div class="pager-wrap">
+            <div class="container">
+                <nav class="pager" aria-label="Page navigation">
+                    <span class="pager__btn pager__btn--prev is-disabled" aria-disabled="true">
+                        <span class="pager__arrow">←</span>
+                        <span class="pager__meta"><small>Previous</small><strong>Start</strong></span>
+                    </span>
+                    <ol class="pager__dots">
+                        <li><a class="pager__dot is-active" href="index.html" aria-current="page" aria-label="Page 1: Home">1</a></li>
+                        <li><a class="pager__dot" href="about.html" aria-label="Page 2: About">2</a></li>
+                        <li><a class="pager__dot" href="skills.html" aria-label="Page 3: Skills">3</a></li>
+                        <li><a class="pager__dot" href="projects.html" aria-label="Page 4: Projects">4</a></li>
+                        <li><a class="pager__dot" href="contact.html" aria-label="Page 5: Contact">5</a></li>
+                    </ol>
+                    <a class="pager__btn pager__btn--next" href="about.html">
+                        <span class="pager__arrow">→</span>
+                        <span class="pager__meta"><small>Next</small><strong>About Me</strong></span>
+                    </a>
+                </nav>
+            </div>
         </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

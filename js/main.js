@@ -1,20 +1,21 @@
 /* ============================================================
    Kariuki Moses - Portfolio interactions
-   Theme toggle · aurora parallax · scroll reveal · typewriter
-   counters · skill bars · 3D tilt · spotlight · ripple · glow
+   Works across every page (home / about / skills / projects / contact)
+   Theme · nav · reveal · typewriter · counters · skill bars
+   3D tilt · spotlight · ripple on every button · cursor glow
    ============================================================ */
 (function () {
     'use strict';
 
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var $ = function (sel, root) { return (root || document).querySelector(sel); };
+    var finePointer = window.matchMedia('(pointer: fine)').matches;
     var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
 
     /* ---------------------------------------------------------
        1. Theme (dark default, persisted)
        --------------------------------------------------------- */
     var root = document.documentElement;
-    var toggle = $('#themeToggle');
+    var themeToggle = document.getElementById('themeToggle');
     var stored = null;
     try { stored = localStorage.getItem('km-theme'); } catch (e) {}
     var theme = stored || 'dark';
@@ -26,8 +27,8 @@
     }
     syncThemeMeta();
 
-    if (toggle) {
-        toggle.addEventListener('click', function () {
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function () {
             theme = theme === 'dark' ? 'light' : 'dark';
             root.setAttribute('data-theme', theme);
             try { localStorage.setItem('km-theme', theme); } catch (e) {}
@@ -38,14 +39,27 @@
     /* ---------------------------------------------------------
        2. Year
        --------------------------------------------------------- */
-    var year = $('#year');
+    var year = document.getElementById('year');
     if (year) year.textContent = new Date().getFullYear();
 
     /* ---------------------------------------------------------
-       3. Mobile navigation
+       3. Active nav link for the current page
        --------------------------------------------------------- */
-    var navToggle = $('#navToggle');
-    var navMenu = $('#navMenu');
+    var page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    if (!page || page === '') page = 'index.html';
+    $$('.nav__link').forEach(function (link) {
+        var href = (link.getAttribute('href') || '').split('/').pop().toLowerCase();
+        if (href === page) {
+            link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
+        }
+    });
+
+    /* ---------------------------------------------------------
+       4. Mobile navigation
+       --------------------------------------------------------- */
+    var navToggle = document.getElementById('navToggle');
+    var navMenu = document.getElementById('navMenu');
 
     function closeMenu() {
         if (!navMenu || !navToggle) return;
@@ -69,32 +83,19 @@
     }
 
     /* ---------------------------------------------------------
-       4. Scroll progress + nav state + scroll spy + back to top
+       5. Scroll progress · nav state · back to top
        --------------------------------------------------------- */
-    var scrollProgress = $('#scrollProgress');
-    var nav = $('#nav');
-    var toTop = $('#toTop');
-    var sections = $$('section[id], header[id]');
-    var navLinks = $$('.nav__link[href^="#"]');
-
+    var scrollProgress = document.getElementById('scrollProgress');
+    var nav = document.getElementById('nav');
+    var toTop = document.getElementById('toTop');
     var ticking = false;
+
     function onScroll() {
         var y = window.scrollY || document.documentElement.scrollTop;
         var docH = document.documentElement.scrollHeight - window.innerHeight;
-
         if (scrollProgress) scrollProgress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + '%';
         if (nav) nav.classList.toggle('scrolled', y > 24);
-        if (toTop) toTop.classList.toggle('show', y > 520);
-
-        // scroll spy
-        var current = '';
-        for (var i = 0; i < sections.length; i++) {
-            if (sections[i].offsetTop - 140 <= y) current = sections[i].id;
-        }
-        navLinks.forEach(function (link) {
-            link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-        });
-
+        if (toTop) toTop.classList.toggle('show', y > 480);
         ticking = false;
     }
     window.addEventListener('scroll', function () {
@@ -109,11 +110,11 @@
     }
 
     /* ---------------------------------------------------------
-       5. Typewriter role
+       6. Typewriter role (home page)
        --------------------------------------------------------- */
-    var typed = $('#typedRole');
+    var typed = document.getElementById('typedRole');
     if (typed) {
-        var roles = ['Web Developer', 'Front-End Developer', 'UI Enthusiast', 'Problem Solver'];
+        var roles = ['Web Developer', 'Front-End Developer', 'Back-End Developer', 'Full-Stack Builder', 'Problem Solver'];
         if (reduceMotion) {
             typed.textContent = roles[0];
         } else {
@@ -121,66 +122,56 @@
             (function type() {
                 var word = roles[rIdx];
                 typed.textContent = word.slice(0, cIdx);
-                if (!deleting && cIdx < word.length) {
-                    cIdx++;
-                    setTimeout(type, 85);
-                } else if (!deleting && cIdx === word.length) {
-                    deleting = true;
-                    setTimeout(type, 1500);
-                } else if (deleting && cIdx > 0) {
-                    cIdx--;
-                    setTimeout(type, 40);
-                } else {
-                    deleting = false;
-                    rIdx = (rIdx + 1) % roles.length;
-                    setTimeout(type, 320);
-                }
+                if (!deleting && cIdx < word.length) { cIdx++; setTimeout(type, 85); }
+                else if (!deleting && cIdx === word.length) { deleting = true; setTimeout(type, 1500); }
+                else if (deleting && cIdx > 0) { cIdx--; setTimeout(type, 40); }
+                else { deleting = false; rIdx = (rIdx + 1) % roles.length; setTimeout(type, 320); }
             })();
         }
     }
 
     /* ---------------------------------------------------------
-       6. Counters + skill bars
+       7. Counters + skill bars
        --------------------------------------------------------- */
     function runCounter(el) {
         var target = parseFloat(el.getAttribute('data-count')) || 0;
         var suffix = el.getAttribute('data-suffix') || '';
         if (reduceMotion) { el.textContent = target + suffix; return; }
-        var start = performance.now();
-        var dur = 1400;
+        var start = performance.now(), dur = 1400;
         (function step(now) {
             var p = Math.min((now - start) / dur, 1);
-            var eased = 1 - Math.pow(1 - p, 3);
-            el.textContent = Math.round(target * eased) + suffix;
+            el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
             if (p < 1) window.requestAnimationFrame(step);
         })(start);
     }
-
-    function fillBar(el) {
-        var level = el.getAttribute('data-level') || '0';
-        el.style.width = level + '%';
-    }
+    function fillBar(el) { el.style.width = (el.getAttribute('data-level') || '0') + '%'; }
 
     /* ---------------------------------------------------------
-       7. Scroll reveal (also triggers counters/bars)
+       8. Scroll reveal (also triggers counters/bars)
        --------------------------------------------------------- */
-    var revealEls = $$('.reveal');
     function activate(el) {
         el.classList.add('in-view');
         $$('[data-count]', el).forEach(runCounter);
         $$('.skill__fill[data-level]', el).forEach(fillBar);
     }
 
+    var revealEls = $$('.reveal');
     if ('IntersectionObserver' in window && !reduceMotion) {
         var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    activate(entry.target);
-                    io.unobserve(entry.target);
-                }
+                if (entry.isIntersecting) { activate(entry.target); io.unobserve(entry.target); }
             });
-        }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
         revealEls.forEach(function (el) { io.observe(el); });
+        // Safety net: anything still hidden after load gets shown (short pages)
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                revealEls.forEach(function (el) {
+                    var r = el.getBoundingClientRect();
+                    if (r.top < window.innerHeight) activate(el);
+                });
+            }, 250);
+        });
     } else {
         revealEls.forEach(activate);
         $$('.skill__fill[data-level]').forEach(fillBar);
@@ -188,54 +179,45 @@
     }
 
     /* ---------------------------------------------------------
-       8. Cursor glow
+       9. Cursor glow
        --------------------------------------------------------- */
-    var glow = $('#cursorGlow');
-    if (glow && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
-        var gx = window.innerWidth / 2, gy = window.innerHeight / 2;
-        var cx = gx, cy = gy, glowOn = false;
+    var glow = document.getElementById('cursorGlow');
+    if (glow && !reduceMotion && finePointer) {
+        var gx = window.innerWidth / 2, gy = window.innerHeight / 2, cx = gx, cy = gy, on = false;
         document.addEventListener('mousemove', function (e) {
             gx = e.clientX; gy = e.clientY;
-            if (!glowOn) { glowOn = true; glow.classList.add('on'); }
+            if (!on) { on = true; glow.classList.add('on'); }
         }, { passive: true });
         (function loop() {
-            cx += (gx - cx) * 0.12;
-            cy += (gy - cy) * 0.12;
+            cx += (gx - cx) * 0.12; cy += (gy - cy) * 0.12;
             glow.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
             window.requestAnimationFrame(loop);
         })();
     }
 
     /* ---------------------------------------------------------
-       9. 3D tilt + spotlight
+       10. 3D tilt + spotlight
        --------------------------------------------------------- */
-    if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+    if (!reduceMotion && finePointer) {
         $$('[data-tilt]').forEach(function (card) {
-            var rect = null;
-            var raf = null;
-            var rx = 0, ry = 0;
-
+            var rect = null, raf = null, rx = 0, ry = 0;
             function apply() {
                 card.style.transform = 'perspective(900px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-6px)';
                 raf = null;
             }
-
             card.addEventListener('mouseenter', function () {
                 rect = card.getBoundingClientRect();
                 card.style.transition = 'transform .18s ease-out, box-shadow .4s ease, border-color .4s ease';
             });
-
             card.addEventListener('mousemove', function (e) {
                 if (!rect) rect = card.getBoundingClientRect();
                 var px = (e.clientX - rect.left) / rect.width;
                 var py = (e.clientY - rect.top) / rect.height;
                 card.style.setProperty('--mx', (px * 100) + '%');
                 card.style.setProperty('--my', (py * 100) + '%');
-                ry = (px - 0.5) * 9;
-                rx = (0.5 - py) * 9;
+                ry = (px - 0.5) * 9; rx = (0.5 - py) * 9;
                 if (!raf) raf = window.requestAnimationFrame(apply);
             });
-
             card.addEventListener('mouseleave', function () {
                 rx = 0; ry = 0;
                 card.style.transition = 'transform .5s cubic-bezier(.16,1,.3,1), box-shadow .4s ease, border-color .4s ease';
@@ -248,27 +230,30 @@
     }
 
     /* ---------------------------------------------------------
-       10. Button ripple
+       11. Ripple on every button
        --------------------------------------------------------- */
-    $$('.btn').forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
+    var rippleTargets = '.btn, .project__link, .contact__method, .pager__btn, .pager__dot, .nav__link--resume, .to-top, .theme-toggle, .explore__card';
+    $$(rippleTargets).forEach(function (el) {
+        el.addEventListener('click', function (e) {
             if (reduceMotion) return;
-            var rect = btn.getBoundingClientRect();
+            var rect = el.getBoundingClientRect();
             var size = Math.max(rect.width, rect.height);
             var span = document.createElement('span');
             span.className = 'ripple';
             span.style.width = span.style.height = size + 'px';
-            span.style.left = (e.clientX - rect.left - size / 2) + 'px';
-            span.style.top = (e.clientY - rect.top - size / 2) + 'px';
-            btn.appendChild(span);
-            setTimeout(function () { span.remove(); }, 700);
+            var x = (e.clientX || rect.left + rect.width / 2) - rect.left - size / 2;
+            var y = (e.clientY || rect.top + rect.height / 2) - rect.top - size / 2;
+            span.style.left = x + 'px';
+            span.style.top = y + 'px';
+            el.appendChild(span);
+            setTimeout(function () { if (span.parentNode) span.parentNode.removeChild(span); }, 700);
         });
     });
 
     /* ---------------------------------------------------------
-       11. Aurora orbs - gentle parallax with the pointer
+       12. Aurora orbs - gentle pointer parallax
        --------------------------------------------------------- */
-    if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+    if (!reduceMotion && finePointer) {
         var orbs = $$('.orb');
         if (orbs.length) {
             var ox = 0, oy = 0, tx = 0, ty = 0;
@@ -277,8 +262,7 @@
                 oy = (e.clientY / window.innerHeight - 0.5);
             }, { passive: true });
             (function orbLoop() {
-                tx += (ox - tx) * 0.06;
-                ty += (oy - ty) * 0.06;
+                tx += (ox - tx) * 0.06; ty += (oy - ty) * 0.06;
                 orbs.forEach(function (orb, i) {
                     var depth = (i + 1) * 14;
                     orb.style.marginLeft = (tx * depth) + 'px';
