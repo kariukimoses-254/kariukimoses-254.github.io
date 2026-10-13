@@ -1,46 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kariuki Moses | Web Developer</title>
-    <meta name="description" content="Portfolio of Kariuki Moses, Web Developer based in Nakuru.">
+    <meta name="description" content="Portfolio of Kariuki Moses, Web Developer based in Nakuru, Kenya. Interactive, responsive web experiences built with HTML, CSS and JavaScript.">
+    <meta name="theme-color" content="#05060f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='.5' stop-color='%23a855f7'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='50' text-anchor='middle' dominant-baseline='central' font-family='Arial' font-weight='bold' font-size='46' fill='white'%3EKM%3C/text%3E%3C/svg%3E">
 </head>
 <body>
+    <!-- Scroll progress -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <!-- Animated background -->
+    <div class="bg" aria-hidden="true">
+        <span class="orb orb--1"></span>
+        <span class="orb orb--2"></span>
+        <span class="orb orb--3"></span>
+        <span class="orb orb--4"></span>
+        <span class="bg__grain"></span>
+    </div>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
     <!-- Navigation -->
-    <nav class="nav">
-        <div class="container nav__container">
+    <nav class="nav" id="nav">
+        <div class="nav__container">
             <a href="#home" class="nav__logo">KM</a>
-            <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation menu">
-                <span class="nav__toggle-bar"></span>
-                <span class="nav__toggle-bar"></span>
-                <span class="nav__toggle-bar"></span>
-            </button>
+
             <ul class="nav__menu" id="navMenu">
-                <li class="nav__item">
-                    <a href="#home" class="nav__link">Home</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#about" class="nav__link">About</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#skills" class="nav__link">Skills</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#projects" class="nav__link">Projects</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#contact" class="nav__link">Contact</a>
-                </li>
+                <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
+                <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
+                <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                 <li class="nav__item nav__item--resume">
                     <a href="assets/resume.pdf" class="nav__link nav__link--resume" target="_blank" rel="noopener">Resume</a>
                 </li>
             </ul>
+
+            <div class="nav__right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle colour theme" title="Toggle colour theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"></path>
+                    </svg>
+                </button>
+                <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -48,19 +65,20 @@
     <header id="home" class="hero">
         <div class="container">
             <div class="hero__content">
-                <p class="hero__greeting">Hello, I'm</p>
-                <h1 class="hero__name">Kariuki Moses</h1>
-                <p class="hero__role">Web Developer</p>
-                <p class="hero__location">Based in Nakuru</p>
-                <p class="hero__bio">
-                    I'm a web developer focused on building clean, responsive, and user-friendly websites with HTML, CSS, and JavaScript. 
-                    I enjoy turning ideas into functional digital experiences that work beautifully across devices.
+                <p class="hero__pill reveal"><span class="hero__dot"></span> Available for new projects</p>
+                <p class="hero__greeting reveal" style="--d:60ms">Hello, I'm</p>
+                <h1 class="hero__name reveal" style="--d:120ms">Kariuki Moses</h1>
+                <p class="hero__role reveal" style="--d:180ms"><span id="typedRole"></span><span class="hero__caret" aria-hidden="true"></span></p>
+                <p class="hero__location reveal" style="--d:230ms">📍 Based in Nakuru, Kenya</p>
+                <p class="hero__bio reveal" style="--d:280ms">
+                    I build clean, responsive and interactive websites with HTML, CSS and JavaScript.
+                    I love turning ideas into fast, accessible digital experiences that feel great on every screen.
                 </p>
-                <div class="hero__actions">
-                    <a href="#projects" class="btn btn--primary">View Projects</a>
+                <div class="hero__actions reveal" style="--d:340ms">
+                    <a href="#projects" class="btn btn--primary">View Projects <span class="btn__arrow">→</span></a>
                     <a href="#contact" class="btn btn--secondary">Get In Touch</a>
                 </div>
-                <div class="hero__social">
+                <div class="hero__social reveal" style="--d:400ms">
                     <a href="https://github.com/kariukimoseswambugu-lang" class="social__link" target="_blank" rel="noopener" aria-label="GitHub">
                         <svg class="social__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
@@ -96,20 +114,66 @@
         </div>
     </header>
 
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats__grid reveal">
+                <div class="stat">
+                    <span class="stat__num" data-count="5" data-suffix="">0</span>
+                    <span class="stat__label">Projects Shipped</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__num" data-count="5" data-suffix="">0</span>
+                    <span class="stat__label">Core Technologies</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__num" data-count="100" data-suffix="%">0</span>
+                    <span class="stat__label">Responsive Design</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__num" data-count="5" data-suffix="">0</span>
+                    <span class="stat__label">Live Demos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="section about">
         <div class="container">
-            <h2 class="section__title">About Me</h2>
-            <p class="section__subtitle">A bit more about who I am</p>
-            <div class="about__content">
-                <p class="about__text">
-                    I am a passionate web developer based in Nakuru, Kenya, with a focus on creating responsive and accessible web applications. 
-                    I enjoy learning new technologies and building practical solutions that solve real-world problems.
-                </p>
-                <p class="about__text">
-                    Currently, I work primarily with vanilla HTML, CSS, and JavaScript, but I'm always eager to expand my skillset and take on new challenges.
-                    When I'm not coding, I enjoy exploring new ideas and continuously improving my craft.
-                </p>
+            <h2 class="section__title reveal">About <span>Me</span></h2>
+            <p class="section__subtitle reveal" style="--d:80ms">A bit more about who I am</p>
+            <div class="about__grid">
+                <div class="about__card reveal">
+                    <div class="about__avatar">KM</div>
+                    <h3 class="about__name">Kariuki Moses</h3>
+                    <p class="about__role">Web Developer · Nakuru, Kenya</p>
+                    <div class="about__chips">
+                        <span class="about__chip">HTML</span>
+                        <span class="about__chip">CSS</span>
+                        <span class="about__chip">JavaScript</span>
+                        <span class="about__chip">Git</span>
+                        <span class="about__chip">GitHub</span>
+                    </div>
+                </div>
+                <div class="about__body reveal" style="--d:140ms">
+                    <p class="about__text">
+                        I am a passionate web developer based in Nakuru, Kenya, focused on creating responsive and accessible
+                        web applications. I enjoy learning new technologies and building practical solutions that solve real
+                        world problems.
+                    </p>
+                    <p class="about__text">
+                        I currently work primarily with vanilla HTML, CSS and JavaScript, but I'm always eager to expand my
+                        skillset and take on new challenges. When I'm not coding, I enjoy exploring new ideas and continuously
+                        improving my craft.
+                    </p>
+                    <ul class="about__highlights">
+                        <li>Responsive, mobile-first layouts that work on every device</li>
+                        <li>Clean, semantic and accessible markup</li>
+                        <li>Interactive UI and animations with vanilla JavaScript</li>
+                        <li>Version control and collaboration with Git &amp; GitHub</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -117,24 +181,49 @@
     <!-- Skills Section -->
     <section id="skills" class="section skills">
         <div class="container">
-            <h2 class="section__title">Skills</h2>
-            <p class="section__subtitle">Technologies I work with</p>
+            <h2 class="section__title reveal">My <span>Skills</span></h2>
+            <p class="section__subtitle reveal" style="--d:80ms">Technologies I work with</p>
             <div class="skills__grid">
-                <div class="skill__card">
-                    <h3 class="skill__name">HTML</h3>
-                </div>
-                <div class="skill__card">
-                    <h3 class="skill__name">CSS</h3>
-                </div>
-                <div class="skill__card">
-                    <h3 class="skill__name">JavaScript</h3>
-                </div>
-                <div class="skill__card">
-                    <h3 class="skill__name">Git</h3>
-                </div>
-                <div class="skill__card">
-                    <h3 class="skill__name">GitHub</h3>
-                </div>
+                <article class="skill__card reveal" data-tilt>
+                    <div class="skill__top">
+                        <span class="skill__icon">🧩</span>
+                        <h3 class="skill__name">HTML</h3>
+                        <span class="skill__pct">95%</span>
+                    </div>
+                    <div class="skill__bar"><span class="skill__fill" data-level="95"></span></div>
+                </article>
+                <article class="skill__card reveal" style="--d:80ms" data-tilt>
+                    <div class="skill__top">
+                        <span class="skill__icon">🎨</span>
+                        <h3 class="skill__name">CSS</h3>
+                        <span class="skill__pct">92%</span>
+                    </div>
+                    <div class="skill__bar"><span class="skill__fill" data-level="92"></span></div>
+                </article>
+                <article class="skill__card reveal" style="--d:160ms" data-tilt>
+                    <div class="skill__top">
+                        <span class="skill__icon">⚡</span>
+                        <h3 class="skill__name">JavaScript</h3>
+                        <span class="skill__pct">88%</span>
+                    </div>
+                    <div class="skill__bar"><span class="skill__fill" data-level="88"></span></div>
+                </article>
+                <article class="skill__card reveal" style="--d:240ms" data-tilt>
+                    <div class="skill__top">
+                        <span class="skill__icon">🌿</span>
+                        <h3 class="skill__name">Git</h3>
+                        <span class="skill__pct">85%</span>
+                    </div>
+                    <div class="skill__bar"><span class="skill__fill" data-level="85"></span></div>
+                </article>
+                <article class="skill__card reveal" style="--d:320ms" data-tilt>
+                    <div class="skill__top">
+                        <span class="skill__icon">🚀</span>
+                        <h3 class="skill__name">GitHub</h3>
+                        <span class="skill__pct">90%</span>
+                    </div>
+                    <div class="skill__bar"><span class="skill__fill" data-level="90"></span></div>
+                </article>
             </div>
         </div>
     </section>
@@ -142,18 +231,19 @@
     <!-- Projects Section -->
     <section id="projects" class="section projects">
         <div class="container">
-            <h2 class="section__title">Projects</h2>
-            <p class="section__subtitle">A selection of my work</p>
+            <h2 class="section__title reveal">My <span>Projects</span></h2>
+            <p class="section__subtitle reveal" style="--d:80ms">A selection of my work — every one runs live</p>
             <div class="projects__grid">
                 <!-- Project 1 - Hospital App -->
-                <article class="project__card">
-                    <div class="project__image">
+                <article class="project__card reveal" data-tilt>
+                    <div class="project__image project__image--a">
+                        <span class="project__no">01</span>
                         <div class="project__placeholder">🏥</div>
                     </div>
                     <div class="project__content">
                         <h3 class="project__title">Hospital Management App</h3>
                         <p class="project__description">
-                            A comprehensive hospital management system with appointment booking, services, and patient portal features built with HTML, CSS, and JavaScript.
+                            A comprehensive hospital management system with appointment booking, services and a patient portal, built with HTML, CSS and JavaScript.
                         </p>
                         <div class="project__tech">
                             <span class="tech__tag">HTML</span>
@@ -168,14 +258,15 @@
                 </article>
 
                 <!-- Project 2 - Car Dealers -->
-                <article class="project__card">
-                    <div class="project__image">
+                <article class="project__card reveal" style="--d:100ms" data-tilt>
+                    <div class="project__image project__image--b">
+                        <span class="project__no">02</span>
                         <div class="project__placeholder">🚗</div>
                     </div>
                     <div class="project__content">
                         <h3 class="project__title">Car Dealership Website</h3>
                         <p class="project__description">
-                            A modern car dealership platform featuring vehicle listings, financing options, and contact functionality with a sleek responsive design.
+                            A modern car dealership platform featuring vehicle listings, financing options and contact functionality with a sleek responsive design.
                         </p>
                         <div class="project__tech">
                             <span class="tech__tag">HTML</span>
@@ -190,14 +281,15 @@
                 </article>
 
                 <!-- Project 3 - Motorcycle Dealers -->
-                <article class="project__card">
-                    <div class="project__image">
+                <article class="project__card reveal" style="--d:200ms" data-tilt>
+                    <div class="project__image project__image--c">
+                        <span class="project__no">03</span>
                         <div class="project__placeholder">🏍️</div>
                     </div>
                     <div class="project__content">
                         <h3 class="project__title">Motorcycle Dealership</h3>
                         <p class="project__description">
-                            A motorcycle dealership website showcasing bikes, parts, and services with an intuitive interface designed for enthusiasts.
+                            A motorcycle dealership website showcasing bikes, parts and services with an intuitive interface designed for enthusiasts.
                         </p>
                         <div class="project__tech">
                             <span class="tech__tag">HTML</span>
@@ -212,14 +304,15 @@
                 </article>
 
                 <!-- Project 4 - Phones & Laptops Store -->
-                <article class="project__card">
-                    <div class="project__image">
+                <article class="project__card reveal" style="--d:300ms" data-tilt>
+                    <div class="project__image project__image--d">
+                        <span class="project__no">04</span>
                         <div class="project__placeholder">📱</div>
                     </div>
                     <div class="project__content">
                         <h3 class="project__title">Phones &amp; Laptops Store</h3>
                         <p class="project__description">
-                            An e-commerce storefront for smartphones, laptops, and gadgets with product listings, search, cart, and a responsive modern interface.
+                            An e-commerce storefront for smartphones, laptops and gadgets with product listings, search, cart and a responsive modern interface.
                         </p>
                         <div class="project__tech">
                             <span class="tech__tag">HTML</span>
@@ -234,14 +327,15 @@
                 </article>
 
                 <!-- Project 5 - Real Estate Platform -->
-                <article class="project__card">
-                    <div class="project__image">
+                <article class="project__card reveal" style="--d:400ms" data-tilt>
+                    <div class="project__image project__image--e">
+                        <span class="project__no">05</span>
                         <div class="project__placeholder">🏘️</div>
                     </div>
                     <div class="project__content">
                         <h3 class="project__title">Real Estate Platform</h3>
                         <p class="project__description">
-                            A property listing and management platform with property search, virtual tours, mortgage calculator, and tenant and customer portals.
+                            A property listing and management platform with property search, virtual tours, a mortgage calculator and tenant and customer portals.
                         </p>
                         <div class="project__tech">
                             <span class="tech__tag">HTML</span>
@@ -261,11 +355,12 @@
     <!-- Contact Section -->
     <section id="contact" class="section contact">
         <div class="container">
-            <h2 class="section__title">Get In Touch</h2>
-            <p class="section__subtitle">Feel free to reach out</p>
-            <div class="contact__content">
+            <h2 class="section__title reveal">Get In <span>Touch</span></h2>
+            <p class="section__subtitle reveal" style="--d:80ms">Feel free to reach out</p>
+            <div class="contact__content reveal">
                 <p class="contact__text">
-                    I'm always open to new opportunities and collaborations. Whether you have a project in mind or just want to say hi, feel free to reach out!
+                    I'm always open to new opportunities and collaborations. Whether you have a project in mind or just want
+                    to say hi, feel free to reach out!
                 </p>
                 <div class="contact__methods">
                     <a href="mailto:kariukimoseswambugu@gmail.com" class="contact__method">
@@ -300,9 +395,12 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p class="footer__text">&copy; <span id="year"></span> Kariuki Moses. All rights reserved.</p>
+            <p class="footer__text">&copy; <span id="year"></span> Kariuki Moses. Crafted with HTML, CSS &amp; JavaScript.</p>
         </div>
     </footer>
+
+    <!-- Back to top -->
+    <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
 
     <script src="js/main.js"></script>
 </body>
