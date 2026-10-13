@@ -24,6 +24,29 @@ can move through it page by page.
 | 4 | Projects | `projects.html` | Five projects with screenshot covers and live demos |
 | 5 | Contact | `contact.html` | Email, WhatsApp, GitHub, Facebook, Instagram, X |
 
+## Contact Dialog
+
+"Get In Touch" opens a dialog (reachable from the nav **Hire Me** button on every page, the
+home page hero, the About page and the Contact page) with a form for the visitor's details
+and request:
+
+- **Full name**, **Email** and **Subject** and **Your request** are required; **Phone /
+  WhatsApp** is optional. Fields validate inline and show per-field messages.
+- Submissions POST to [FormSubmit](https://formsubmit.co) at
+  `https://formsubmit.co/ajax/kariukimoseswambugu@gmail.com` (no signup, no backend needed)
+  and are delivered to that inbox as a table. A hidden honeypot field filters bots.
+- The visitor's reply address is set from the `email` field, so you can reply directly.
+- **Open in my email app** is a fallback that opens the visitor's mail client with the same
+  details pre-filled. It is also offered automatically if the automatic send fails.
+
+> **One-time setup:** the first submission makes FormSubmit email
+> `kariukimoseswambugu@gmail.com` an *Activate Form* link. Click it once and every later
+> submission is delivered automatically. Until it is activated, visitors see a prompt to use
+> the email-app fallback instead.
+
+To point the form at a different inbox, change `OWNER_EMAIL` at the top of
+`js/contact-modal.js`.
+
 ## Getting Started
 
 1. Clone or download this repository
@@ -51,6 +74,7 @@ projects.html       Projects
 contact.html        Contact
 css/style.css       Design tokens, themes and all components
 js/main.js          Theme, nav, reveal, counters, tilt, ripple interactions
+js/contact-modal.js "Get In Touch" dialog + form submission logic
 assets/images/      Site assets, including project screenshots
 projects/           Embedded, runnable project demos
 ```
