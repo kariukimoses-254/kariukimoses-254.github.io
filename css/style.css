@@ -163,16 +163,20 @@ section { padding: 4.5rem 0; position: relative; }
 .nav__container { display: flex; justify-content: space-between; align-items: center; width: min(1180px, 92%); margin-inline: auto; }
 
 .nav__logo {
-    font-family: var(--font-head); font-size: 1.55rem; font-weight: 700; letter-spacing: -.5px;
-    text-decoration: none; background: var(--grad); background-size: 220% 100%;
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    animation: gradShift 7s linear infinite; position: relative;
+    position: relative; display: inline-flex; align-items: center; padding: 3px;
+    text-decoration: none; border-radius: 50%;
 }
-.nav__logo::after {
-    content: ""; position: absolute; inset: -6px -10px; border-radius: 12px;
-    background: var(--grad-soft); opacity: 0; z-index: -1; transition: var(--transition);
+.nav__logo::before {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: var(--grad); background-size: 220% 100%; opacity: 0; transition: var(--transition);
 }
-.nav__logo:hover::after { opacity: 1; }
+.nav__logo img {
+    position: relative; display: block; width: 44px; height: 44px; border-radius: 50%;
+    object-fit: cover; box-shadow: 0 10px 22px -14px rgba(0, 0, 0, .9);
+    transition: var(--transition);
+}
+.nav__logo:hover img { transform: scale(1.05); }
+.nav__logo:hover::before { opacity: 1; }
 
 .nav__menu { display: flex; align-items: center; gap: 2rem; list-style: none; }
 .nav__link {
@@ -484,11 +488,11 @@ section { padding: 4.5rem 0; position: relative; }
     -webkit-mask-composite: xor; mask-composite: exclude; opacity: .6;
 }
 .about__avatar {
-    width: 108px; height: 108px; margin: 0 auto 1.2rem; display: grid; place-items: center; border-radius: 50%;
-    font-family: var(--font-head); font-size: 2.2rem; font-weight: 700; color: #fff;
-    background: var(--grad); background-size: 220% 100%; animation: gradShift 8s linear infinite;
+    width: 140px; height: 140px; margin: 0 auto 1.2rem; position: relative; border-radius: 50%;
+    padding: 4px; background: var(--grad); background-size: 220% 100%; animation: gradShift 8s linear infinite;
     box-shadow: 0 0 0 6px rgba(139, 92, 246, .14), 0 20px 40px -18px rgba(139, 92, 246, .9);
 }
+.about__photo { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 .about__name { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; }
 .about__role { font-family: var(--font-mono); font-size: .82rem; color: var(--muted); margin-top: .3rem; }
 .about__chips { display: flex; flex-wrap: wrap; gap: .45rem; justify-content: center; margin-top: 1.3rem; }
