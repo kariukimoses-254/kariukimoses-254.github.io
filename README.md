@@ -76,6 +76,35 @@ It is currently published with GitHub Pages:
 
 To publish a change, commit and push to `main`; GitHub Pages rebuilds automatically.
 
+## Search Engines
+
+Everything a crawler needs is already in the repository, so the only manual step left is
+telling each search engine that the site exists (see the numbered list below).
+
+| Piece | What it does |
+| --- | --- |
+| `sitemap.xml` | Lists the five pages with priorities — this is the link you submit |
+| `robots.txt` | Allows every crawler and points at the sitemap |
+| `assets/images/og-cover.jpg` | 1200×630 share card used by `og:image` / `twitter:image` |
+| Open Graph + Twitter tags | On every page: canonical URL, title, description and share image |
+| JSON-LD (`index.html`) | `Person` + `WebSite` structured data — name, role, location, skills, social profiles |
+
+**To get the site indexed** (this needs your own Google/Bing account — nobody else can
+claim the site for you):
+
+1. Google — <https://search.google.com/search-console> → add a property for
+   `https://kariukimoseswambugu-lang.github.io/portfolio/` → verify with the **HTML tag**
+   method (the `<meta name="google-site-verification" …>` tag goes in `index.html`) or the
+   **HTML file** method (drop their file into the repository root).
+2. Submit the sitemap: `https://kariukimoseswambugu-lang.github.io/portfolio/sitemap.xml`.
+3. Bing, which also feeds DuckDuckGo — <https://www.bing.com/webmasters> → same two steps.
+4. Links are what actually get you found: put the site URL in your GitHub profile, and in
+   your Facebook, Instagram, X and WhatsApp profiles.
+
+> `robots.txt` sits in the `/portfolio/` subfolder, so crawlers read GitHub's own file at
+> the host root instead. The sitemap submission is what matters; the file is kept for
+> documentation and for crawlers that do follow it.
+
 ## Project Structure
 
 ```
