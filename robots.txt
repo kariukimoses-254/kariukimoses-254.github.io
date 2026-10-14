@@ -1,7 +1,7 @@
 # Kariuki Moses — portfolio
-# https://kariukimoses-254.github.io/portfolio/
+# https://kariukimoses-254.github.io/
 
 User-agent: *
 Allow: /
 
-Sitemap: https://kariukimoses-254.github.io/portfolio/sitemap.xml
+Sitemap: https://kariukimoses-254.github.io/sitemap.xml

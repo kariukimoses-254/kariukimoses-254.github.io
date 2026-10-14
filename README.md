@@ -6,7 +6,7 @@ GitHub Pages deployment with no build step and no dependencies.
 
 ## Live Site
 
-**<https://kariukimoses-254.github.io/portfolio/>**
+**<https://kariukimoses-254.github.io/>**
 
 Deployed from the `main` branch via GitHub Pages.
 
@@ -82,9 +82,9 @@ mount — the component goes wherever the mount is.
 This site is a static build (no build tools), so it can be served from any static host.
 It is currently published with GitHub Pages:
 
-- Repository: <https://github.com/kariukimoses-254/portfolio>
+- Repository: <https://github.com/kariukimoses-254/kariukimoses-254.github.io>
 - Pages source: `main` branch, `/` (root)
-- URL: <https://kariukimoses-254.github.io/portfolio/>
+- URL: <https://kariukimoses-254.github.io/>
 
 To publish a change, commit and push to `main`; GitHub Pages rebuilds automatically.
 
@@ -105,12 +105,12 @@ telling each search engine that the site exists (see the numbered list below).
 claim the site for you):
 
 1. Google — <https://search.google.com/search-console> → add a property for
-   `https://kariukimoses-254.github.io/portfolio/` → verify with the **HTML tag**
+   `https://kariukimoses-254.github.io/` → verify with the **HTML tag**
    method. The tag is already in the `<head>` of `index.html`:
    `<meta name="google-site-verification" content="Kzp5dWBeUi4fPUMjnoJH4JnkGVHnM8z8xB_8ad7cjxg">`
    — leave it there, Google re-checks it periodically. (The **HTML file** method — dropping
    their file into the repository root — works too if you ever need a fallback.)
-2. Submit the sitemap: `https://kariukimoses-254.github.io/portfolio/sitemap.xml`.
+2. Submit the sitemap: `https://kariukimoses-254.github.io/sitemap.xml`.
 3. Bing, which also feeds DuckDuckGo — <https://www.bing.com/webmasters> → same two steps.
 4. Links are what actually get you found: put the site URL in your GitHub profile, and in
    your Facebook, Instagram, X and WhatsApp profiles.
