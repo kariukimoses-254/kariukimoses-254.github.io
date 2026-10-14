@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Phones &amp; Laptops Store — Case Study | Kariuki Moses</title>
+    <meta name="description" content="Case study: a React and Vite electronics storefront by Kariuki Moses — catalogue with reviews and facets, cart and checkout, plus the work needed to rebuild it for static hosting.">
+    <link rel="canonical" href="https://kariukimoseswambugu-lang.github.io/portfolio/case-studies/phones-laptops.html">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Kariuki Moses">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Kariuki Moses — Web Developer">
+    <meta property="og:title" content="Phones &amp; Laptops Store — Case Study | Kariuki Moses">
+    <meta property="og:description" content="A React and Vite electronics storefront — catalogue with reviews and facets, cart and checkout, and a static-hosting rebuild.">
+    <meta property="og:url" content="https://kariukimoseswambugu-lang.github.io/portfolio/case-studies/phones-laptops.html">
+    <meta property="og:image" content="https://kariukimoseswambugu-lang.github.io/portfolio/assets/images/og-cover.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Kariuki Moses, web developer in Nakuru, Kenya">
+    <meta property="og:locale" content="en_KE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Phones &amp; Laptops Store — Case Study | Kariuki Moses">
+    <meta name="twitter:description" content="A React and Vite electronics storefront — catalogue with reviews and facets, cart and checkout, and a static-hosting rebuild.">
+    <meta name="twitter:image" content="https://kariukimoseswambugu-lang.github.io/portfolio/assets/images/og-cover.jpg">
+    <meta name="theme-color" content="#05060f">
+    <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="apple-mobile-web-app-title" content="Kariuki Moses">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='.5' stop-color='%23a855f7'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='50' text-anchor='middle' dominant-baseline='central' font-family='Arial' font-weight='bold' font-size='46' fill='white'%3EKM%3C/text%3E%3C/svg%3E">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Phones & Laptops Store — case study",
+        "description": "A React and Vite electronics storefront — catalogue with reviews and facets, cart and checkout, and a static-hosting rebuild.",
+        "url": "https://kariukimoseswambugu-lang.github.io/portfolio/case-studies/phones-laptops.html",
+        "image": "https://kariukimoseswambugu-lang.github.io/portfolio/assets/images/og-cover.jpg",
+        "author": { "@type": "Person", "@id": "https://kariukimoseswambugu-lang.github.io/portfolio/#kariuki", "name": "Kariuki Moses", "url": "https://kariukimoseswambugu-lang.github.io/portfolio/" },
+        "isPartOf": { "@type": "WebSite", "@id": "https://kariukimoseswambugu-lang.github.io/portfolio/#website" }
+    }
+    </script>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <div class="bg" aria-hidden="true">
+        <span class="orb orb--1"></span>
+        <span class="orb orb--2"></span>
+        <span class="orb orb--3"></span>
+        <span class="orb orb--4"></span>
+        <span class="bg__grain"></span>
+    </div>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav__container">
+            <a href="../index.html" class="nav__logo"><img src="../assets/images/logo.jpg" alt="Kariuki Moses — home" width="44" height="44"></a>
+
+            <ul class="nav__menu" id="navMenu">
+                <li class="nav__item"><a href="../index.html" class="nav__link">Home</a></li>
+                <li class="nav__item"><a href="../about.html" class="nav__link">About</a></li>
+                <li class="nav__item"><a href="../skills.html" class="nav__link">Skills</a></li>
+                <li class="nav__item"><a href="../projects.html" class="nav__link">Projects</a></li>
+                <li class="nav__item"><a href="../contact.html" class="nav__link">Contact</a></li>
+                <li class="nav__item nav__item--resume">
+                    <a href="../contact.html" class="nav__link nav__link--resume" data-contact-modal>Hire Me</a>
+                </li>
+            </ul>
+
+            <div class="nav__right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle colour theme" title="Toggle colour theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"></path>
+                    </svg>
+                </button>
+                <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-head">
+            <div class="container">
+                <span class="page-head__kicker">Case Study · 04 of 05</span>
+                <h1 class="section__title reveal">Phones &amp; Laptops <span>Store</span></h1>
+                <p class="section__subtitle reveal" style="--d:80ms">A React single-page storefront, rebuilt to run from a static host</p>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top:1rem">
+            <div class="container">
+                <div class="case__grid">
+                    <div class="case__main reveal">
+                        <figure class="case__figure">
+                            <img src="../assets/images/project-phones-laptops.jpg" alt="Electronics store front page showing phones and laptops with prices in Kenyan shillings" width="1000" height="756" decoding="async">
+                            <figcaption>Mosey Technologies — storefront (index.html)</figcaption>
+                        </figure>
+
+                        <p class="case__lead">
+                            This is the only project here that is not hand-written HTML — it is a React single-page app
+                            built with Vite. It is also the project that taught me the most about deployment, because
+                            getting a client-side router to work correctly from a sub-folder on a static host is a
+                            different problem from getting it to work on localhost.
+                        </p>
+
+                        <div class="case__block">
+                            <h2 class="case__h2">The brief</h2>
+                            <p class="case__text">
+                                A phone and laptop retailer needed a catalogue shoppers could filter by category, read
+                                reviews on and order from — with prices in shillings, a cart that survives a refresh, and
+                                a checkout step. No server-side rendering, no backend to host: it had to stay a static
+                                bundle that can be dropped on any host.
+                            </p>
+                        </div>
+
+                        <div class="case__block">
+                            <h2 class="case__h2">What I built</h2>
+                            <ul class="case__list">
+                                <li><strong>Nine routes</strong> — shop, product details, cart, checkout, account, login, register, about and contact.</li>
+                                <li><strong>Category browsing</strong> through shareable URLs such as <span class="case__code">/shop?category=phones</span> — phones, laptops, audio, wearables and gaming.</li>
+                                <li><strong>Sorting and filtering</strong>, including <span class="case__code">/shop?sort=rating</span> to put the best-reviewed products first.</li>
+                                <li><strong>A cart and checkout flow</strong> with state persisted in <span class="case__code">localStorage</span>, so a refresh does not empty the basket.</li>
+                                <li><strong>Product pages with customer reviews</strong>, and prices formatted in Kenyan shillings.</li>
+                            </ul>
+                        </div>
+
+                        <div class="case__block">
+                            <h2 class="case__h2">How it works — and the static-hosting problem</h2>
+                            <p class="case__text">
+                                Two things had to change before this could live on GitHub Pages, where the site is served
+                                from a sub-folder rather than a domain root.
+                            </p>
+                            <p class="case__text">
+                                First, routing. The app reads an injected <span class="case__code">window.__ROUTER_BASE__</span>
+                                value and passes it to the router as its basename, so every link resolves under
+                                <span class="case__code">/portfolio/projects/phones-laptops/</span> instead of jumping to
+                                the root of the domain.
+                            </p>
+                            <p class="case__text">
+                                Second, the service worker. The original worker precached absolute root paths, which are
+                                wrong the moment the app is not at the root — it would have failed to install, or worse,
+                                served a stale shell. The shipped worker is a deliberate no-op: it takes control, skips
+                                precaching, and lets the network serve everything. For a demo site, correct and
+                                predictable beats clever.
+                            </p>
+                        </div>
+
+                        <div class="case__block">
+                            <h2 class="case__h2">What I would do next</h2>
+                            <ul class="case__list">
+                                <li>GitHub Pages has no single-page-app fallback, so refreshing a deep link such as <span class="case__code">/cart</span> returns a 404. The fix is either hash routing or a <span class="case__code">404.html</span> redirect shim — I would add the shim.</li>
+                                <li>Server-render or pre-render the product pages so they can be indexed as individual pages rather than one app shell.</li>
+                                <li>Split the bundle; the main application chunk is around 250 KB and the checkout path alone does not need all of it.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <aside class="case__aside reveal" style="--d:120ms">
+                        <div class="case__card">
+                            <p class="case__card-title">At a glance</p>
+                            <dl class="case__facts">
+                                <div class="case__fact"><dt>Type</dt><dd>React SPA storefront</dd></div>
+                                <div class="case__fact"><dt>My role</dt><dd>Build, UI and deployment</dd></div>
+                                <div class="case__fact"><dt>Routes</dt><dd>9</dd></div>
+                                <div class="case__fact"><dt>Cat. facets</dt><dd>5 + review sorting</dd></div>
+                                <div class="case__fact"><dt>Bundle</dt><dd>~250 KB main chunk</dd></div>
+                                <div class="case__fact"><dt>Hosting</dt><dd>Static, sub-folder safe</dd></div>
+                            </dl>
+                        </div>
+
+                        <div class="case__card">
+                            <p class="case__card-title">Stack</p>
+                            <div class="case__stack">
+                                <span class="tech__tag">React</span>
+                                <span class="tech__tag">Vite</span>
+                                <span class="tech__tag">JavaScript</span>
+                                <span class="tech__tag">CSS</span>
+                                <span class="tech__tag">localStorage</span>
+                            </div>
+                        </div>
+
+                        <div class="case__actions">
+                            <a class="btn btn--primary" href="../projects/phones-laptops/index.html" target="_blank" rel="noopener">Open live demo ↗</a>
+                            <a class="btn btn--secondary" href="../projects.html">All projects</a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pagination -->
+        <div class="pager-wrap">
+            <div class="container">
+                <nav class="pager" aria-label="Page navigation">
+                    <a class="pager__btn pager__btn--prev" href="motorcycle-dealers.html">
+                        <span class="pager__arrow">←</span>
+                        <span class="pager__meta"><small>Previous case study</small><strong>Motorcycle Dealership</strong></span>
+                    </a>
+                    <a class="pager__btn pager__btn--next" href="estate.html">
+                        <span class="pager__arrow">→</span>
+                        <span class="pager__meta"><small>Next case study</small><strong>Real Estate Platform</strong></span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__text">&copy; <span id="year"></span> Kariuki Moses. Crafted with HTML, CSS &amp; JavaScript.</p>
+        </div>
+    </footer>
+
+    <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+    <script src="../js/contact-modal.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

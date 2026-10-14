@@ -47,6 +47,9 @@
        --------------------------------------------------------- */
     var page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
     if (!page || page === '') page = 'index.html';
+    /* Case studies live in their own folder but still belong to the Projects
+       section, so the nav keeps pointing at Projects while they are open. */
+    if (window.location.pathname.indexOf('/case-studies/') !== -1) page = 'projects.html';
     $$('.nav__link').forEach(function (link) {
         var href = (link.getAttribute('href') || '').split('/').pop().toLowerCase();
         if (href === page) {

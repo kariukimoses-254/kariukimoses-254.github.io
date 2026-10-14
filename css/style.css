@@ -619,6 +619,8 @@ section { padding: 4.5rem 0; position: relative; }
 .project__link--demo:hover .arw { transform: translate(3px, -3px); }
 .project__link--github { color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); }
 .project__link--github:hover { color: var(--text); border-color: var(--border-strong); transform: translateY(-2px); }
+.project__link--case { color: var(--text); background: var(--grad-soft); border: 1px solid var(--border-strong); }
+.project__link--case:hover { transform: translateY(-2px); border-color: transparent; background: var(--grad-soft); box-shadow: 0 16px 32px -18px rgba(99, 102, 241, .9); }
 
 /* ============================================================
    Contact
@@ -817,9 +819,54 @@ body.modal-open { overflow: hidden; }
 }
 
 /* ============================================================
+   Case studies (project detail pages)
+   ============================================================ */
+.case__grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 2.6rem; align-items: start; }
+.case__main { min-width: 0; }   /* the grid item must be allowed to shrink, or long code strings widen it */
+
+.case__figure {
+    position: relative; border-radius: var(--radius-lg); overflow: hidden;
+    border: 1px solid var(--border); background: var(--surface-solid); box-shadow: var(--shadow);
+}
+.case__figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; }
+.case__figure figcaption { padding: .8rem 1.2rem; font-family: var(--font-mono); font-size: .78rem; color: var(--muted); border-top: 1px solid var(--border); }
+
+.case__lead { font-size: 1.14rem; color: var(--text); line-height: 1.9; margin: 2.2rem 0 2.6rem; }
+.case__block { margin-bottom: 2.6rem; }
+.case__h2 { display: flex; align-items: center; gap: .7rem; font-family: var(--font-head); font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; }
+.case__h2::before { content: ""; width: 10px; height: 24px; border-radius: 3px; background: var(--grad); flex: 0 0 auto; }
+.case__text { font-size: 1.02rem; color: var(--muted); line-height: 1.9; margin-bottom: 1rem; }
+.case__block > :last-child { margin-bottom: 0; }
+.case__list { list-style: none; display: grid; gap: .7rem; }
+.case__list li {
+    position: relative; min-width: 0; padding: .85rem 1.1rem .85rem 2.55rem; border-radius: 14px;
+    background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: .97rem; transition: var(--transition);
+}
+.case__list li:hover { transform: translateX(6px); border-color: var(--border-strong); background: var(--surface-2); }
+.case__list li::before {
+    content: "◆"; position: absolute; left: 1.05rem; top: .95rem; font-size: .8rem;
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.case__code { font-family: var(--font-mono); font-size: .86em; padding: .1rem .4rem; border-radius: 7px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text); }
+
+.case__aside { position: sticky; top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 1.4rem); display: grid; gap: 1.2rem; }
+.case__card { padding: 1.5rem; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(12px); }
+.case__card-title { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+.case__facts { display: grid; gap: .8rem; }
+.case__fact { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: .92rem; padding-bottom: .8rem; border-bottom: 1px dashed var(--border); }
+.case__fact:last-child { padding-bottom: 0; border-bottom: 0; }
+.case__fact dt { color: var(--muted); }
+.case__fact dd { font-weight: 600; text-align: right; }
+.case__stack { display: flex; flex-wrap: wrap; gap: .4rem; }
+.case__actions { display: grid; gap: .7rem; }
+.case__actions .btn { width: 100%; padding: .8rem 1.1rem; font-size: .93rem; }
+
+/* ============================================================
    Responsive
    ============================================================ */
 @media (max-width: 980px) {
+    .case__grid { grid-template-columns: 1fr; gap: 2.2rem; }
+    .case__aside { position: static; }
     .hero__inner { grid-template-columns: 1fr; gap: 2.5rem; }
     /* An auto inline margin beats `justify-self: stretch` on a grid item, so the
        card has to carry an explicit width. Without it the card shrink-wraps its
@@ -898,6 +945,9 @@ body.modal-open { overflow: hidden; }
     section { padding: 3.2rem 0; }
     .contact__content { padding: 2.2rem 1.2rem; }
     .project__image { height: 175px; }
+    .case__h2 { font-size: 1.2rem; }
+    .case__lead { font-size: 1.06rem; }
+    .case__figure img { aspect-ratio: 4 / 3; }
 }
 
 /* Narrow phones - Galaxy Fold and friends are 280-360px wide */

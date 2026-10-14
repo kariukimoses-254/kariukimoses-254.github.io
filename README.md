@@ -24,6 +24,18 @@ can move through it page by page.
 | 4 | Projects | `projects.html` | Five projects with screenshot covers and live demos |
 | 5 | Contact | `contact.html` | Email, WhatsApp, GitHub, Facebook, Instagram, X |
 
+Each project also has a written case study in `case-studies/`. The case studies are linked from
+the project cards and chain into one another (prev / next), so a reader can walk the whole
+portfolio in order:
+
+| Project | Case study | Live demo |
+| --- | --- | --- |
+| Hospital Management App | `case-studies/hospital-app.html` | `projects/hospital-app/home.html` |
+| Car Dealership Website | `case-studies/car-dealers.html` | `projects/car-dealers/index.html` |
+| Motorcycle Dealership | `case-studies/motorcycle-dealers.html` | `projects/motorcycle-dealers/home.html` |
+| Phones & Laptops Store | `case-studies/phones-laptops.html` | `projects/phones-laptops/index.html` |
+| Real Estate Platform | `case-studies/estate.html` | `projects/estate/frontend/index.html` |
+
 ## Contact Form
 
 One reusable form component (`js/contact-modal.js`) renders in two places:
@@ -83,7 +95,7 @@ telling each search engine that the site exists (see the numbered list below).
 
 | Piece | What it does |
 | --- | --- |
-| `sitemap.xml` | Lists the five pages with priorities — this is the link you submit |
+| `sitemap.xml` | Lists all ten pages (five site pages plus five project case studies) with priorities — this is the link you submit |
 | `robots.txt` | Allows every crawler and points at the sitemap |
 | `assets/images/og-cover.jpg` | 1200×630 share card used by `og:image` / `twitter:image` |
 | Open Graph + Twitter tags | On every page: canonical URL, title, description and share image |
@@ -136,6 +148,7 @@ about.html          About
 skills.html         Skills (front-end / back-end / tooling)
 projects.html       Projects
 contact.html        Contact
+case-studies/       One long-form case study per project
 css/style.css       Design tokens, themes and all components
 js/main.js          Theme, nav, reveal, counters, tilt, ripple interactions
 js/contact-modal.js "Get In Touch" dialog + form submission logic
@@ -148,7 +161,7 @@ projects/           Embedded, runnable project demos
 ## Customization
 
 - **Content** — edit the relevant page (`index.html`, `about.html`, `skills.html`,
-  `projects.html`, `contact.html`).
+  `projects.html`, `contact.html`, or a file in `case-studies/`).
 - **Theme** — colour tokens live in the `:root` / `[data-theme="dark"]` / `[data-theme="light"]`
   blocks at the top of `css/style.css`. The visitor's choice is stored in `localStorage`
   under `km-theme`.
