@@ -3,23 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediCare Hospital - Contact</title>
+  <title>Lil Mosey Hospital - Contact</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="client.css" />
+<script src="nav.js" defer></script>
 </head>
 <body>
-  <header class="topbar">
-    <h1>🏥 MediCare Hospital</h1>
-    <nav>
-      <a href="home.html" class="nav-btn">Home</a>
-      <a href="about.html" class="nav-btn">About</a>
-      <a href="services.html" class="nav-btn">Services</a>
-      <a href="doctors.html" class="nav-btn">Doctors</a>
-      <a href="appointments.html" class="nav-btn">Appointments</a>
-      <a href="contact.html" class="nav-btn active">Contact</a>
-      <a href="index.html" class="nav-btn">Staff Dashboard</a>
-      <a href="login.html" class="nav-btn">Login</a>
-      <a href="guidance.html" class="nav-btn">Guidance</a>
+    <header class="topbar">
+    <a class="brand" href="home.html"><span class="brand-mark" aria-hidden="true">+</span><span class="brand-text">Lil Mosey <span>Hospital</span></span></a>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+      <a class="nav-btn" href="home.html">Home</a>
+      <a class="nav-btn" href="about.html">About</a>
+      <a class="nav-btn" href="services.html">Services</a>
+      <a class="nav-btn" href="doctors.html">Doctors</a>
+      <a class="nav-btn" href="appointments.html">Appointments</a>
+      <a class="nav-btn active" href="contact.html" aria-current="page">Contact</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a class="nav-btn nav-btn--quiet" href="guidance.html">Guidance</a>
+      <a class="nav-btn nav-btn--quiet" href="apply.html">Careers</a>
+      <a class="nav-btn nav-btn--quiet" href="index.html">Staff</a>
+      <a class="nav-btn nav-btn--outline" href="login.html">Log in</a>
+      <a class="nav-btn nav-btn--solid" href="register.html">Register</a>
     </nav>
   </header>
 
@@ -28,7 +35,7 @@
     <div class="form-card">
       <p><strong>📍 Address:</strong> 123 Health Avenue, Jakarta</p>
       <p><strong>📞 Phone:</strong> (021) 555-1234</p>
-      <p><strong>✉️ Email:</strong> info@medicare.example.com</p>
+      <p><strong>✉️ Email:</strong> info@Lil Mosey.example.com</p>
       <p><strong>🕐 Hours:</strong> Open 24/7 — OPD: 08:00–20:00</p>
     </div>
 
@@ -44,7 +51,7 @@
   </main>
 
   <div class="bg-slideshow"><img src="images/hero.jpg" alt=""/><img src="images/cardiology.jpg" alt=""/><img src="images/orthopedics.jpg" alt=""/><img src="images/emergency.jpg" alt=""/><img src="images/dentistry.jpg" alt=""/></div>
-  <footer class="footer"><div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div><p>© 2026 MediCare Hospital. All rights reserved.</p></footer>
+  <footer class="footer"><div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div><p>© 2026 Lil Mosey Hospital. All rights reserved.</p></footer>
 
   <script>
     document.querySelectorAll('a.nav-btn').forEach(a => {

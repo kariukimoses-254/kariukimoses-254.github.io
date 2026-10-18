@@ -1,6 +1,6 @@
--- Active: 1791190944874@@127.0.0.1@3306@medicare
--- Seed data for MediCare Hospital
-USE medicare;
+-- Active: 1791190944874@@127.0.0.1@3306@Lil Mosey
+-- Seed data for Lil Mosey Hospital
+USE Lil Mosey;
 
 INSERT INTO doctors (name, spec, phone) VALUES
   ('Dr. Smith', 'Cardiology', '555-0101'),

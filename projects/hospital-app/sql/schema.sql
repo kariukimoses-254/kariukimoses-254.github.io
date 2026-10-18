@@ -1,6 +1,6 @@
--- MediCare Hospital Management System - Database Schema
-CREATE DATABASE IF NOT EXISTS medicare;
-USE medicare;
+-- Lil Mosey Hospital Management System - Database Schema
+CREATE DATABASE IF NOT EXISTS Lil Mosey;
+USE Lil Mosey;
 
 CREATE TABLE IF NOT EXISTS doctors (
   id INT AUTO_INCREMENT PRIMARY KEY,

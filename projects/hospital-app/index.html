@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MediCare Hospital Management System</title>
+  <title>Lil Mosey Hospital Management System</title>
   <link rel="stylesheet" href="styles.css" />
   <script>
     // Role guard: only admin/staff can access the dashboard
@@ -12,11 +12,15 @@
       location.href = 'login.html';
     }
   </script>
+<script src="nav.js" defer></script>
 </head>
 <body>
-  <header class="topbar">
-    <h1>🏥 MediCare Hospital</h1>
-    <button id="toggleSidebar" class="theme-btn" title="Toggle sidebar">☰</button>
+    <header class="topbar">
+    <a class="brand" href="home.html"><span class="brand-mark" aria-hidden="true">+</span><span class="brand-text">Lil Mosey <span>Hospital</span></span></a>
+    <div class="topbar__actions">
+      <a class="nav-btn nav-btn--quiet" href="home.html">View site</a>
+      <button id="toggleSidebar" class="theme-btn" title="Toggle sidebar">&#9776;</button>
+    </div>
   </header>
 
   <div class="layout">

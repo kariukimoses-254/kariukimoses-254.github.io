@@ -3,5 +3,5 @@ module.exports = {
   DB_PORT: 3307,
   DB_USER: 'root',
   DB_PASSWORD: '',
-  DB_NAME: 'medicare',
+  DB_NAME: 'Lil Mosey',
 };

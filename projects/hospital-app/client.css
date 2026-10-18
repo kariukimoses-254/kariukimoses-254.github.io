@@ -44,15 +44,15 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,.18);
-  border-radius: 20px;
-  padding: 40px;
+  border-radius: 22px;
+  padding: clamp(24px, 5vw, 44px);
   max-width: 900px;
   margin: auto;
   box-shadow: 0 12px 40px rgba(0,0,0,.25);
   color: #fff;
 }
 
-.hero h2 { font-size: 2.4rem; margin-bottom: 10px; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+.hero h2 { font-size: clamp(1.7rem, 4.5vw, 2.6rem); margin-bottom: 10px; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
 .hero p { margin-bottom: 20px; text-shadow: 0 1px 4px rgba(0,0,0,.4); }
 
 .btn-hero {
@@ -85,14 +85,6 @@
 .nav-btn:hover { transform: translateY(-2px); }
 
 .form-card p { flex: 1 1 45%; margin: 4px 0; }
-
-.footer {
-  text-align: center;
-  padding: 20px;
-  background: #087EA4;
-  color: #fff;
-  margin-top: 40px;
-}
 
 /* Service cards with images */
 .service-card {
@@ -180,11 +172,6 @@ main h2, h2 {
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 /* Dark mode */
 body.dark { background: #1a1d23; color: #e5e7eb; }
 body.dark main h2 { color: #fff; }
@@ -205,10 +192,6 @@ body.dark table { background: #242830; }
   padding: 8px 14px; border-radius: 20px; cursor: pointer;
 }
 body.dark .dark-toggle { background: #fff; color: #333; }
-
-  from { opacity: 0; transform: translateX(-15px); }
-  to { opacity: 1; transform: translateX(0); }
-}
 
 /* ---------- Home page left sidebar ---------- */
 .home-layout {

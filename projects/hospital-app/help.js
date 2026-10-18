@@ -2,7 +2,7 @@
 (function () {
   const helpContent = {
     'home.html': 'This is the hospital home page. Use the nav bar to visit Services, Doctors, Appointments, Register, or Login.',
-    'about.html': 'Learn about MediCare Hospital, its mission, and visiting hours.',
+    'about.html': 'Learn about Lil Mosey Hospital, its mission, and visiting hours.',
     'services.html': 'Browse the departments and facilities we offer.',
     'doctors.html': 'Browse doctors, filter by specialization, and rate them with stars.',
     'appointments.html': 'Sign in first, then book an appointment by specialization, doctor, date, and time.',
