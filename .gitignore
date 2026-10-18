@@ -18,3 +18,6 @@ npm-debug.log*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Surge.sh writes this on publish - GitHub Pages must never see it (it would claim the custom domain)
+CNAME
