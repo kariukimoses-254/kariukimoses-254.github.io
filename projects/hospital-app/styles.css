@@ -429,7 +429,7 @@ body.dark #helpPanel { background: #22262e; color: #e4e6eb; }
   overflow: hidden;
 }
 
-main, .topbar, footer, header, .sidebar, .home-side {
+main, footer, header, .sidebar, .home-side {
   position: relative;
   z-index: 2;
 }
