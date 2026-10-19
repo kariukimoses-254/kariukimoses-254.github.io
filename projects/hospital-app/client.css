@@ -160,6 +160,10 @@ main h2, h2 {
 .footer-socials a.tw { background: #000; }
 .footer-socials a.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 .footer-socials a.yt { background: #ff0000; }
+.footer-socials a.wa { background: #25d366; }
+.footer-socials a.gh { background: #24292e; }
+.footer-contact { margin: 6px 0; font-size: 13px; opacity: .9; }
+.footer-contact a { color: inherit; }
 .footer-socials { margin: 6px 0; display: flex; gap: 14px; justify-content: center; }
 .footer-socials a {
   color: #fff;

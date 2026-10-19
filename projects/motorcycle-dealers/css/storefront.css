@@ -2,3 +2,14 @@
 
 /* Local motorcycle brand wordmarks: no third-party logo CDN required. */
 .brand-tile img{width:100px;height:42px;object-fit:contain;max-width:100%;} .brand-tile.logo-fallback::before{content:"MOTORCYCLE BRAND";font-size:11px;letter-spacing:1px;color:var(--ink);padding:12px;} @media(max-width:760px){.brand-row{grid-template-columns:repeat(3,minmax(0,1fr))}} @media(max-width:460px){.brand-row{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Portfolio contact socials */
+.footer-socials{display:flex;gap:9px;margin:8px 0 0}
+.footer-socials a{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;color:#fff;transition:transform .15s ease,filter .15s ease}
+.footer-socials a svg{width:15px;height:15px;fill:currentColor}
+.footer-socials a:hover{transform:translateY(-2px);filter:brightness(1.15)}
+.footer-socials a.fs-fb{background:#1877f2}
+.footer-socials a.fs-x{background:#000}
+.footer-socials a.fs-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.footer-socials a.fs-wa{background:#25d366}
+.footer-socials a.fs-gh{background:#24292e}

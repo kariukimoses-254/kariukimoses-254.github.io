@@ -1937,3 +1937,12 @@ RESPONSIVE
     transition:none !important;
   }
 }
+
+/* Portfolio contact socials */
+.social-links{flex-wrap:wrap}
+.social-links a.sl-fb{background:#1877f2}
+.social-links a.sl-x{background:#000}
+.social-links a.sl-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.social-links a.sl-wa{background:#25d366}
+.social-links a.sl-gh{background:#24292e}
+.footer-socials-row{display:flex;justify-content:center;margin-bottom:12px}
