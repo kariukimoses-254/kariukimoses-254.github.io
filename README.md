@@ -30,7 +30,7 @@ portfolio in order:
 
 | Project | Case study | Live demo |
 | --- | --- | --- |
-| Hospital Management App | `case-studies/hospital-app.html` | `projects/hospital-app/home.html` |
+| Lil Mosey Hospital | `case-studies/hospital-app.html` | `projects/hospital-app/home.html` |
 | Car Dealership Website | `case-studies/car-dealers.html` | `projects/car-dealers/index.html` |
 | Motorcycle Dealership | `case-studies/motorcycle-dealers.html` | `projects/motorcycle-dealers/home.html` |
 | Phones & Laptops Store | `case-studies/phones-laptops.html` | `projects/phones-laptops/index.html` |
@@ -181,7 +181,7 @@ The portfolio includes live demos of all projects embedded directly in this repo
 
 | Project | Entry point |
 | --- | --- |
-| Hospital Management App | `projects/hospital-app/home.html` |
+| Lil Mosey Hospital | `projects/hospital-app/home.html` |
 | Car Dealership Website | `projects/car-dealers/index.html` |
 | Motorcycle Dealership | `projects/motorcycle-dealers/home.html` |
 | Phones & Laptops Store | `projects/phones-laptops/index.html` |
@@ -199,7 +199,7 @@ ideally 600×600 or larger) to swap them.
 Most projects are self-contained (HTML/CSS/JS) and run as-is on GitHub Pages. Several also
 ship the Node.js/Express + MySQL backends they were built against:
 
-- Hospital Management App — Express + MySQL
+- Lil Mosey Hospital - Express + MySQL
 - Car Dealership Website — Express + MySQL, JWT auth
 - Motorcycle Dealership — Express + MySQL
 - Real Estate Platform — Express + MySQL, JWT auth (plus MongoDB, PostgreSQL and a PHP
