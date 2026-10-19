@@ -52,7 +52,7 @@
   color: #fff;
 }
 
-.hero h2 { font-size: clamp(1.7rem, 4.5vw, 2.6rem); margin-bottom: 10px; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+.hero h1, .hero h2 { font-size: clamp(1.7rem, 4.5vw, 2.6rem); margin-bottom: 10px; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
 .hero p { margin-bottom: 20px; text-shadow: 0 1px 4px rgba(0,0,0,.4); }
 
 .btn-hero {
@@ -78,7 +78,17 @@
   50% { box-shadow: 0 0 0 12px rgba(255,255,255,0); }
 }
 
-.hero-content h2 { animation: fadeIn 1s ease; }
+.hero-content h1, .hero-content h2 { animation: fadeIn 1s ease; }
+
+/* Stat cards inside the hero sit on the dark glass panel — keep them glass
+   (white cards there made the white text unreadable) */
+.hero .stat-card {
+  background: rgba(255, 255, 255, .12);
+  border: 1px solid rgba(255, 255, 255, .22);
+  box-shadow: none;
+}
+.hero .stat-card h3, .hero .stat-card .stat-num { background: none; -webkit-text-fill-color: #fff; color: #fff; }
+.hero .stat-card p { color: #fff; }
 .hero-content p { animation: fadeIn 1.4s ease; }
 
 .nav-btn { text-decoration: none; display: inline-block; transition: background .3s, transform .2s; }

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse the doctors at Lil Mosey Hospital, filter by specialization and book a consultation online." />
   <title>Lil Mosey Hospital - Doctors</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="client.css" />
@@ -50,7 +51,7 @@
           document.getElementById('doctorList').innerHTML = doctors.map(d => `
           <div class="doctor-card">
             <img src="${d.photo || 'images/hero.jpg'}" alt="${d.name}" style="width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:8px;" />
-            <h4>👨‍⚕️ ${d.name}</h4>
+            <h3>👨‍⚕️ ${d.name}</h3>
             <p><strong>Specialization:</strong> ${d.spec}</p>
             <p><strong>Phone:</strong> ${d.phone}</p>
             <p>⭐ Staff: ${d.rating ?? '4.5'} · 🕐 ${d.available || 'Mon-Fri 09:00-17:00'}</p>

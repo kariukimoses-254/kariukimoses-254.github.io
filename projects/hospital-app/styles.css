@@ -36,7 +36,7 @@ body.dark td { border-bottom: 1px solid #363d4a; }
 body.dark .form-card input, body.dark .form-card select, body.dark textarea {
   background: #16181d; color: #e4e6eb; border-color: #363d4a;
 }
-body.dark .stat-card h3, body.dark .doctor-card h4 { color: #5aa9ff; }
+body.dark .stat-card h3, body.dark .stat-card .stat-num, body.dark .doctor-card h3, body.dark .doctor-card h4 { color: #5aa9ff; }
 body.dark .topbar { background: linear-gradient(135deg, #0b2833, #0e3c4b); }
 
 /* Respect reduced-motion preferences */
@@ -179,7 +179,8 @@ h3 { margin: 20px 0 10px; }
   transition: transform .3s, box-shadow .3s;
 }
 .stat-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
-.stat-card h3 {
+.stat-card h3, .stat-card .stat-num {
+  display: block;
   color: var(--brand-1); font-size: 2.2rem; margin: 0;
   background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
@@ -233,7 +234,7 @@ th { background: #eef4ff; color: var(--brand-1); font-weight: 700; }
   transition: transform .3s, box-shadow .3s;
 }
 .doctor-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
-.doctor-card h4 { color: var(--brand-1); margin-bottom: 8px; }
+.doctor-card h3, .doctor-card h4 { color: var(--brand-1); margin-bottom: 8px; }
 
 /* ---------- Entrance animations ---------- */
 .doctor-card, .stat-card, .form-card, table {
@@ -285,7 +286,7 @@ th { background: #eef4ff; color: var(--brand-1); font-weight: 700; }
   100% { transform: scale(1); }
 }
 
-.stat-card:hover h3 {
+.stat-card:hover h3, .stat-card:hover .stat-num {
   display: inline-block;
   animation: heartbeat 1s ease-in-out infinite;
 }
