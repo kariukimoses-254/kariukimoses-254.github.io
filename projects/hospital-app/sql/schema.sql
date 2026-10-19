@@ -1,15 +1,20 @@
 -- Lil Mosey Hospital Management System - Database Schema
-CREATE DATABASE IF NOT EXISTS Lil Mosey;
-USE Lil Mosey;
+CREATE DATABASE IF NOT EXISTS lil_mosey_hospital;
+USE lil_mosey_hospital;
 
 CREATE TABLE IF NOT EXISTS doctors (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   spec VARCHAR(100) NOT NULL,
+  qualification VARCHAR(150),
+  experience VARCHAR(50),
   phone VARCHAR(20) NOT NULL,
+  email VARCHAR(100),
+  languages VARCHAR(120),
   photo TEXT,
   rating DECIMAL(2,1) DEFAULT 4.5,
   available VARCHAR(120) DEFAULT 'Mon-Fri 09:00-17:00',
+  bio TEXT,
   patient_rating DECIMAL(2,1),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -78,3 +83,12 @@ CREATE TABLE IF NOT EXISTS appointments (
   email VARCHAR(100),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Upgrading an existing database? Run these once to add the doctor profile columns
+-- (they are already part of the doctors table above, so skip this on a fresh install):
+-- ALTER TABLE doctors
+--   ADD COLUMN qualification VARCHAR(150) AFTER spec,
+--   ADD COLUMN experience VARCHAR(50) AFTER qualification,
+--   ADD COLUMN email VARCHAR(100) AFTER phone,
+--   ADD COLUMN languages VARCHAR(120) AFTER email,
+--   ADD COLUMN bio TEXT AFTER available;

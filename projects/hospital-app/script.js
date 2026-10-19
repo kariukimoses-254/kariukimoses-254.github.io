@@ -38,14 +38,17 @@ async function loadAll() {
 }
 
 // ---------- Navigation ----------
-document.querySelectorAll('.nav-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (btn.tagName === 'A') return; // allow real page links
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.view).classList.add('active');
-  });
+function showView(name) {
+  document.querySelectorAll('.sidebar .nav-btn[data-view]').forEach(b =>
+    b.classList.toggle('active', b.dataset.view === name));
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === name));
+  const view = document.getElementById(name);
+  if (view) window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.showView = showView;
+
+document.querySelectorAll('.sidebar .nav-btn[data-view]').forEach(btn => {
+  btn.addEventListener('click', () => showView(btn.dataset.view));
 });
 
 // ---------- Dashboard ----------
@@ -76,16 +79,27 @@ function renderPatients() {
   if (s === 'name') rows.sort((a,b) => a.name.localeCompare(b.name));
   if (s === 'age') rows.sort((a,b) => a.age - b.age);
   if (s === 'status') rows.sort((a,b) => a.status.localeCompare(b.status));
-  document.getElementById('patientBody').innerHTML = rows.map(p => `
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('patientBody').innerHTML = rows.map(p => {
+    const appts = state.appointments.filter(a => a.patient === p.name);
+    const next = appts.filter(a => a.date >= today)
+      .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time))[0];
+    const apptCell = appts.length
+      ? `${appts.length} booked${next ? ` · next ${next.date} ${String(next.time).slice(0, 5)}` : ''}`
+      : '—';
+    return `
     <tr>
       <td>${p.name}</td><td>${p.age}</td><td>${p.gender}</td>
       <td>${p.disease}</td><td>${p.status}</td>
+      <td class="appt-cell">${apptCell}</td>
       <td>
         <button class="edit" onclick="viewPatient(${p.id})">View</button>
         <button class="edit" onclick="editPatient(${p.id})">Edit</button>
+        <button class="edit" onclick="bookForPatient(${p.id})">📅 Book</button>
         <button class="danger" onclick="deletePatient(${p.id})">Delete</button>
       </td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
 }
 
 window.viewPatient = id => {
@@ -140,15 +154,39 @@ window.deletePatient = async id => {
 
 // ---------- Doctors ----------
 function renderDoctors() {
-  document.getElementById('doctorList').innerHTML = state.doctors.map(d => `
+  const today = new Date().toISOString().split('T')[0];
+  const photo = window.HospitalDoctors ? window.HospitalDoctors.photoFor : (d => d.photo || 'images/hero.jpg');
+  document.getElementById('doctorList').innerHTML = state.doctors.map(d => {
+    const appts = state.appointments.filter(a => a.doctor === d.name);
+    const next = appts.filter(a => a.date >= today)
+      .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time))[0];
+    const apptLine = appts.length
+      ? `📅 ${appts.length} appointment${appts.length > 1 ? 's' : ''}${next ? ` · next ${next.date} ${String(next.time).slice(0, 5)} (${next.patient})` : ''}`
+      : '📅 No appointments booked';
+    const details = [
+      ['Qualification', d.qualification],
+      ['Experience', d.experience],
+      ['Phone', d.phone],
+      ['Email', d.email],
+      ['Languages', d.languages],
+    ].filter(([, value]) => value)
+      .map(([label, value]) => `<p><strong>${label}:</strong> ${value}</p>`).join('');
+    return `
     <div class="doctor-card">
-      <img src="${d.photo || 'images/hero.jpg'}" alt="${d.name}" style="width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:8px;" />
-      <h4>${d.name}</h4>
-      <p><strong>Specialization:</strong> ${d.spec}</p>
-      <p><strong>Phone:</strong> ${d.phone}</p>
+      <div class="doctor-card__photo">
+        <img src="${photo(d)}" alt="Portrait of ${d.name}" loading="lazy" />
+        <span class="doctor-card__badge">${d.spec || 'General'}</span>
+      </div>
+      <h3>${d.name}</h3>
+      ${details}
       <p>⭐ ${d.rating ?? '4.5'} · 🕐 ${d.available || 'Mon-Fri 09:00-17:00'}</p>
-      <button class="danger" style="margin-top:8px" onclick="deleteDoctor(${d.id})">Remove</button>
-    </div>`).join('');
+      <p class="appt-line">${apptLine}</p>
+      <div class="doctor-card__actions">
+        <button class="edit" onclick="bookForDoctor(${d.id})">📅 Book appointment</button>
+        <button class="danger" onclick="deleteDoctor(${d.id})">Remove</button>
+      </div>
+    </div>`;
+  }).join('');
   document.getElementById('aDoctor').innerHTML = state.doctors
     .map(d => `<option value="${d.name}">${d.name} (${d.spec})</option>`).join('');
 }
@@ -168,9 +206,14 @@ document.getElementById('doctorForm').addEventListener('submit', async e => {
     body: JSON.stringify({
       name: document.getElementById('dName').value.trim(),
       spec: document.getElementById('dSpec').value.trim(),
+      qualification: document.getElementById('dQualification').value.trim(),
+      experience: document.getElementById('dExperience').value.trim(),
       phone: document.getElementById('dPhone').value.trim(),
+      email: document.getElementById('dEmail').value.trim(),
+      languages: document.getElementById('dLanguages').value.trim(),
       rating: document.getElementById('dRating').value,
       available: document.getElementById('dAvailable').value.trim() || 'Mon-Fri 09:00-17:00',
+      bio: document.getElementById('dBio').value.trim(),
       photo,
     }),
   });
@@ -211,6 +254,32 @@ document.getElementById('apptForm').addEventListener('submit', async e => {
 window.deleteAppt = async id => {
   await fetch(`${API}/api/appointments/${id}`, { method: 'DELETE' });
   loadAll();
+};
+
+// ---------- Book straight from a patient / doctor row ----------
+window.bookForPatient = id => {
+  const p = state.patients.find(x => x.id === id);
+  if (!p) return;
+  showView('appointments');
+  const input = document.getElementById('aPatient');
+  if (input) {
+    input.value = p.name;
+    input.focus();
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+};
+
+window.bookForDoctor = id => {
+  const d = state.doctors.find(x => x.id === id);
+  if (!d) return;
+  showView('appointments');
+  const select = document.getElementById('aDoctor');
+  if (select) select.value = d.name;
+  const input = document.getElementById('aPatient');
+  if (input) {
+    input.focus();
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 };
 
 // ---------- Doctor Applications ----------

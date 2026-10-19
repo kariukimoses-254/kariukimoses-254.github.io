@@ -135,6 +135,7 @@
                                 <li><strong>Patient records, billing and inventory</strong> as full create/read/delete sets, plus an <span class="case__code">audit-log</span> and a <span class="case__code">reports</span> endpoint.</li>
                                 <li><strong>One-to-one messaging</strong> between a patient and the hospital, filtered by the same email used at sign-in.</li>
                                 <li><strong>A doctor rating endpoint</strong> so a rating can be attached to a doctor without editing their whole record.</li>
+                                <li><strong>A searchable doctor directory</strong> — every profile carries a photo, qualification, experience, availability, languages and contact details, with live search, specialization filter and sorting. A shared <span class="case__code">doctors-data.js</span> module reads the API first and falls back to a built-in roster, so the directory still works when the page is hosted without the backend.</li>
                             </ul>
                         </div>
 

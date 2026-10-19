@@ -235,6 +235,73 @@ th { background: #eef4ff; color: var(--brand-1); font-weight: 700; }
 }
 .doctor-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
 .doctor-card h3, .doctor-card h4 { color: var(--brand-1); margin-bottom: 8px; }
+.doctor-card__actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+/* Appointments shown inside the Patients & Doctors views */
+.appt-cell { font-size: .85rem; color: #4c6472; white-space: nowrap; }
+.appt-line {
+  font-size: .85rem; color: var(--brand-1); font-weight: 600;
+  background: rgba(8,126,164,.08); border-radius: 8px; padding: 7px 10px; margin-top: 6px;
+}
+body.dark .appt-cell { color: #c7cdd6; }
+body.dark .appt-line { color: #8fd3e6; background: rgba(18,168,185,.16); }
+
+/* ---------- Doctors page: filters + profile cards ---------- */
+.doctor-toolbar {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px; align-items: end; margin: 18px 0 4px;
+}
+.doctor-toolbar .field { display: flex; flex-direction: column; gap: 6px; }
+.doctor-toolbar .field > span {
+  font-size: .82rem; font-weight: 700; letter-spacing: .02em;
+  text-transform: uppercase; color: var(--brand-1);
+}
+.doctor-toolbar input, .doctor-toolbar select {
+  width: 100%; padding: 11px 13px; border: 1px solid var(--card-line); border-radius: 10px;
+  background: #fff; color: #1b2b3a; font: inherit; font-size: .92rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+.doctor-toolbar input:focus, .doctor-toolbar select:focus {
+  outline: none; border-color: var(--brand-1); box-shadow: 0 0 0 3px rgba(8,126,164,.16);
+}
+.doctor-count { grid-column: 1 / -1; margin: 0; font-size: .85rem; color: #4c6472; }
+
+#doctorList { grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+
+.doctor-card { display: flex; flex-direction: column; }
+.doctor-card__photo {
+  position: relative; margin: -20px -20px 14px; border-radius: var(--radius) var(--radius) 0 0;
+  overflow: hidden; background: #eef4ff;
+}
+.doctor-card__photo img { display: block; width: 100%; height: 195px; object-fit: cover; }
+.doctor-card__badge {
+  position: absolute; left: 12px; bottom: 12px; max-width: calc(100% - 24px);
+  background: rgba(8,126,164,.94); color: #fff; padding: 5px 11px; border-radius: 999px;
+  font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}
+.doctor-fields { display: grid; gap: 6px; margin: 12px 0 0; }
+.doctor-fields > div { display: flex; gap: 8px; font-size: .86rem; }
+.doctor-fields dt { flex: 0 0 86px; color: #6b7c8c; font-weight: 600; }
+.doctor-fields dd { margin: 0; color: #23384a; }
+.doctor-fields a { color: var(--brand-1); text-decoration: none; overflow-wrap: anywhere; }
+.doctor-fields a:hover { text-decoration: underline; }
+.doctor-card__bio { margin: 12px 0 0; font-size: .87rem; color: #4c6472; }
+.doctor-card__rating { margin: 12px 0 0; font-size: .87rem; font-weight: 600; color: #b45309; }
+.doctor-card__rate { margin: 8px 0 0; font-size: .82rem; color: #4c6472; }
+.doctor-card__rate button { padding: 4px 7px; margin: 2px 4px 0 0; font-size: .78rem; }
+.btn-book {
+  display: block; margin-top: 16px; padding: 11px 18px; border-radius: 10px; text-align: center;
+  background: linear-gradient(135deg, #087EA4, #12a8b9); color: #fff;
+  font-weight: 600; text-decoration: none; transition: transform .2s, box-shadow .3s;
+}
+.btn-book:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(30,94,255,.35); }
+.doctor-empty { grid-column: 1 / -1; padding: 24px; text-align: center; color: #4c6472; }
+
+body.dark .doctor-toolbar input, body.dark .doctor-toolbar select { background: #16232e; color: #e8eef4; border-color: #2b3a48; }
+body.dark .doctor-card__photo { background: #16232e; }
+body.dark .doctor-fields dd { color: #cfd9e2; }
+body.dark .doctor-fields dt, body.dark .doctor-card__bio, body.dark .doctor-count, body.dark .doctor-empty { color: #9fb0c0; }
+body.dark .doctor-card__rating { color: #f0b429; }
 
 /* ---------- Entrance animations ---------- */
 .doctor-card, .stat-card, .form-card, table {

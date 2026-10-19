@@ -33,37 +33,108 @@
 
   <main>
     <h2>Our Doctors</h2>
-    <p>Meet our team of specialist doctors. All doctors are added via the Staff Dashboard and loaded live from the database.</p>
-    <br />
+    <p>Meet the specialists at Lil Mosey Hospital. Search or filter the list to find the right doctor, then book a consultation — each profile is loaded from the hospital database.</p>
+
+    <div class="doctor-toolbar">
+      <label class="field">
+        <span>Search</span>
+        <input id="doctorSearch" type="search" placeholder="Name, specialization or qualification" autocomplete="off" />
+      </label>
+      <label class="field">
+        <span>Specialization</span>
+        <select id="doctorSpec"><option value="">All specializations</option></select>
+      </label>
+      <label class="field">
+        <span>Sort by</span>
+        <select id="doctorSort">
+          <option value="">Name (A-Z)</option>
+          <option value="experience">Experience</option>
+          <option value="rating">Staff rating</option>
+          <option value="patient_rating">Patient rating</option>
+        </select>
+      </label>
+      <p id="doctorCount" class="doctor-count" role="status" aria-live="polite"></p>
+    </div>
+
     <div id="doctorList" class="card-grid">
       <div class="spinner"></div>
     </div>
   </main>
 
   <div class="bg-slideshow"><img src="images/hero.jpg" alt=""/><img src="images/cardiology.jpg" alt=""/><img src="images/orthopedics.jpg" alt=""/><img src="images/emergency.jpg" alt=""/><img src="images/dentistry.jpg" alt=""/></div>
-  <footer class="footer"><div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div><div class="footer-socials"><a class="fb" href="https://facebook.com/Lil Moseyhospital" target="_blank" title="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a> <a class="tw" href="https://x.com/Lil Moseyhospital" target="_blank" title="X"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a> <a class="ig" href="https://instagram.com/Lil Moseyhospital" target="_blank" title="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a> <a class="yt" href="https://youtube.com/@Lil Moseyhospital" target="_blank" title="YouTube"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .502 5.814 3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></div><p>� 2026 Lil Mosey Hospital. All rights reserved.</p></footer>
+  <footer class="footer"><div class="footer-links"><a href="home.html">Home</a> | <a href="about.html">About</a> | <a href="services.html">Services</a> | <a href="doctors.html">Doctors</a> | <a href="appointments.html">Appointments</a> | <a href="contact.html">Contact</a> | <a href="guidance.html">Guidance</a></div><div class="footer-socials"><a class="fb" href="https://facebook.com/lilmoseyhospital" target="_blank" title="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a> <a class="tw" href="https://x.com/lilmoseyhospital" target="_blank" title="X"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a> <a class="ig" href="https://instagram.com/lilmoseyhospital" target="_blank" title="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a> <a class="yt" href="https://youtube.com/@lilmoseyhospital" target="_blank" title="YouTube"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .502 5.814 3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a></div><p>� 2026 Lil Mosey Hospital. All rights reserved.</p></footer>
 
+  <script src="doctors-data.js"></script>
   <script>
-    function loadDoctors() {
-      fetch('/api/doctors')
-        .then(r => r.json())
-        .then(doctors => {
-          document.getElementById('doctorList').innerHTML = doctors.map(d => `
-          <div class="doctor-card">
-            <img src="${d.photo || 'images/hero.jpg'}" alt="${d.name}" style="width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:8px;" />
-            <h3>👨‍⚕️ ${d.name}</h3>
-            <p><strong>Specialization:</strong> ${d.spec}</p>
-            <p><strong>Phone:</strong> ${d.phone}</p>
-            <p>⭐ Staff: ${d.rating ?? '4.5'} · 🕐 ${d.available || 'Mon-Fri 09:00-17:00'}</p>
-            <p>${d.patient_rating ? `⭐ Patient rating: ${d.patient_rating}` : ''}</p>
-            <p style="margin-top:6px">Rate this doctor:
-              ${[1,2,3,4,5].map(s => `<button class="edit" onclick="rateDoctor(${d.id}, ${s})" style="padding:4px 8px;margin-right:4px">${'★'.repeat(s)}</button>`).join('')}
-            </p>
-          </div>`).join('') || '<p>No doctors listed yet.</p>';
-        })
-        .catch(() => {
-          document.getElementById('doctorList').innerHTML = '<p>Could not load doctors — is the server running?</p>';
-        });
+    const { load: fetchDoctors, photoFor, isLive } = window.HospitalDoctors;
+
+    function esc(value) {
+      return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    const searchBox = document.getElementById('doctorSearch');
+    const specBox = document.getElementById('doctorSpec');
+    const sortBox = document.getElementById('doctorSort');
+    const countEl = document.getElementById('doctorCount');
+    const listEl = document.getElementById('doctorList');
+
+    let doctors = [];
+
+    function years(value) {
+      const n = parseInt(value, 10);
+      return isNaN(n) ? 0 : n;
+    }
+
+    function doctorFields(d) {
+      return [
+        ['Qualification', esc(d.qualification)],
+        ['Experience', esc(d.experience)],
+        ['Available', esc(d.available)],
+        ['Languages', esc(d.languages)],
+        ['Phone', d.phone ? `<a href="tel:${esc(String(d.phone).replace(/\s+/g, ''))}">${esc(d.phone)}</a>` : ''],
+        ['Email', d.email ? `<a href="mailto:${esc(d.email)}">${esc(d.email)}</a>` : ''],
+      ].filter(([, value]) => value);
+    }
+
+    function render() {
+      const q = searchBox.value.trim().toLowerCase();
+      const spec = specBox.value;
+      const sort = sortBox.value;
+
+      let rows = doctors.filter(d => {
+        const haystack = [d.name, d.spec, d.qualification, d.experience, d.languages].join(' ').toLowerCase();
+        return (!q || haystack.includes(q)) && (!spec || d.spec === spec);
+      });
+
+      if (sort === 'experience') rows = rows.slice().sort((a, b) => years(b.experience) - years(a.experience));
+      if (sort === 'rating') rows = rows.slice().sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      if (sort === 'patient_rating') rows = rows.slice().sort((a, b) => (b.patient_rating || 0) - (a.patient_rating || 0));
+
+      countEl.textContent = `${rows.length} of ${doctors.length} doctors`;
+
+      listEl.innerHTML = rows.map(d => `
+        <article class="doctor-card">
+          <div class="doctor-card__photo">
+            <img src="${photoFor(d)}" alt="Portrait of ${esc(d.name)}" loading="lazy" />
+            <span class="doctor-card__badge">${esc(d.spec || 'General')}</span>
+          </div>
+          <h3>${esc(d.name)}</h3>
+          <dl class="doctor-fields">
+            ${doctorFields(d).map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')}
+          </dl>
+          ${d.bio ? `<p class="doctor-card__bio">${esc(d.bio)}</p>` : ''}
+          <p class="doctor-card__rating">
+            ⭐ Staff rating <strong>${esc(d.rating ?? '—')}</strong>
+            · 👥 Patients <strong>${esc(d.patient_rating ?? '—')}</strong>
+          </p>
+          ${isLive() ? `<p class="doctor-card__rate">Rate this doctor:
+            ${[1, 2, 3, 4, 5].map(s => `<button class="edit" onclick="rateDoctor(${d.id}, ${s})" title="Rate ${s} star${s > 1 ? 's' : ''}">${'★'.repeat(s)}</button>`).join('')}
+          </p>` : ''}
+          <a class="btn-book" href="appointments.html?doctor=${encodeURIComponent(d.name)}">📅 Book appointment</a>
+        </article>`).join('')
+        || `<p class="doctor-empty">No doctors match your search — try another name or specialization.</p>`;
     }
 
     function rateDoctor(id, stars) {
@@ -71,10 +142,20 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ stars }),
-      }).then(() => loadDoctors());
+      }).then(() => fetchDoctors()).then(rows => { doctors = rows; render(); });
     }
 
-    loadDoctors();
+    fetchDoctors().then(rows => {
+      doctors = rows;
+      [...new Set(rows.map(d => d.spec).filter(Boolean))].sort().forEach(s => {
+        specBox.insertAdjacentHTML('beforeend', `<option value="${esc(s)}">${esc(s)}</option>`);
+      });
+      render();
+    });
+
+    searchBox.addEventListener('input', render);
+    specBox.addEventListener('change', render);
+    sortBox.addEventListener('change', render);
   </script>
   <script src="theme.js"></script>
   <script src="auth.js"></script>

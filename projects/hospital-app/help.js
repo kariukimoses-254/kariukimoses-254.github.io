@@ -4,7 +4,7 @@
     'home.html': 'This is the hospital home page. Use the nav bar to visit Services, Doctors, Appointments, Register, or Login.',
     'about.html': 'Learn about Lil Mosey Hospital, its mission, and visiting hours.',
     'services.html': 'Browse the departments and facilities we offer.',
-    'doctors.html': 'Browse doctors, filter by specialization, and rate them with stars.',
+    'doctors.html': 'Browse the doctor profiles — each card shows their photo, qualification, experience, availability and contact details. Search or filter by specialization, then book a consultation.',
     'appointments.html': 'Sign in first, then book an appointment by specialization, doctor, date, and time.',
     'contact.html': 'Find our location, hours, and send us a message.',
     'apply.html': 'Doctors can apply to join our team. Upload your photo and details.',

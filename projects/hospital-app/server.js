@@ -15,7 +15,7 @@ const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'Lil Mosey',
+  database: 'lil_mosey_hospital',
   waitForConnections: true,
   connectionLimit: 10,
 });
@@ -56,10 +56,15 @@ app.get('/api/doctors', async (req, res) => {
 });
 
 app.post('/api/doctors', async (req, res) => {
-  const { name, spec, phone, photo, rating, available } = req.body;
+  const { name, spec, qualification, experience, phone, email, languages, photo, rating, available, bio } = req.body;
   const [result] = await pool.query(
-    'INSERT INTO doctors (name, spec, phone, photo, rating, available) VALUES (?, ?, ?, ?, ?, ?)',
-    [name, spec, phone, photo || 'images/hero.jpg', rating || 4.5, available || 'Mon-Fri 09:00-17:00']
+    `INSERT INTO doctors
+       (name, spec, qualification, experience, phone, email, languages, photo, rating, available, bio)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      name, spec, qualification || null, experience || null, phone, email || null, languages || null,
+      photo || 'images/hero.jpg', rating || 4.5, available || 'Mon-Fri 09:00-17:00', bio || null,
+    ]
   );
   res.status(201).json({ id: result.insertId, ...req.body });
 });
