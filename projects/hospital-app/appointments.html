@@ -76,6 +76,14 @@
         ).join('') || '<tr><td colspan="4">No appointments yet.</td></tr>';
       } catch (err) {
         apptBody.innerHTML = '<tr><td colspan="4">Appointments are stored by the hospital server, so the list is empty in this static demo.</td></tr>';
+    (function(){
+      try {
+        const key = 'hms_appointments_offline';
+        const list = JSON.parse(localStorage.getItem(key) || '[]');
+        if (!list.length) return;
+        apptBody.innerHTML = list.slice().reverse().map(a => '<tr><td>' + (a.patient||'') + '</td><td>' + (a.doctor||'') + '</td><td>' + (a.date||'') + '</td><td>' + (a.time||'') + '</td></tr>').join('');
+      } catch(e) {}
+    })();
       }
     }
 
